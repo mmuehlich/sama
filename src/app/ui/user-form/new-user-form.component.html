@@ -1,5 +1,5 @@
 
-<form [formGroup]="userForm"   (ngSubmit)="login()">
+<form [formGroup]="userForm"  (ngSubmit)="signup()">
 
   <label for="email">Email</label>
   <input type="email" id="email" class="input"
@@ -17,10 +17,8 @@
     {{ formErrors.password }}
   </div>
 
-  <button type="submit" class="button" [disabled]="!userForm.valid">Anmelden</button>
-
-  <a *ngIf="!passReset && userForm.controls.email.valid" class="help is-info" (click)="resetPassword()">Passwort für {{userForm.value.email}} zurücksetzen?</a>
-  <p *ngIf="passReset" class="help is-info">Passwort zurückgesetzt, Sie erhalten in Kürze eine eMail.</p>
-
+  <div *ngIf="userForm.valid" class="help is-success">Form is valid</div>
+  <button type="submit" class="button" [disabled]="!userForm.valid">Submit</button>
 
 </form>
+

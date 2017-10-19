@@ -1,43 +1,46 @@
-<div *ngIf="!auth.currentUser; else alreadyLoggedIn">
+<div *ngIf="!auth.currentUser; else logout">
 
-  <h3>Social Login</h3>
-
-
-    <button (click)="signInWithGoogle()" class="button btn-social btn-google">
-      <i class="fa fa-google-plus fa-lg"></i> Connect Google
-    </button>
-
-    <button (click)="signInWithGithub()" class="button btn-social btn-github" disabled>
-      <i class="fa fa-github fa-lg"></i> Connect GitHub
-    </button>
-
-    <button (click)="signInWithFacebook()" class="button  btn-social btn-facebook" disabled>
-      <i class="fa fa-facebook fa-lg"></i> Connect Facebook
-    </button>
-
-    <button (click)="signInWithTwitter()" class="button  btn-social btn-twitter" disabled>
-      <i class="fa fa-twitter fa-lg"></i> Connect Twitter
-    </button>
-
-    <hr>
-
-    <h3>Anonymous Login</h3>
-
-      <button (click)="signInAnonymously()" class="button button-info">
-        <i class="fa fa-user-secret fa-lg"></i> Connect Anonymously
-      </button>
-
-    <hr>
+  <a (click)="showLogin=!showLogin; showRegister = false;" href="javascript://">&gt; Anmelden</a>
+  
+  <div *ngIf="showLogin" style="padding-left: 100px">
+      <user-form></user-form>
+  </div>
+  <br/>
+  
+  
+  <a (click)="showRegister=!showRegister; showLogin = false" href="javascript://">&gt; Registrieren</a>
+  
+  <div *ngIf="showRegister" style="padding-left: 100px">
+      <new-user-form> </new-user-form>
+  </div>
+  <br/>
 
 
-    <user-form></user-form>
+  <a (click)="showSocialMedia=!showSocialMedia" href="javascript://">&gt; Social Media Login </a>
+
+  <div *ngIf="showSocialMedia">
+    <button (click)="signInWithGoogle()" class="btn-social btn-google" title="Login mit Google +" ng-show="showSocialMedia">
+          <i class="fa fa-google-plus"></i>
+        </button>
+    <button (click)="signInWithFacebook()" class="btn-social btn-facebook" title="Login mit Facebook">
+          <i class="fa fa-facebook"></i>
+        </button>
+    <button (click)="signInAnonymously()" class="btn-social btn-anonymous" title="Anonymer Login">
+          <i class="fa fa-user"></i>
+        </button>
+
+    <button (click)="signInAnonymously()" class="btn-social btn-mail" title="eMail / Passwort Login">
+          <i class="fa fa-envelope-o"></i>
+        </button>
+  </div>
+  <hr>
 
 </div>
 
 
 
 
-<ng-template #alreadyLoggedIn>
+<ng-template #logout>
   <p class="text-success">
     Already logged in!
   </p>

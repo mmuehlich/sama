@@ -3,14 +3,13 @@ import { AuthService } from '../../core/auth.service';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'user-form',
-  templateUrl: './user-form.component.html',
+  selector: 'new-user-form',
+  templateUrl: './new-user-form.component.html',
   styleUrls: ['./user-form.component.scss']
 })
-export class UserFormComponent implements OnInit {
+export class NewUserFormComponent implements OnInit {
 
   userForm: FormGroup;
-  passReset = false; // set to true when password reset is triggered
   formErrors = {
     'email': '',
     'password': ''
@@ -21,7 +20,7 @@ export class UserFormComponent implements OnInit {
       'email': 'Ungültige eMail'
     },
     'password': {
-      'required': 'Passwort darf nicht leer sein.'
+      'required': 'Password darf nicht leer sein.'
     }
   };
 
@@ -31,13 +30,8 @@ export class UserFormComponent implements OnInit {
     this.buildForm();
   }
 
-  login(): void {
-    this.auth.emailLogin(this.userForm.value['email'], this.userForm.value['password'])
-  }
-
-  resetPassword() {
-    this.auth.resetPassword(this.userForm.value['email'])
-      .then(() => this.passReset = true)
+  signup(): void {
+    this.auth.emailSignUp(this.userForm.value['email'], this.userForm.value['password'])
   }
 
   buildForm(): void {
