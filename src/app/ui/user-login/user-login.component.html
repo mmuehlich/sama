@@ -1,47 +1,54 @@
 <div *ngIf="!auth.currentUser; else logout">
 
-  <a (click)="showLogin=!showLogin; showRegister = false;" href="javascript://">&gt; Anmelden</a>
-  
-  <div *ngIf="showLogin" style="padding-left: 100px">
+  <a class="nav-item" (click)="displayLoginForm=!displayLoginForm;" href="javascript://" style="font-weight: normal;">
+      Login
+  </a>
+
+  <div *ngIf="displayLoginForm" class="login-overlay">
+    <a (click)="showLogin=!showLogin; showRegister = false;" href="javascript://">&gt; Anmelden</a>
+
+    <div *ngIf="showLogin" style="padding-left: 100px">
       <user-form></user-form>
-  </div>
-  <br/>
-  
-  
-  <a (click)="showRegister=!showRegister; showLogin = false" href="javascript://">&gt; Registrieren</a>
-  
-  <div *ngIf="showRegister" style="padding-left: 100px">
+    </div>
+    <br/>
+
+
+    <a (click)="showRegister=!showRegister; showLogin = false;" href="javascript://">&gt; Registrieren</a>
+
+    <div *ngIf="showRegister" style="padding-left: 100px">
       <new-user-form> </new-user-form>
+    </div>
+    <br/>
+
+
+    <a (click)="showSocialMedia=!showSocialMedia" href="javascript://">&gt; Social Media Login </a>
+
+    <div *ngIf="showSocialMedia">
+      <button (click)="signInWithGoogle()" class="btn-social btn-google" title="Login mit Google +" ng-show="showSocialMedia">
+            <i class="fa fa-google-plus"></i>
+          </button>
+      <button (click)="signInWithFacebook()" class="btn-social btn-facebook" title="Login mit Facebook">
+            <i class="fa fa-facebook"></i>
+          </button>
+      <button (click)="signInAnonymously()" class="btn-social btn-anonymous" title="Anonymer Login">
+            <i class="fa fa-user"></i>
+          </button>
+    </div>
+
   </div>
-  <br/>
-
-
-  <a (click)="showSocialMedia=!showSocialMedia" href="javascript://">&gt; Social Media Login </a>
-
-  <div *ngIf="showSocialMedia">
-    <button (click)="signInWithGoogle()" class="btn-social btn-google" title="Login mit Google +" ng-show="showSocialMedia">
-          <i class="fa fa-google-plus"></i>
-        </button>
-    <button (click)="signInWithFacebook()" class="btn-social btn-facebook" title="Login mit Facebook">
-          <i class="fa fa-facebook"></i>
-        </button>
-    <button (click)="signInAnonymously()" class="btn-social btn-anonymous" title="Anonymer Login">
-          <i class="fa fa-user"></i>
-        </button>
-
-    <button (click)="signInAnonymously()" class="btn-social btn-mail" title="eMail / Passwort Login">
-          <i class="fa fa-envelope-o"></i>
-        </button>
-  </div>
-  <hr>
-
 </div>
 
 
 
 
 <ng-template #logout>
-  <p class="text-success">
-    Already logged in!
-  </p>
+  <a class="nav-item" (click)="displayLogout=!displayLogout;" href="javascript://" style="font-weight: normal;">
+    {{ auth.currentUserDisplayName }}
+  </a>
+
+  <div *ngIf="displayLogout" class="login-overlay">
+    <a (click)="logout()" href="javascript://">Abmelden</a>
+  </div>
+
+
 </ng-template>

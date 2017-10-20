@@ -19,11 +19,9 @@ export class UserLoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  /// Social Login
-
-  signInWithGithub(): void {
-    this.auth.githubLogin()
-    .then(() => this.afterSignIn());
+  signInAnonymously() {
+    this.auth.anonymousLogin()
+      .then(() => this.afterSignIn());
   }
 
   signInWithGoogle(): void {
@@ -35,25 +33,14 @@ export class UserLoginComponent implements OnInit {
     this.auth.facebookLogin()
       .then(() => this.afterSignIn());
   }
-
-  signInWithTwitter(): void {
-    this.auth.twitterLogin()
-      .then(() => this.afterSignIn());
-  }
-
-  /// Anonymous Sign In
-
-  signInAnonymously() {
-    this.auth.anonymousLogin()
-      .then(() => this.afterSignIn());
-  }
-
-
-  /// Shared
-
+  
   private afterSignIn(): void {
     // Do after login stuff here, such router redirects, toast messages, etc.
     this.router.navigate(['/']);
+  }
+  
+   logout() {
+    this.auth.signOut();
   }
 
 }

@@ -17,9 +17,7 @@
   <!-- This "nav-menu" is hidden on mobile -->
   <!-- Add the modifier "is-active" to display it on mobile -->
   <div class="nav-right nav-menu" [ngClass]="{'is-active': show}">
-    <a class="nav-item" routerLink="/login">
-      Login
-    </a>
+    <user-login class="nav-item"></user-login>
     <a class="nav-item" routerLink="/notes">
       Firestore
     </a>
@@ -29,3 +27,4 @@
   </div>
 
 </nav>
+

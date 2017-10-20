@@ -71,13 +71,6 @@ export class AuthService {
     }
   }
 
-  //// Social Auth ////
-
-  githubLogin() {
-    const provider = new firebase.auth.GithubAuthProvider()
-    return this.socialSignIn(provider);
-  }
-
   googleLogin() {
     const provider = new firebase.auth.GoogleAuthProvider()
     return this.socialSignIn(provider);
@@ -87,11 +80,7 @@ export class AuthService {
     const provider = new firebase.auth.FacebookAuthProvider()
     return this.socialSignIn(provider);
   }
-
-  twitterLogin() {
-    const provider = new firebase.auth.TwitterAuthProvider()
-    return this.socialSignIn(provider);
-  }
+  
 
   private socialSignIn(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
@@ -101,7 +90,6 @@ export class AuthService {
       })
       .catch(error => console.log(error));
   }
-
 
   //// Anonymous Auth ////
 
