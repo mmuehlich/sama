@@ -1,0 +1,40 @@
+<h1>Gästeliste</h1>
+
+<button class="btn-social" title="neuer Gast..." (click)="shwoNewGuest=!shwoNewGuest;" style="float:right;margin-top:-50px">
+  <i class="fa fa-plus"></i>
+</button>
+
+<div *ngIf="shwoNewGuest">
+  <input [(ngModel)]="content" placeholder="Vorname" class="input">
+  <input [(ngModel)]="content" placeholder="Nachnname" class="input">
+  
+  <input [(ngModel)]="content" placeholder="eMail" class="input">
+
+  <input [(ngModel)]="content" placeholder="Telefon" class="input">
+  <textarea [(ngModel)]="content" placeholder="Adresse" class="input" style="height: 150px;"></textarea>
+  
+
+  <div style="text-align:right">
+    <label for="NrOfAdults" style="padding-right: 20px;line-height: 30px;">Anzahl Erwachsene</label>
+    <input [(ngModel)]="content" class="input" size="2" style="width:80px;">
+  </div>
+  <div style="text-align:right">
+    <label for="NrOfChildren" style="padding-right: 20px;line-height: 30px;">Anzahl Kinder</label>
+    <input [(ngModel)]="content" class="input" size="2" style="width:80px;">
+  </div>
+  
+  <textarea [(ngModel)]="content" placeholder="Anmerkungen" class="input" style="height: 150px;"></textarea>
+
+  <button class="button is-success" (click)="createGuest()" [disabled]="content?.length < 2 || content?.length > 200">
+    Add Note
+  </button>
+  
+  <hr/>
+</div>
+
+
+<div *ngFor="let guest of guests | async">
+  <note-detail [note]="guest"></note-detail>
+</div>
+
+

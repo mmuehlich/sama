@@ -4,7 +4,7 @@
       Login
   </a>
 
-  <div *ngIf="displayLoginForm" class="login-overlay">
+  <div *ngIf="displayLoginForm" class="login-overlay" (mouseleave)="displayLoginForm = false;">
     <a (click)="showLogin=!showLogin; showRegister = false;" href="javascript://">&gt; Anmelden</a>
 
     <div *ngIf="showLogin" style="padding-left: 100px">
@@ -12,16 +12,7 @@
     </div>
     <br/>
 
-
-    <a (click)="showRegister=!showRegister; showLogin = false;" href="javascript://">&gt; Registrieren</a>
-
-    <div *ngIf="showRegister" style="padding-left: 100px">
-      <new-user-form> </new-user-form>
-    </div>
-    <br/>
-
-
-    <a (click)="showSocialMedia=!showSocialMedia" href="javascript://">&gt; Social Media Login </a>
+    <a (click)="showSocialMedia=!showSocialMedia; showRegister = false; showLogin = false;" href="javascript://">&gt; Social Media Login </a>
 
     <div *ngIf="showSocialMedia">
       <button (click)="signInWithGoogle()" class="btn-social btn-google" title="Login mit Google +" ng-show="showSocialMedia">
@@ -33,6 +24,15 @@
       <button (click)="signInAnonymously()" class="btn-social btn-anonymous" title="Anonymer Login">
             <i class="fa fa-user"></i>
           </button>
+    </div>
+    <br/>
+    <br/>
+
+
+    <a (click)="showRegister=!showRegister; showLogin = false;" href="javascript://">&gt; Registrieren</a>
+
+    <div *ngIf="showRegister" style="padding-left: 100px">
+      <new-user-form> </new-user-form>
     </div>
 
   </div>
@@ -46,9 +46,15 @@
     {{ auth.currentUserDisplayName }}
   </a>
 
-  <div *ngIf="displayLogout" class="login-overlay">
-    <a (click)="logout()" href="javascript://">Abmelden</a>
+  <div *ngIf="displayLogout" class="login-overlay"  (mouseleave)="displayLogout = false;">
+    <a (click)="doLogout()" href="javascript://">Abmelden</a>
   </div>
 
+    <a class="nav-item" routerLink="/guests" style="font-weight: normal;">
+      Gäste
+    </a>
+    <a class="nav-item" routerLink="/items" style="font-weight: normal;">
+      Realtime DB
+    </a>
 
 </ng-template>

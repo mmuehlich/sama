@@ -18,7 +18,8 @@ import { SharedModule } from './shared/shared.module'
 // Feature Modules
 import { ItemModule } from './items/shared/item.module';
 import { UiModule } from './ui/shared/ui.module';
-import { NotesModule } from './notes/notes.module'
+import { NotesModule } from './notes/notes.module';
+import { GuestsModule } from './guests/guests.module';
 ///// End FireStarter
 
 
@@ -46,6 +47,7 @@ import { FormsModule } from '@angular/forms';
     ItemModule,
     UiModule,
     NotesModule,
+    GuestsModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [

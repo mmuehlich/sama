@@ -4,12 +4,9 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { NoteService } from './note.service';
 
-import { NotesListComponent } from './notes-list/notes-list.component';
+import { GuestListComponent } from './guest-list/guest-list.component';
 import { NoteDetailComponent } from './note-detail/note-detail.component';
 
-import { environment } from '../../environments/environment';
-
-import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 @NgModule({
@@ -20,9 +17,10 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     AngularFirestoreModule.enablePersistence(),
   ],
   declarations: [
-    NotesListComponent,
+    GuestListComponent,
     NoteDetailComponent
   ],
   providers: [NoteService]
 })
-export class NotesModule { }
+
+export class GuestsModule { }

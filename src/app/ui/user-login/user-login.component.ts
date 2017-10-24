@@ -39,7 +39,7 @@ export class UserLoginComponent implements OnInit {
     this.router.navigate(['/']);
   }
   
-   logout() {
+   doLogout(): void {
     this.auth.signOut();
   }
 

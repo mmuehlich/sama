@@ -20,7 +20,7 @@ export class NewUserFormComponent implements OnInit {
       'email': 'Ungültige eMail'
     },
     'password': {
-      'required': 'Password darf nicht leer sein.'
+      'required': 'Passwort darf nicht leer sein.'
     }
   };
 
