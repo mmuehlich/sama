@@ -1,60 +1,69 @@
 <div *ngIf="!auth.currentUser; else logout">
 
-  <a class="nav-item" (click)="displayLoginForm=!displayLoginForm;" href="javascript://" style="font-weight: normal;">
+  <div class="navbar-item has-dropdown is-hoverable">
+    <a class="navbar-link" style="margin-right:120px;">
       Login
-  </a>
+    </a>
 
-  <div *ngIf="displayLoginForm" class="login-overlay" (mouseleave)="displayLoginForm = false;">
-    <a (click)="showLogin=!showLogin; showRegister = false;" href="javascript://">&gt; Anmelden</a>
+    <div class="navbar-dropdown">
+      <a class="navbar-item" (click)="showLogin=!showLogin; showRegister = false;">
+        anmelden (User/Passwort)
+      </a>
+      <div class="navbar-item">
+        direkter Login mit
+        <a title="Google+" (click)="signInWithGoogle()">
+          <i class="fa fa-google-plus btn-google" style="padding-left:10px;"></i>
+        </a>
+        <a title="facebook" (click)="signInWithFacebook()">
+          <i class="fa fa-facebook btn-facebook" style="padding-left:10px;"></i>
+        </a>
+      </div>
+      <hr class="navbar-divider">
+      <a class="navbar-item" (click)="showRegister=!showRegister; showLogin = false;">
+        registrieren
+      </a>
+    </div>
+  </div>
 
-    <div *ngIf="showLogin" style="padding-left: 100px">
+
+  <div class="modal {{showLogin? 'is-active' : ''}}">
+    <div class="modal-background"></div>
+    <div class="modal-content">
       <user-form></user-form>
     </div>
-    <br/>
+    <button class="modal-close is-large" aria-label="close" (click)="showLogin=false; showRegister = false;"></button>
+  </div>
 
-    <a (click)="showSocialMedia=!showSocialMedia; showRegister = false; showLogin = false;" href="javascript://">&gt; Social Media Login </a>
-
-    <div *ngIf="showSocialMedia">
-      <button (click)="signInWithGoogle()" class="btn-social btn-google" title="Login mit Google +" ng-show="showSocialMedia">
-            <i class="fa fa-google-plus"></i>
-          </button>
-      <button (click)="signInWithFacebook()" class="btn-social btn-facebook" title="Login mit Facebook">
-            <i class="fa fa-facebook"></i>
-          </button>
-      <button (click)="signInAnonymously()" class="btn-social btn-anonymous" title="Anonymer Login">
-            <i class="fa fa-user"></i>
-          </button>
-    </div>
-    <br/>
-    <br/>
-
-
-    <a (click)="showRegister=!showRegister; showLogin = false;" href="javascript://">&gt; Registrieren</a>
-
-    <div *ngIf="showRegister" style="padding-left: 100px">
+  <div class="modal {{showRegister? 'is-active' : ''}}">
+    <div class="modal-background"></div>
+    <div class="modal-content">
       <new-user-form> </new-user-form>
     </div>
-
+    <button class="modal-close is-large" aria-label="close" (click)="showLogin=false; showRegister = false;"></button>
   </div>
+
 </div>
 
 
 
 
 <ng-template #logout>
-  <a class="nav-item" (click)="displayLogout=!displayLogout;" href="javascript://" style="font-weight: normal;">
-    {{ auth.currentUserDisplayName }}
+
+  <a class="navbar-item" routerLink="/guests" style="font-weight: normal;">
+    Gäste
+  </a>
+  <a class="navbar-item" routerLink="/items" style="font-weight: normal;">
+    Realtime DB
   </a>
 
-  <div *ngIf="displayLogout" class="login-overlay"  (mouseleave)="displayLogout = false;">
-    <a (click)="doLogout()" href="javascript://">Abmelden</a>
+  <div class="navbar-item has-dropdown is-hoverable">
+    <a class="navbar-link">
+      {{ auth.currentUserDisplayName }}
+    </a>
+    <div class="navbar-dropdown">
+      <a class="navbar-item" (click)="doLogout()" href="javascript://">abmelden</a>
+    </div>
   </div>
 
-    <a class="nav-item" routerLink="/guests" style="font-weight: normal;">
-      Gäste
-    </a>
-    <a class="nav-item" routerLink="/items" style="font-weight: normal;">
-      Realtime DB
-    </a>
 
 </ng-template>

@@ -1,8 +1,18 @@
 <h1>Gästeliste</h1>
 
-<button class="btn-social" title="neuer Gast..." (click)="shwoNewGuest=!shwoNewGuest;" style="float:right;margin-top:-50px">
-  <i class="fa fa-plus"></i>
-</button>
+<div style="float:right;margin-top:-50px">
+  <button class="btn-social" title="neuer Gast..." (click)="shwoNewGuest=!shwoNewGuest;" style="padding-right: 20px">
+    <i class="fa fa-plus"></i>
+  </button>
+
+  <button class="btn-social" title="Import aus Excel" (click)="shwoNewGuest=!shwoNewGuest;">
+    <i class="fa fa-upload"></i>
+  </button>
+
+  <button class="btn-social" title="Liste herunterladen" (click)="shwoNewGuest=!shwoNewGuest;">
+    <i class="fa fa-download"></i>
+  </button>
+</div>
 
 <div *ngIf="shwoNewGuest">
   <input [(ngModel)]="guest.firstname" placeholder="Vorname" class="input">
