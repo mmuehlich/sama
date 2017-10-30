@@ -5,33 +5,47 @@
 </button>
 
 <div *ngIf="shwoNewGuest">
-  <input [(ngModel)]="content" placeholder="Vorname" class="input">
-  <input [(ngModel)]="content" placeholder="Nachnname" class="input">
+  <input [(ngModel)]="guest.firstname" placeholder="Vorname" class="input">
+  <input [(ngModel)]="guest.name" placeholder="Nachnname" class="input">
   
-  <input [(ngModel)]="content" placeholder="eMail" class="input">
+  <input [(ngModel)]="guest.email" placeholder="eMail" class="input">
 
-  <input [(ngModel)]="content" placeholder="Telefon" class="input">
-  <textarea [(ngModel)]="content" placeholder="Adresse" class="input" style="height: 150px;"></textarea>
+  <input [(ngModel)]="guest.phone" placeholder="Telefon" class="input">
+  <textarea [(ngModel)]="guest.address" placeholder="Adresse" class="input" style="height: 150px;"></textarea>
   
 
   <div style="text-align:right">
     <label for="NrOfAdults" style="padding-right: 20px;line-height: 30px;">Anzahl Erwachsene</label>
-    <input [(ngModel)]="content" class="input" size="2" style="width:80px;">
+    <input [(ngModel)]="guest.adults" class="input" size="2" style="width:80px;">
   </div>
   <div style="text-align:right">
     <label for="NrOfChildren" style="padding-right: 20px;line-height: 30px;">Anzahl Kinder</label>
-    <input [(ngModel)]="content" class="input" size="2" style="width:80px;">
+    <input [(ngModel)]="guest.children" class="input" size="2" style="width:80px;">
   </div>
   
-  <textarea [(ngModel)]="content" placeholder="Anmerkungen" class="input" style="height: 150px;"></textarea>
+  <textarea [(ngModel)]="guest.remarks" placeholder="Anmerkungen" class="input" style="height: 150px;"></textarea>
 
-  <button class="button is-success" (click)="createGuest()" [disabled]="content?.length < 2 || content?.length > 200">
-    Add Note
+  <button class="button is-success" (click)="createGuest()" [disabled]="guest.email?.length < 1">
+    hinzufügen
   </button>
   
   <hr/>
 </div>
 
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Kontakt</th>
+    <th>Gäste</th>
+    <th>Anmerkungen</th>
+  </tr>
+  <tr *ngFor="let guest of guests | async">
+    <td>{{guest.firstname}} {{guest.name}}</td>
+    <td title="{{guest.email}} &#013;{{guest.phone}} &#013;{{guest.address}}">{{guest.email}}</td>
+    <td>{{guest.adults}} Erwachsene, {{guest.children}} Kinder</td>
+    <td title="{{guest.remarks}}">{{guest.remarks | slice:0:10}}</td>
+  </tr>
+</table>
 
 <div *ngFor="let guest of guests | async">
   <note-detail [note]="guest"></note-detail>

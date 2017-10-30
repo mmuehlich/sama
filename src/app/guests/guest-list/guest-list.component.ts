@@ -1,26 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { NoteService } from '../note.service';
+import { GuestService } from '../guest.service';
+import { Guest } from '../guest';
 
 @Component({
   selector: 'guest-list',
   templateUrl: './guest-list.component.html',
   styleUrls: ['./guest-list.component.scss']
 })
+
 export class GuestListComponent implements OnInit {
 
   guests;
-  content;
+  guest : Guest = {
+      firstname: "",
+      name: ""
+  };
 
-  constructor(private guestService: NoteService) { }
+  constructor(private guestService: GuestService) { }
 
   ngOnInit() {
     // this.notes = this.noteService.getData()
-    this.guests = this.guestService.getSnapshot()
+    this.guests = this.guestService.getSnapshot();
   }
 
   createGuest() {
-    this.guestService.create(this.content)
-    this.content = ''
+    this.guestService.create(this.guest)
+    this.guest = {
+        firstname: "",
+        name: ""
+      };
   }
 
 }

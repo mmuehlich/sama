@@ -3,31 +3,26 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-interface Note {
-  content: string;
-  hearts?: number;
-  id?: any;
-  time?: number;
-}
+import { Guest } from './guest';
 
 @Injectable()
-export class NoteService {
+export class GuestService {
 
-  notesCollection: AngularFirestoreCollection<Note>;
+  guests: AngularFirestoreCollection<Guest>;
   noteDocument:   AngularFirestoreDocument<Node>
 
   constructor(private afs: AngularFirestore) {
-    this.notesCollection = this.afs.collection('notes', ref => ref.orderBy('time', 'desc').limit(5) )
+    this.guests = this.afs.collection('guests', ref => ref.orderBy('firstname', 'desc'));
     // this.noteDocument = this.afs.doc('notes/mtp1Ll6caN4dVrhg8fWD');
   }
 
-  getData(): Observable<Note[]> {
-    return this.notesCollection.valueChanges();
+  getData(): Observable<Guest[]> {
+    return this.guests.valueChanges();
   }
 
   getSnapshot() {
     // ['added', 'modified', 'removed']
-    return this.notesCollection.snapshotChanges().map(actions => {
+    return this.guests.snapshotChanges().map(actions => {
       return actions.map(a => {
         return { id: a.payload.doc.id, ...a.payload.doc.data() }
       })
@@ -35,18 +30,18 @@ export class NoteService {
   }
 
   getNote(id) {
-    return this.afs.doc<Note>('notes/' + id);
+  //  return this.afs.doc<Note>('notes/' + id);
   }
 
-  create(content: string) {
-    const note: Note = {
+  create(guest: Guest) {
+    /*const note: Note = {
       content: content,
       hearts: 0,
       time: new Date().getTime()
-    }
-    return this.notesCollection.add(note);
+    }*/
+    return this.guests.add(guest);
   }
-
+/*
   updateNote(id, data) {
     return this.getNote(id).update(data)
   }
@@ -54,6 +49,6 @@ export class NoteService {
   deleteNote(id) {
     return this.getNote(id).delete()
   }
-
+*/
 
 }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
-import { NoteService } from './note.service';
+import { GuestService } from './guest.service';
 
 import { GuestListComponent } from './guest-list/guest-list.component';
 import { NoteDetailComponent } from './note-detail/note-detail.component';
@@ -20,7 +20,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     GuestListComponent,
     NoteDetailComponent
   ],
-  providers: [NoteService]
+  providers: [GuestService]
 })
 
 export class GuestsModule { }

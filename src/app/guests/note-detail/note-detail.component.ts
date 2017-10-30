@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NoteService } from '../note.service';
+import { GuestService } from '../guest.service';
 
 @Component({
   selector: 'note-detail',
@@ -11,7 +11,7 @@ export class NoteDetailComponent implements OnInit {
   @Input()
   note: any;
 
-  constructor(private noteService: NoteService) { }
+  constructor(private guestService: GuestService) { }
 
   ngOnInit() {
     // this.noteDoc = this.noteService.getNote(this.noteId)
@@ -19,11 +19,11 @@ export class NoteDetailComponent implements OnInit {
   }
 
   addHeartToNote(val) {
-    this.noteService.updateNote(this.note.id, { hearts: val + 1 })
+    //this.guestService.updateNote(this.note.id, { hearts: val + 1 })
   }
 
   deleteNote(id) {
-    this.noteService.deleteNote(id)
+   // this.guestService.deleteNote(id)
   }
 
 }
