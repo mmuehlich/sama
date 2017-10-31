@@ -28,7 +28,7 @@
 
   <div class="modal {{showLogin? 'is-active' : ''}}">
     <div class="modal-background"></div>
-    <div class="modal-content">
+    <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
       <user-form></user-form>
     </div>
     <button class="modal-close is-large" aria-label="close" (click)="showLogin=false; showRegister = false;"></button>
@@ -36,7 +36,7 @@
 
   <div class="modal {{showRegister? 'is-active' : ''}}">
     <div class="modal-background"></div>
-    <div class="modal-content">
+    <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
       <new-user-form> </new-user-form>
     </div>
     <button class="modal-close is-large" aria-label="close" (click)="showLogin=false; showRegister = false;"></button>

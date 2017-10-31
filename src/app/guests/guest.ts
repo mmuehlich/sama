@@ -1,4 +1,5 @@
 export class Guest {
+  greeting: string;
   firstname: string;
   name: string;
   email?: string;

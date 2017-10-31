@@ -14,32 +14,35 @@
   </button>
 </div>
 
-<div *ngIf="shwoNewGuest">
-  <input [(ngModel)]="guest.firstname" placeholder="Vorname" class="input">
-  <input [(ngModel)]="guest.name" placeholder="Nachnname" class="input">
-  
-  <input [(ngModel)]="guest.email" placeholder="eMail" class="input">
+<div class="modal {{shwoNewGuest? 'is-active' : ''}}">
+  <div class="modal-background"></div>
+    <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
+    <input [(ngModel)]="guest.greeting" placeholder="Anrede (Liebe Maria, Liebe Familie Hinz...)" class="input">
+    <input [(ngModel)]="guest.firstname" placeholder="Vorname" class="input">
+    <input [(ngModel)]="guest.name" placeholder="Nachnname" class="input">
+    
+    <input [(ngModel)]="guest.email" placeholder="eMail" class="input">
 
-  <input [(ngModel)]="guest.phone" placeholder="Telefon" class="input">
-  <textarea [(ngModel)]="guest.address" placeholder="Adresse" class="input" style="height: 150px;"></textarea>
-  
+    <input [(ngModel)]="guest.phone" placeholder="Telefon" class="input">
+    <textarea [(ngModel)]="guest.address" placeholder="Adresse" class="input" style="height: 150px;"></textarea>
+    
 
-  <div style="text-align:right">
-    <label for="NrOfAdults" style="padding-right: 20px;line-height: 30px;">Anzahl Erwachsene</label>
-    <input [(ngModel)]="guest.adults" class="input" size="2" style="width:80px;">
+    <div style="text-align:right">
+      <label for="NrOfAdults" style="padding-right: 20px;line-height: 30px;">Anzahl Erwachsene</label>
+      <input [(ngModel)]="guest.adults" class="input" size="2" style="width:80px;">
+    </div>
+    <div style="text-align:right">
+      <label for="NrOfChildren" style="padding-right: 20px;line-height: 30px;">Anzahl Kinder</label>
+      <input [(ngModel)]="guest.children" class="input" size="2" style="width:80px;">
+    </div>
+    
+    <textarea [(ngModel)]="guest.remarks" placeholder="Anmerkungen" class="input" style="height: 150px;"></textarea>
+
+    <button class="button is-success" (click)="createGuest()" [disabled]="guest.email?.length < 1">
+      hinzufügen
+    </button>
   </div>
-  <div style="text-align:right">
-    <label for="NrOfChildren" style="padding-right: 20px;line-height: 30px;">Anzahl Kinder</label>
-    <input [(ngModel)]="guest.children" class="input" size="2" style="width:80px;">
-  </div>
-  
-  <textarea [(ngModel)]="guest.remarks" placeholder="Anmerkungen" class="input" style="height: 150px;"></textarea>
-
-  <button class="button is-success" (click)="createGuest()" [disabled]="guest.email?.length < 1">
-    hinzufügen
-  </button>
-  
-  <hr/>
+  <button class="modal-close is-large" aria-label="close" (click)="shwoNewGuest=false;"></button>  
 </div>
 
 <table>
@@ -49,7 +52,7 @@
     <th>Gäste</th>
     <th>Anmerkungen</th>
   </tr>
-  <tr *ngFor="let guest of guests | async">
+  <tr *ngFor="let guest of guests | async" (click)="showUser(guest)">
     <td>{{guest.firstname}} {{guest.name}}</td>
     <td title="{{guest.email}} &#013;{{guest.phone}} &#013;{{guest.address}}">{{guest.email}}</td>
     <td>{{guest.adults}} Erwachsene, {{guest.children}} Kinder</td>
@@ -62,3 +65,23 @@
 </div>
 
 
+<div class="modal {{showGuestDetails? 'is-active' : ''}}">
+  <div class="modal-background"></div>
+  <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
+    <table>
+      <tr><td>Anrede</td><td>{{guest.greeting}}</td></tr>
+      <tr><td>Name</td><td>{{guest.firstname}} {{guest.name}}</td></tr>
+      <tr><td>Kontakt</td><td>{{guest.email}}<br/>{{guest.phone}}<br/>{{guest.address}}</td></tr>
+      <tr><td>Gäste</td><td>{{guest.adults}} Erwachsene, {{guest.children}} Kinder</td></tr>
+      <tr><td>Anmerkungen</td><td>{{guest.remarks}}</td></tr>
+    </table>
+
+    <button class="button is-warning" (click)="deleteGuest(guest)">
+        entfernen
+    </button>
+    <button class="button is-success" (click)="editGuest(guest)">
+        bearbeiten
+    </button>
+  </div>
+  <button class="modal-close is-large" aria-label="close" (click)="showGuestDetails=false;"></button>  
+</div>

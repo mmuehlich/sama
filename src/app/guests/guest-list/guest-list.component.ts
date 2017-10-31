@@ -11,9 +11,11 @@ import { Guest } from '../guest';
 export class GuestListComponent implements OnInit {
 
   guests;
+  showGuestDetails: boolean = false;
   guest : Guest = {
-      firstname: "",
-      name: ""
+    greeting: "",
+    firstname: "",
+    name: ""
   };
 
   constructor(private guestService: GuestService) { }
@@ -26,9 +28,23 @@ export class GuestListComponent implements OnInit {
   createGuest() {
     this.guestService.create(this.guest)
     this.guest = {
-        firstname: "",
-        name: ""
+      greeting: "",
+      firstname: "",
+      name: ""
       };
+  }
+
+  deleteGuest(guest:Guest) {
+    this.showGuestDetails = false;
+  }
+
+  editGuest(guest:Guest) {
+    
+  }
+
+  showUser(guest: Guest) {
+    this.showGuestDetails = true;
+    this.guest = guest;
   }
 
 }

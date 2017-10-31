@@ -29,26 +29,21 @@ export class GuestService {
     })
   }
 
-  getNote(id) {
-  //  return this.afs.doc<Note>('notes/' + id);
+  getGuest(id) {
+    return this.afs.doc<Guest>('guests/' + id);
   }
 
   create(guest: Guest) {
-    /*const note: Note = {
-      content: content,
-      hearts: 0,
-      time: new Date().getTime()
-    }*/
     return this.guests.add(guest);
   }
 /*
   updateNote(id, data) {
     return this.getNote(id).update(data)
   }
-
-  deleteNote(id) {
-    return this.getNote(id).delete()
-  }
 */
+  delete(id) {
+    // TODO - get id?
+    return this.getGuest(id).delete()
+  }
 
 }
