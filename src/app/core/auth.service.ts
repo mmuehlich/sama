@@ -71,6 +71,14 @@ export class AuthService {
     }
   }
 
+  get currentUserEmail(): string {
+    if (!this.authState || this.currentUserAnonymous) {
+      return ''
+    } else {
+      return this.authState['email'] || ''
+    }
+  }
+
   googleLogin() {
     const provider = new firebase.auth.GoogleAuthProvider()
     return this.socialSignIn(provider);

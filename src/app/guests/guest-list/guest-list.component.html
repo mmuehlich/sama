@@ -52,29 +52,48 @@
     <th>Gäste</th>
     <th>Anmerkungen</th>
   </tr>
-  <tr *ngFor="let guest of guests | async" (click)="showUser(guest)">
+  <tr ngInit="alert('test');" *ngFor="let guest of guests | async" (click)="showUser(guest)">
     <td>{{guest.firstname}} {{guest.name}}</td>
     <td title="{{guest.email}} &#013;{{guest.phone}} &#013;{{guest.address}}">{{guest.email}}</td>
     <td>{{guest.adults}} Erwachsene, {{guest.children}} Kinder</td>
     <td title="{{guest.remarks}}">{{guest.remarks | slice:0:10}}</td>
   </tr>
+
+  <tr style="font-weight: bold">
+    <td>Total</td>
+    <td></td>
+    <td>{{guests | async | sum:'adults'}} Erwachsene, {{guests | async | sum:'children'}} Kinder</td>
+    <td></td>
+  </tr>
 </table>
-
-<div *ngFor="let guest of guests | async">
-  <note-detail [note]="guest"></note-detail>
-</div>
-
 
 <div class="modal {{showGuestDetails? 'is-active' : ''}}">
   <div class="modal-background"></div>
   <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
-    <table>
-      <tr><td>Anrede</td><td>{{guest.greeting}}</td></tr>
-      <tr><td>Name</td><td>{{guest.firstname}} {{guest.name}}</td></tr>
-      <tr><td>Kontakt</td><td>{{guest.email}}<br/>{{guest.phone}}<br/>{{guest.address}}</td></tr>
-      <tr><td>Gäste</td><td>{{guest.adults}} Erwachsene, {{guest.children}} Kinder</td></tr>
-      <tr><td>Anmerkungen</td><td>{{guest.remarks}}</td></tr>
-    </table>
+    <h3>Details für {{guest.firstname}} {{guest.name}}</h3>
+
+    <div class="list">
+      <div>
+        <p>Anrede</p>
+        <p>{{guest.greeting}}</p>
+      </div>
+      <div>
+        <p>Name</p>
+        <p>{{guest.firstname}} {{guest.name}}</p>
+      </div>
+      <div>
+        <p>Kontakt</p>
+        <p>{{guest.email}}<br/>{{guest.phone}}<br/>{{guest.address}}</p>
+      </div>
+      <div>
+        <p>Gäste</p>
+        <p>{{guest.adults}} Erwachsene, {{guest.children}} Kinder</p>
+      </div>
+      <div>
+        <p>Anmerkungen</p>
+        <p>{{guest.remarks}}</p>
+      </div>
+    </div>
 
     <button class="button is-warning" (click)="deleteGuest(guest)">
         entfernen

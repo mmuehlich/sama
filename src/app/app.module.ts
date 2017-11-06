@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { MainPipe } from './main-pipe.module'; 
 
 ///// Start FireStarter
 
@@ -33,11 +34,13 @@ export const firebaseConfig = environment.firebaseConfig;
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
+    MainPipe,
     BrowserModule,
     HttpModule,
     FormsModule,
