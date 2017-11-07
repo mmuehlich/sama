@@ -26,7 +26,12 @@ export class GuestListComponent implements OnInit {
   }
 
   createGuest() {
-    this.guestService.create(this.guest)
+    this.showGuestDetails = false;
+    if (this.guest.id) {
+      this.guestService.update(this.guest.id, this.guest);
+    } else {
+      this.guestService.create(this.guest)
+    }
     this.guest = {
       greeting: "",
       firstname: "",
@@ -35,11 +40,15 @@ export class GuestListComponent implements OnInit {
   }
 
   deleteGuest(guest:Guest) {
+    if (confirm(guest.firstname + ' ' + guest.name + ' löschen?')) {
+      this.guestService.delete(guest.id);
+    }
     this.showGuestDetails = false;
   }
 
   editGuest(guest:Guest) {
-    
+    this.showGuestDetails = false;
+    this.guest = guest;
   }
 
   showUser(guest: Guest) {

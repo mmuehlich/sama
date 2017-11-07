@@ -8,4 +8,5 @@ export class Guest {
   adults?: number;
   children?: number;
   remarks?: number;
+  id?: string;
 }

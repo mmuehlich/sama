@@ -38,8 +38,8 @@
     
     <textarea [(ngModel)]="guest.remarks" placeholder="Anmerkungen" class="input" style="height: 150px;"></textarea>
 
-    <button class="button is-success" (click)="createGuest()" [disabled]="guest.email?.length < 1">
-      hinzufügen
+    <button class="button is-success" (click)="createGuest(); shwoNewGuest=false;" [disabled]="guest.email?.length < 1">
+      speichern
     </button>
   </div>
   <button class="modal-close is-large" aria-label="close" (click)="shwoNewGuest=false;"></button>  
@@ -73,6 +73,10 @@
     <h3>Details für {{guest.firstname}} {{guest.name}}</h3>
 
     <div class="list">
+        <div>
+            <p>id</p>
+            <p>{{guest.id}}</p>
+          </div>
       <div>
         <p>Anrede</p>
         <p>{{guest.greeting}}</p>
@@ -98,7 +102,7 @@
     <button class="button is-warning" (click)="deleteGuest(guest)">
         entfernen
     </button>
-    <button class="button is-success" (click)="editGuest(guest)">
+    <button class="button is-success" (click)="editGuest(guest); shwoNewGuest=true;">
         bearbeiten
     </button>
   </div>

@@ -36,13 +36,22 @@ export class GuestService {
   create(guest: Guest) {
     return this.guests.add(guest);
   }
-/*
-  updateNote(id, data) {
-    return this.getNote(id).update(data)
+
+  update(id, data) {
+    return this.getGuest(id).update({
+      greeting: data.greeting? data.greeting : '',
+      firstname: data.firstname? data.firstname : '',
+      name: data.name? data.name : '',
+      email: data.email? data.email : '',
+      phone: data.phone? data.phone : '',
+      address: data.address? data.address : '',
+      adults: data.adults? data.adults : '',
+      children: data.children? data.children : '',
+      remarks: data.remarks? data.remarks : ''
+    })
   }
-*/
+
   delete(id) {
-    // TODO - get id?
     return this.getGuest(id).delete()
   }
 
