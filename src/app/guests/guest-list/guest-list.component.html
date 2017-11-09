@@ -17,11 +17,40 @@
 <div class="modal {{shwoNewGuest? 'is-active' : ''}}">
   <div class="modal-background"></div>
     <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
-    <input [(ngModel)]="guest.greeting" placeholder="Anrede (Liebe Maria, Liebe Familie Hinz...)" class="input">
-    <input [(ngModel)]="guest.firstname" placeholder="Vorname" class="input">
-    <input [(ngModel)]="guest.name" placeholder="Nachnname" class="input">
+        <div class="list">
+          <div style="padding-left: 20px"> 
+            <input [(ngModel)]="guest.greeting" placeholder="Liebe, Lieber..." class="input">
+            <input [(ngModel)]="guest.name" placeholder="Name" class="input">
+          </div>
+        </div>
+
+        <span>Kontakt</span>
+          <div style="padding-left: 20px"> 
+            <textarea style="height: 100px;" [(ngModel)]="guest.address" placeholder="Adresse" class="input"></textarea>    
+          </div>
+
+        <span>Teilnehmer</span>
+          <div style="padding-left: 20px">
+              <span>Erwachsene</span>
+              <div *ngFor="let a of guest.adults"> 
+                <input [(ngModel)]="guest.name" placeholder="Name" class="input">
+                <input [(ngModel)]="guest.name" placeholder="eMail" class="input">
+                <input [(ngModel)]="guest.name" placeholder="Telefon" class="input">
+              </div>
+            <span>Kinder</span>
+              <div *ngFor="let a of guest.adults"> 
+              </div>
+            <textarea style="height: 150px;" [(ngModel)]="guest.address" placeholder="Adresse" class="input"></textarea>    
+          </div>
+
+        <span>Anmerkungen</span>
+          <div style="padding-left: 20px"> 
+            <textarea [(ngModel)]="guest.remarks" placeholder="Anmerkungen" class="input" style="height: 150px;"></textarea>
+          </div>
+
+        <span>Admin</span>
     
-    <input [(ngModel)]="guest.email" placeholder="eMail" class="input">
+   <!-- <input [(ngModel)]="guest.email" placeholder="eMail" class="input">
 
     <input [(ngModel)]="guest.phone" placeholder="Telefon" class="input">
     <textarea [(ngModel)]="guest.address" placeholder="Adresse" class="input" style="height: 150px;"></textarea>
@@ -37,15 +66,16 @@
     </div>
     
     <textarea [(ngModel)]="guest.remarks" placeholder="Anmerkungen" class="input" style="height: 150px;"></textarea>
-
+  -->
     <button class="button is-success" (click)="createGuest(); shwoNewGuest=false;" [disabled]="guest.email?.length < 1">
       speichern
     </button>
+
   </div>
   <button class="modal-close is-large" aria-label="close" (click)="shwoNewGuest=false;"></button>  
 </div>
 
-<table>
+<!-- <table>
   <tr>
     <th>Name</th>
     <th>Kontakt</th>
@@ -66,11 +96,12 @@
     <td></td>
   </tr>
 </table>
+-->
 
 <div class="modal {{showGuestDetails? 'is-active' : ''}}">
   <div class="modal-background"></div>
   <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
-    <h3>Details für {{guest.firstname}} {{guest.name}}</h3>
+<!--    <h3>Details für {{guest.firstname}} {{guest.name}}</h3>
 
     <div class="list">
         <div>
@@ -106,5 +137,6 @@
         bearbeiten
     </button>
   </div>
+-->
   <button class="modal-close is-large" aria-label="close" (click)="showGuestDetails=false;"></button>  
 </div>

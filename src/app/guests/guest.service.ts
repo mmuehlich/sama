@@ -38,17 +38,8 @@ export class GuestService {
   }
 
   update(id, data) {
-    return this.getGuest(id).update({
-      greeting: data.greeting? data.greeting : '',
-      firstname: data.firstname? data.firstname : '',
-      name: data.name? data.name : '',
-      email: data.email? data.email : '',
-      phone: data.phone? data.phone : '',
-      address: data.address? data.address : '',
-      adults: data.adults? data.adults : '',
-      children: data.children? data.children : '',
-      remarks: data.remarks? data.remarks : ''
-    })
+    data.id = undefined;
+    return this.getGuest(id).update(data)
   }
 
   delete(id) {

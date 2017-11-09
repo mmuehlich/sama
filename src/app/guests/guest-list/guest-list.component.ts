@@ -14,8 +14,16 @@ export class GuestListComponent implements OnInit {
   showGuestDetails: boolean = false;
   guest : Guest = {
     greeting: "",
-    firstname: "",
-    name: ""
+    name: "",
+    adults: [{
+      name: ""
+    }],
+    children: [{
+      name: ""
+    }],
+    civil: false,
+    state: "new",
+    loginToken: ""
   };
 
   constructor(private guestService: GuestService) { }
@@ -34,13 +42,21 @@ export class GuestListComponent implements OnInit {
     }
     this.guest = {
       greeting: "",
-      firstname: "",
-      name: ""
+      name: "",
+      adults: [{
+        name: ""
+      }],
+      children: [{
+        name: ""
+      }],
+      civil: false,
+      state: "new",
+      loginToken: ""
       };
   }
 
   deleteGuest(guest:Guest) {
-    if (confirm(guest.firstname + ' ' + guest.name + ' löschen?')) {
+    if (confirm(guest.name + ' löschen?')) {
       this.guestService.delete(guest.id);
     }
     this.showGuestDetails = false;
