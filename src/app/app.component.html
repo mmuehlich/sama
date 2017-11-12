@@ -1,16 +1,46 @@
-<div id="wrapper">
+<div id="wrapper" *ngIf="auth.currentUser; else noUser">
 
-<top-nav></top-nav>
+  <div *ngIf="isAdmin(auth.currentUser)">
+    <top-nav-admin></top-nav-admin>
+  </div>
+  {{getUser(guests, auth.currentUser)}} <br>
+  {{auth.currentUser.email}} {{auth.currentUser.displayName}}
+    <div *ngFor="let guest of guests | async">
+      <!-- <div *ngIf="isUser(guest, auth.currentUser)">user found!</div>
+        <span>{{guest.name}}</span> -->
+     </div> 
+<span>done</span>
 
-  <div class="content columns">
+  <div>
+    <top-nav></top-nav>
+    
+    <div class="content columns">
 
-    <aside class="column is-2 is-offset-1">
-        <user-profile></user-profile>
-    </aside>
+        <!-- <aside class="column is-2 is-offset-1">
+            <user-profile></user-profile>
+        </aside>-->
 
-    <main class="column is-8">
-      <router-outlet></router-outlet>
-    </main>
-
+      <main style="width:100%;">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </div>
 </div>
 
+<div id="wrapper" *ngIf="!auth.admin">
+    <div>
+      <top-nav></top-nav>
+      
+      <div class="content columns">
+        <main class="column is-10">
+          no admin...
+          <router-outlet></router-outlet>
+        </main>
+      </div>
+    </div>
+  </div>
+
+
+  <ng-template #noUser>
+    ... TODO - no user page
+  </ng-template>

@@ -13,6 +13,8 @@ import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { UserFormComponent } from '../user-form/user-form.component';
 import { NewUserFormComponent } from '../user-form/new-user-form.component';
 import { TopNavComponent } from '../top-nav/top-nav.component';
+import { TopNavAdminComponent } from '../top-nav/top-nav-admin.component';
+
 import { FooterNavComponent } from '../footer-nav/footer-nav.component';
 import { ReadmePageComponent } from '../readme-page/readme-page.component';
 
@@ -31,6 +33,7 @@ import { ReadmePageComponent } from '../readme-page/readme-page.component';
     UserLoginComponent,
     UserProfileComponent,
     TopNavComponent,
+    TopNavAdminComponent,
     FooterNavComponent,
     UserFormComponent,
     NewUserFormComponent,
@@ -38,6 +41,7 @@ import { ReadmePageComponent } from '../readme-page/readme-page.component';
   ],
   exports: [
     TopNavComponent,
+    TopNavAdminComponent,
     FooterNavComponent,
     UserProfileComponent,
   ]

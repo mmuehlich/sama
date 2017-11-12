@@ -50,7 +50,7 @@
 
         <span>Admin</span>
     
-   <!-- <input [(ngModel)]="guest.email" placeholder="eMail" class="input">
+    <input [(ngModel)]="guest.email" placeholder="eMail" class="input">
 
     <input [(ngModel)]="guest.phone" placeholder="Telefon" class="input">
     <textarea [(ngModel)]="guest.address" placeholder="Adresse" class="input" style="height: 150px;"></textarea>
@@ -66,7 +66,7 @@
     </div>
     
     <textarea [(ngModel)]="guest.remarks" placeholder="Anmerkungen" class="input" style="height: 150px;"></textarea>
-  -->
+  
     <button class="button is-success" (click)="createGuest(); shwoNewGuest=false;" [disabled]="guest.email?.length < 1">
       speichern
     </button>
@@ -75,7 +75,7 @@
   <button class="modal-close is-large" aria-label="close" (click)="shwoNewGuest=false;"></button>  
 </div>
 
-<!-- <table>
+ <table>
   <tr>
     <th>Name</th>
     <th>Kontakt</th>
@@ -96,12 +96,13 @@
     <td></td>
   </tr>
 </table>
--->
+
 
 <div class="modal {{showGuestDetails? 'is-active' : ''}}">
   <div class="modal-background"></div>
   <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
-<!--    <h3>Details für {{guest.firstname}} {{guest.name}}</h3>
+
+      <h3>Details für {{guest.firstname}} {{guest.name}}</h3>
 
     <div class="list">
         <div>
@@ -137,6 +138,6 @@
         bearbeiten
     </button>
   </div>
--->
+
   <button class="modal-close is-large" aria-label="close" (click)="showGuestDetails=false;"></button>  
 </div>

@@ -1,22 +1,14 @@
 export class Guest {
   greeting: string;
   name: string;
-  adults: Adult[];
-  children: Child[];
+  adults: string[];
+  children: string[];
   civil: boolean;
   state: string;
   loginToken: string;
   address?: string;
+  email?: string;
+  phone?: string;
   remarks?: number;
   id?: string;
-}
-
-export class Adult {
-  name: string;
-  email?: string;
-  phone?: string
-}
-
-export class Child {
-  name: string;
 }

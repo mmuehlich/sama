@@ -1,0 +1,40 @@
+<nav class="navbar is-transparent" role="navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item logo" routerLink="/">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmzVTgKI5o43hEmD31BSYHwnnv-D00EmhfY3MIYEoBw8mRi94reg" style="height:38px"> Sarah & Matthias
+    </a>
+  </div>
+
+  <div class="navbar-menu">
+    <div class="navbar-end">
+      <a class="navbar-item" routerLink="/guests" title="Gäste">
+        Gäste
+      </a>
+      <a class="navbar-item" routerLink="/items" title="Notizen">
+        <i class="fa fa-sticky-note-o"></i>
+      </a>
+      <a class="navbar-item" routerLink="/items" title="Planung">
+        <i class="fa fa-tasks"></i>
+      </a>
+      <a class="navbar-item" routerLink="/items" title="Geschenke">
+        <i class="fa fa-gift"></i>
+      </a>
+      <a class="navbar-item" routerLink="/items" title="Finanzen">
+        <i class="fa fa-eur"></i>
+      </a>
+      <a class="navbar-item" routerLink="/items" title="Nachrichten">
+        <i class="fa fa-email"></i>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          {{ auth.currentUserDisplayName }}
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" (click)="doLogout()" href="javascript://">abmelden</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</nav>
