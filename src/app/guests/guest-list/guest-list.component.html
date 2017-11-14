@@ -1,20 +1,20 @@
 <h1>Gästeliste</h1>
 
 <div style="float:right;margin-top:-50px">
-  <button class="btn-social" title="neuer Gast..." (click)="shwoNewGuest=!shwoNewGuest;" style="padding-right: 20px">
+  <button class="btn-social" title="neuer Gast..." (click)="showNewGuest=!showNewGuest;" style="padding-right: 20px">
     <i class="fa fa-plus"></i>
   </button>
 
-  <button class="btn-social" title="Import aus Excel" (click)="shwoNewGuest=!shwoNewGuest;">
+  <button class="btn-social" title="Import aus Excel" (click)="showNewGuest=!showNewGuest;">
     <i class="fa fa-upload"></i>
   </button>
 
-  <button class="btn-social" title="Liste herunterladen" (click)="shwoNewGuest=!shwoNewGuest;">
+  <button class="btn-social" title="Liste herunterladen" (click)="showNewGuest=!showNewGuest;">
     <i class="fa fa-download"></i>
   </button>
 </div>
 
-<div class="modal {{shwoNewGuest? 'is-active' : ''}}">
+<div class="modal {{showNewGuest? 'is-active' : ''}}">
   <div class="modal-background"></div>
     <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
         <div class="list">
@@ -67,12 +67,12 @@
     
     <textarea [(ngModel)]="guest.remarks" placeholder="Anmerkungen" class="input" style="height: 150px;"></textarea>
   
-    <button class="button is-success" (click)="createGuest(); shwoNewGuest=false;" [disabled]="guest.email?.length < 1">
+    <button class="button is-success" (click)="createGuest(); showNewGuest=false;" [disabled]="guest.email?.length < 1">
       speichern
     </button>
 
   </div>
-  <button class="modal-close is-large" aria-label="close" (click)="shwoNewGuest=false;"></button>  
+  <button class="modal-close is-large" aria-label="close" (click)="showNewGuest=false;"></button>  
 </div>
 
  <table>
@@ -83,7 +83,7 @@
     <th>Anmerkungen</th>
   </tr>
   <tr ngInit="alert('test');" *ngFor="let guest of guests | async" (click)="showUser(guest)">
-    <td>{{guest.firstname}} {{guest.name}}</td>
+    <td>{{guest.name}}</td>
     <td title="{{guest.email}} &#013;{{guest.phone}} &#013;{{guest.address}}">{{guest.email}}</td>
     <td>{{guest.adults}} Erwachsene, {{guest.children}} Kinder</td>
     <td title="{{guest.remarks}}">{{guest.remarks | slice:0:10}}</td>
@@ -102,7 +102,7 @@
   <div class="modal-background"></div>
   <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
 
-      <h3>Details für {{guest.firstname}} {{guest.name}}</h3>
+      <h3>Details für {{guest.name}}</h3>
 
     <div class="list">
         <div>
@@ -115,7 +115,7 @@
       </div>
       <div>
         <p>Name</p>
-        <p>{{guest.firstname}} {{guest.name}}</p>
+        <p>{{guest.name}}</p>
       </div>
       <div>
         <p>Kontakt</p>
@@ -134,7 +134,7 @@
     <button class="button is-warning" (click)="deleteGuest(guest)">
         entfernen
     </button>
-    <button class="button is-success" (click)="editGuest(guest); shwoNewGuest=true;">
+    <button class="button is-success" (click)="editGuest(guest); showNewGuest=true;">
         bearbeiten
     </button>
   </div>

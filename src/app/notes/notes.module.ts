@@ -4,6 +4,8 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { NoteService } from './note.service';
 
+import { MainPipe } from '../main-pipe.module'; 
+
 import { NotesListComponent } from './notes-list/notes-list.component';
 import { NoteDetailComponent } from './note-detail/note-detail.component';
 
@@ -18,6 +20,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     FormsModule,
     SharedModule,
     AngularFirestoreModule.enablePersistence(),
+    MainPipe
   ],
   declarations: [
     NotesListComponent,

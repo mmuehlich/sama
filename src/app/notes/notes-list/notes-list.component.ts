@@ -8,19 +8,51 @@ import { NoteService } from '../note.service';
 })
 export class NotesListComponent implements OnInit {
 
-  notes;
-  content;
+  priorities = ["wichtig", "normal", "info"];
+  states = ["neu", "ToDo", "done", "gelöscht"];
 
-  constructor(private noteService: NoteService) { }
+  state;
+  topic;
+  priority;
+  content: string[][];
+
+  notes;
+  sortedNotes;
+  usedTopics;
+
+  constructor(private noteService: NoteService) { 
+    this.priority = this.priorities[1];
+    this.state = this.states[0];
+    this.content = [["", ""]];
+
+    this.sortedNotes = [];
+    this.usedTopics = this.getUsedTopics();
+  }
 
   ngOnInit() {
-    // this.notes = this.noteService.getData()
     this.notes = this.noteService.getSnapshot()
   }
 
   createNote() {
-    this.noteService.create(this.content)
-    this.content = ''
+    this.noteService.create(this.state, this.topic, this.priority, this.content.map(c => c[0] + '::' + c[1]).join(";;"))
+    this.content = [["", ""]]
+
+    this.sortedNotes = [];
+    this.usedTopics = [];
+  }
+
+  addContent() {
+    if (this.content[this.content.length-1][0].length > 0) {
+      this.content.push(["", ""]);
+    } else if (this.content.length > 1 && this.content[this.content.length-2][0].length == 0) {
+      this.content.pop();
+    }
+  }
+
+  getUsedTopics() {
+    this.noteService.getSnapshot().toPromise().then(e => {
+      debugger;
+    });
   }
 
 }

@@ -4,8 +4,10 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 interface Note {
+  topic: string;
+  status: string;
+  priority: string;
   content: string;
-  hearts?: number;
   id?: any;
   time?: number;
 }
@@ -17,8 +19,7 @@ export class NoteService {
   noteDocument:   AngularFirestoreDocument<Node>
 
   constructor(private afs: AngularFirestore) {
-    this.notesCollection = this.afs.collection('notes', ref => ref.orderBy('time', 'desc').limit(5) )
-    // this.noteDocument = this.afs.doc('notes/mtp1Ll6caN4dVrhg8fWD');
+    this.notesCollection = this.afs.collection('notes');
   }
 
   getData(): Observable<Note[]> {
@@ -26,7 +27,6 @@ export class NoteService {
   }
 
   getSnapshot() {
-    // ['added', 'modified', 'removed']
     return this.notesCollection.snapshotChanges().map(actions => {
       return actions.map(a => {
         return { id: a.payload.doc.id, ...a.payload.doc.data() }
@@ -38,10 +38,12 @@ export class NoteService {
     return this.afs.doc<Note>('notes/' + id);
   }
 
-  create(content: string) {
+  create(state: string, topic: string, priority: string, content: string) {
     const note: Note = {
+      topic: topic,
+      status: state,
+      priority: priority,
       content: content,
-      hearts: 0,
       time: new Date().getTime()
     }
     return this.notesCollection.add(note);
@@ -54,6 +56,5 @@ export class NoteService {
   deleteNote(id) {
     return this.getNote(id).delete()
   }
-
 
 }

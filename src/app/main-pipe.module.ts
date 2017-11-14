@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import {CommonModule} from "@angular/common";
 
 import {SumPipe} from "./sum.pipe";
+import {OrderByPipe} from "./orderBy.pipe";
 
 @NgModule({
-  declarations:[SumPipe],
+  declarations:[SumPipe, OrderByPipe],
   imports:[CommonModule],
-  exports:[SumPipe]
+  exports:[SumPipe, OrderByPipe]
 })
 
 export class MainPipe{}

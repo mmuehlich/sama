@@ -1,15 +1,34 @@
-<h1>Firestore Notes</h1>
-<p>This is a very basic demo of the Firestore database.</p>
+<h1>Notizen</h1>
 
-<input [(ngModel)]="content" placeholder="Add your own note" class="input">
+<div>
+  <div style="display:inline-block;">
+    <input [(ngModel)]="topic" placeholder="Thema" class="input" style="float:left; width: 200px">
+    <select [(ngModel)]="state" class="input" style="float:left; width: 100px;margin-left: 20px;">
+        <option *ngFor="let state of states" [ngValue]="state">{{state}}</option>
+    </select>
+    <select [(ngModel)]="priority" class="input" style="float:left; width: 100px;margin-left: 20px;">
+      <option *ngFor="let priority of priorities" [ngValue]="priority">{{priority}}</option>
+    </select>
+  </div>
 
-
-<button class="button is-success" (click)="createNote()" [disabled]="content?.length < 2 || content?.length > 200">
-  Add Note
-</button>
-<hr>
-<div *ngFor="let note of notes | async">
-  <note-detail [note]="note"></note-detail>
+  <div class="list" style="width: 80%">
+    <div style="padding-left: 20px" *ngFor="let c of content">
+      <input [(ngModel)]="c[0]" placeholder="Titel" class="input" (change)="addContent()">
+      <textarea [(ngModel)]="c[1]" placeholder="Text" class="input" style="height: 80px; margin-left: 20px"> </textarea>
+    </div>
+  </div>
 </div>
 
+<button class="button is-success" (click)="createNote()">
+  hinzufügen
+</button>
+<hr>
 
+<div *ngFor="let t of usedTopics">
+    <span>{{t}}</span>
+</div>
+
+<div *ngFor="let note of notes | async | orderBy:['topic','time']">
+  <span>{{note.topic}}</span>
+  <note-detail [note]="note"></note-detail>
+</div>

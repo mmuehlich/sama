@@ -1,0 +1,11 @@
+div.list > div {
+    display: flex;
+}
+
+div.list > div input{
+    flex: 0 0 25%;
+}
+
+div.list > div input+input{
+    flex: 0 0 75%;
+}

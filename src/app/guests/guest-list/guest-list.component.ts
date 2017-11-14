@@ -12,15 +12,12 @@ export class GuestListComponent implements OnInit {
 
   guests;
   showGuestDetails: boolean = false;
+  showNewGuest: boolean = false;
   guest : Guest = {
     greeting: "",
     name: "",
-    adults: [{
-      name: ""
-    }],
-    children: [{
-      name: ""
-    }],
+    adults: [""],
+    children: [""],
     civil: false,
     state: "new",
     loginToken: ""
@@ -43,12 +40,8 @@ export class GuestListComponent implements OnInit {
     this.guest = {
       greeting: "",
       name: "",
-      adults: [{
-        name: ""
-      }],
-      children: [{
-        name: ""
-      }],
+      adults: [""],
+      children: [""],
       civil: false,
       state: "new",
       loginToken: ""
