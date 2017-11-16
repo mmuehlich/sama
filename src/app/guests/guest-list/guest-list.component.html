@@ -1,56 +1,62 @@
 <h1>Gästeliste</h1>
 
 <div style="float:right;margin-top:-50px">
-  <button class="btn-social" title="neuer Gast..." (click)="showNewGuest=!showNewGuest;" style="padding-right: 20px">
+  <button class="btn" title="neuer Gast..." (click)="shwoNewGuest=!shwoNewGuest;" style="padding-right: 20px">
     <i class="fa fa-plus"></i>
   </button>
 
-  <button class="btn-social" title="Import aus Excel" (click)="showNewGuest=!showNewGuest;">
+  <button class="btn" title="Import aus Excel" (click)="shwoNewGuest=!shwoNewGuest;">
     <i class="fa fa-upload"></i>
   </button>
 
-  <button class="btn-social" title="Liste herunterladen" (click)="showNewGuest=!showNewGuest;">
+  <button class="btn" title="Liste herunterladen" (click)="shwoNewGuest=!shwoNewGuest;">
     <i class="fa fa-download"></i>
   </button>
 </div>
 
-<div class="modal {{showNewGuest? 'is-active' : ''}}">
+<div class="modal {{shwoNewGuest? 'is-active' : ''}}">
   <div class="modal-background"></div>
-    <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
-        <div class="list">
-          <div style="padding-left: 20px"> 
-            <input [(ngModel)]="guest.greeting" placeholder="Liebe, Lieber..." class="input">
-            <input [(ngModel)]="guest.name" placeholder="Name" class="input">
-          </div>
-        </div>
+  <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
+    <span>Name</span>
+    <div style="padding-left: 20px">
+      <input [(ngModel)]="guest.name" placeholder="Name" class="input">
+    </div>
 
-        <span>Kontakt</span>
-          <div style="padding-left: 20px"> 
-            <textarea style="height: 100px;" [(ngModel)]="guest.address" placeholder="Adresse" class="input"></textarea>    
-          </div>
+    <span>Kontakt</span>
+    <div style="padding-left: 20px">
+      <input [(ngModel)]="guest.email" placeholder="eMail" class="input">
+      <input [(ngModel)]="guest.phone" placeholder="Telefon" class="input">
+      <textarea style="height: 100px;" [(ngModel)]="guest.address" placeholder="Adresse" class="input"></textarea>
+    </div>
 
-        <span>Teilnehmer</span>
-          <div style="padding-left: 20px">
-              <span>Erwachsene</span>
-              <div *ngFor="let a of guest.adults"> 
-                <input [(ngModel)]="guest.name" placeholder="Name" class="input">
-                <input [(ngModel)]="guest.name" placeholder="eMail" class="input">
-                <input [(ngModel)]="guest.name" placeholder="Telefon" class="input">
-              </div>
-            <span>Kinder</span>
-              <div *ngFor="let a of guest.adults"> 
-              </div>
-            <textarea style="height: 150px;" [(ngModel)]="guest.address" placeholder="Adresse" class="input"></textarea>    
-          </div>
+    <span>Teilnehmer</span>
+    <div style="padding-left: 20px">
+      <div>
+          <span style="float: left;  width: 100px; line-height: 36px;">Erwachsene:</span>
+          <input (change)="setAdults(this)" style="float: left; width: 50px;" class="input">
+      </div>
+      <div *ngFor="let a of guest.adults">
+        <input [(ngModel)]="guest.name" placeholder="Name" class="input">
+      </div>
+      <div>
+          <span style="float: left;  width: 100px; line-height: 36px;">Kinder:</span>
+          <input style="float: left; width: 50px;" class="input">
+      </div>
+      <div *ngFor="let a of guest.adults">
+      </div>
+      <textarea style="height: 150px;" [(ngModel)]="guest.address" placeholder="Adresse" class="input"></textarea>
+    </div>
 
-        <span>Anmerkungen</span>
-          <div style="padding-left: 20px"> 
-            <textarea [(ngModel)]="guest.remarks" placeholder="Anmerkungen" class="input" style="height: 150px;"></textarea>
-          </div>
+    <span>Anmerkungen</span>
+    <div style="padding-left: 20px">
+      <textarea [(ngModel)]="guest.remarks" placeholder="Anmerkungen" class="input" style="height: 150px;"></textarea>
+    </div>
 
-        <span>Admin</span>
-    
-    <input [(ngModel)]="guest.email" placeholder="eMail" class="input">
+    <span>Admin</span>
+    <div style="padding-left: 20px">
+      <input [(ngModel)]="guest.greeting" placeholder="Liebe, Lieber..." class="input">
+    </div>
+   <!-- <input [(ngModel)]="guest.email" placeholder="eMail" class="input">
 
     <input [(ngModel)]="guest.phone" placeholder="Telefon" class="input">
     <textarea [(ngModel)]="guest.address" placeholder="Adresse" class="input" style="height: 150px;"></textarea>
@@ -66,16 +72,16 @@
     </div>
     
     <textarea [(ngModel)]="guest.remarks" placeholder="Anmerkungen" class="input" style="height: 150px;"></textarea>
-  
-    <button class="button is-success" (click)="createGuest(); showNewGuest=false;" [disabled]="guest.email?.length < 1">
+  -->
+    <button class="button is-success" (click)="createGuest(); shwoNewGuest=false;" [disabled]="guest.email?.length < 1">
       speichern
     </button>
 
   </div>
-  <button class="modal-close is-large" aria-label="close" (click)="showNewGuest=false;"></button>  
+  <button class="modal-close is-large" aria-label="close" (click)="shwoNewGuest=false;"></button>  
 </div>
 
- <table>
+<!-- <table>
   <tr>
     <th>Name</th>
     <th>Kontakt</th>
@@ -83,7 +89,7 @@
     <th>Anmerkungen</th>
   </tr>
   <tr ngInit="alert('test');" *ngFor="let guest of guests | async" (click)="showUser(guest)">
-    <td>{{guest.name}}</td>
+    <td>{{guest.firstname}} {{guest.name}}</td>
     <td title="{{guest.email}} &#013;{{guest.phone}} &#013;{{guest.address}}">{{guest.email}}</td>
     <td>{{guest.adults}} Erwachsene, {{guest.children}} Kinder</td>
     <td title="{{guest.remarks}}">{{guest.remarks | slice:0:10}}</td>
@@ -96,13 +102,12 @@
     <td></td>
   </tr>
 </table>
-
+-->
 
 <div class="modal {{showGuestDetails? 'is-active' : ''}}">
   <div class="modal-background"></div>
   <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
-
-      <h3>Details für {{guest.name}}</h3>
+<!--    <h3>Details für {{guest.firstname}} {{guest.name}}</h3>
 
     <div class="list">
         <div>
@@ -115,7 +120,7 @@
       </div>
       <div>
         <p>Name</p>
-        <p>{{guest.name}}</p>
+        <p>{{guest.firstname}} {{guest.name}}</p>
       </div>
       <div>
         <p>Kontakt</p>
@@ -134,10 +139,10 @@
     <button class="button is-warning" (click)="deleteGuest(guest)">
         entfernen
     </button>
-    <button class="button is-success" (click)="editGuest(guest); showNewGuest=true;">
+    <button class="button is-success" (click)="editGuest(guest); shwoNewGuest=true;">
         bearbeiten
     </button>
   </div>
-
+-->
   <button class="modal-close is-large" aria-label="close" (click)="showGuestDetails=false;"></button>  
 </div>
