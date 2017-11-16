@@ -13,7 +13,7 @@
 
   <div class="list" style="width: 80%">
     <div style="padding-left: 20px" *ngFor="let c of content">
-      <input [(ngModel)]="c[0]" placeholder="Titel" class="input" (change)="addContent()">
+      <input style="width: 180px;" [(ngModel)]="c[0]" placeholder="Titel" class="input" (change)="addContent()">
       <textarea [(ngModel)]="c[1]" placeholder="Text" class="input" style="height: 80px; margin-left: 20px"> </textarea>
     </div>
   </div>
@@ -24,11 +24,15 @@
 </button>
 <hr>
 
-<div *ngFor="let t of usedTopics">
-    <span>{{t}}</span>
-</div>
-
-<div *ngFor="let note of notes | async | orderBy:['topic','time']">
-  <span>{{note.topic}}</span>
-  <note-detail [note]="note"></note-detail>
+<div *ngIf="usedTopics">
+  <div *ngFor="let t of usedTopics">
+    <div onclick="this.nextElementSibling.style.display == 'block'? this.nextElementSibling.style.display = 'none' : this.nextElementSibling.style.display = 'block'">
+        <h3><i class="fa fa-chevron-down"></i> {{t.topic}} ({{t.values.length}})</h3>
+    </div>
+    <div style="padding-left: 20px;display:none;">
+      <div *ngFor="let n of t.values" >
+          <note-detail [note]="n"></note-detail>
+      </div>
+    </div>
+  </div>
 </div>
