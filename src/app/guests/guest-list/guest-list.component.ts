@@ -15,12 +15,8 @@ export class GuestListComponent implements OnInit {
   guest : Guest = {
     greeting: "",
     name: "",
-    adults: [{
-      name: ""
-    }],
-    children: [{
-      name: ""
-    }],
+    adults: [""],
+    children: [""],
     civil: false,
     state: "new",
     loginToken: ""
@@ -43,12 +39,8 @@ export class GuestListComponent implements OnInit {
     this.guest = {
       greeting: "",
       name: "",
-      adults: [{
-        name: ""
-      }],
-      children: [{
-        name: ""
-      }],
+      adults: [""],
+      children: [""],
       civil: false,
       state: "new",
       loginToken: ""
@@ -70,5 +62,9 @@ export class GuestListComponent implements OnInit {
   showUser(guest: Guest) {
     this.showGuestDetails = true;
     this.guest = guest;
+  }
+
+  setAdults(val) {
+debugger;
   }
 }
