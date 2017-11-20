@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../core/auth.service';
 import { GuestService } from '../guest.service';
 import { Guest } from '../guest';
 
@@ -16,14 +17,15 @@ export class GuestListComponent implements OnInit {
   guest : Guest = {
     greeting: "",
     name: "",
-    adults: [""],
-    children: [""],
+    adults: [{name: ""}],
+    children: [{name: ""}],
     civil: false,
     state: "new",
     loginToken: ""
   };
 
-  constructor(private guestService: GuestService) { }
+  constructor(public auth: AuthService, private guestService: GuestService) {
+  }
 
   ngOnInit() {
     // this.notes = this.noteService.getData()
@@ -40,8 +42,8 @@ export class GuestListComponent implements OnInit {
     this.guest = {
       greeting: "",
       name: "",
-      adults: [""],
-      children: [""],
+      adults: [{name: ""}],
+      children: [{name: ""}],
       civil: false,
       state: "new",
       loginToken: ""
@@ -65,7 +67,11 @@ export class GuestListComponent implements OnInit {
     this.guest = guest;
   }
 
-  setAdults(val) {
-debugger;
+  addAdult() {
+    this.guest.adults.push({name: ""});
+  }
+
+  addChild() {
+    this.guest.children.push({name: ""});
   }
 }
