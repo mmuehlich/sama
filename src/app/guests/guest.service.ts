@@ -9,7 +9,9 @@ import { Guest } from './guest';
 export class GuestService {
 
   guests: AngularFirestoreCollection<Guest>;
+  
   noteDocument:   AngularFirestoreDocument<Node>
+
 
   constructor(private afs: AngularFirestore) {
     this.guests = this.afs.collection('guests', ref => ref.orderBy('firstname', 'desc'));
@@ -31,6 +33,29 @@ export class GuestService {
 
   getGuest(id) {
     return this.afs.doc<Guest>('guests/' + id);
+  }
+
+  getByName(name) {
+    return this.guests = this.afs.collection('guests', 
+      ref => ref.where('name', "==", name)
+    );
+  /*  return this.guests
+    .map(user => {
+       debugger;
+
+       this.guestService.getByName([user.displayName, user.email]);
+      // user.displayName
+      // user.email
+      return !!user;})
+    .do(loggedIn => {
+      if (!loggedIn) {
+        console.log('access denied')
+        this.router.navigate(['/']);
+      }
+  })
+*/
+
+//    return ""; //this.afs.doc<Guest>('guests/' + id);
   }
 
   create(guest: Guest) {

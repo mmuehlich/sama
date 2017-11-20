@@ -26,11 +26,12 @@ export class NotesListComponent implements OnInit {
     this.content = [["", ""]];
 
     this.sortedNotes = [];
-    this.usedTopics = this.getUsedTopics();
+    this.usedTopics = [];
   }
 
   ngOnInit() {
-    this.notes = this.noteService.getSnapshot()
+    this.notes = this.noteService.getSnapshot();
+    this.getUsedTopics();
   }
 
   createNote() {
@@ -50,8 +51,11 @@ export class NotesListComponent implements OnInit {
   }
 
   getUsedTopics() {
-    this.noteService.getSnapshot().toPromise().then(e => {
-      debugger;
+    this.usedTopics = [];
+    var me = this;
+    this.noteService.getSnapshot().subscribe(x => {
+      new Set(x.map(x => x['topic'])).forEach(
+        topic => me.usedTopics.push({topic: topic, values: x.filter(x => x['topic'] == topic) }));
     });
   }
 

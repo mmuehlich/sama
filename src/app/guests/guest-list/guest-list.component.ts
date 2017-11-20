@@ -64,4 +64,8 @@ export class GuestListComponent implements OnInit {
     this.showGuestDetails = true;
     this.guest = guest;
   }
+
+  setAdults(val) {
+debugger;
+  }
 }
