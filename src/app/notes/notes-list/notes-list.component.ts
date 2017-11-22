@@ -11,6 +11,8 @@ export class NotesListComponent implements OnInit {
   priorities = ["wichtig", "normal", "info"];
   states = ["neu", "ToDo", "done", "gelöscht"];
 
+  showNewNote = false;
+  
   state;
   topic;
   priority;
