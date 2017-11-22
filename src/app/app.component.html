@@ -1,16 +1,17 @@
-<div id="wrapper" *ngIf="auth.currentUser; else noUser">
+<div id="wrapper" *ngIf="false && auth.currentUser; else noUser">
 
-<div *ngIf="isAdmin(auth.currentUser) else noAdmin">
-  <top-nav-admin></top-nav-admin>
-  
-  <div class="content columns">
-    <main style="width:100%;">
-      <router-outlet></router-outlet>
-    </main>
+  <div *ngIf="isAdmin(auth.currentUser) else noAdmin">
+    <top-nav-admin></top-nav-admin>
+
+    <div class="content columns">
+      <main style="width:100%;">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
   </div>
 </div>
 
-
+<ng-template #noAdmin>
   <div id="wrapper" *ngIf="false">
     <div>
       <top-nav></top-nav>
@@ -28,7 +29,8 @@
 </ng-template>
 
 
-<ng-template #notLoggedIn>
-    <top-nav></top-nav>
-  ... TODO - login
+<ng-template #noUser>
+  <top-nav-empty></top-nav-empty>
+  <save-the-date></save-the-date>
+  <footer-nav></footer-nav>
 </ng-template>

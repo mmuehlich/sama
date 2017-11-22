@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { GuestService } from './guest.service';
 
 import { GuestListComponent } from './guest-list/guest-list.component';
-import { NoteDetailComponent } from './note-detail/note-detail.component';
 
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
@@ -19,8 +18,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     AngularFirestoreModule.enablePersistence(),
   ],
   declarations: [
-    GuestListComponent,
-    NoteDetailComponent
+    GuestListComponent
   ],
   providers: [GuestService]
 })

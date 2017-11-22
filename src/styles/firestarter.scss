@@ -8,6 +8,11 @@
 $body-font: 'Source Sans Pro', sans-serif;
 $heading-font: 'Palanquin', sans-serif;
 
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
 body {
   font-family: $body-font;
 }
@@ -62,10 +67,6 @@ a {
   
 .footer {
   border-top: 2px solid $gray-lightest;
-  min-height: 100px;
-  text-align: center;
-  font-size: 0.9em;
-  background: #f9f9f9;
 }
 
 
@@ -119,4 +120,9 @@ a {
 
 .btn-mail {
   color: #046504;
+}
+
+
+.niceFont {
+  font-family: 'Lovers Quarrel', cursive !important;
 }

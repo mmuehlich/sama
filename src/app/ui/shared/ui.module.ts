@@ -14,9 +14,10 @@ import { UserFormComponent } from '../user-form/user-form.component';
 import { NewUserFormComponent } from '../user-form/new-user-form.component';
 import { TopNavComponent } from '../top-nav/top-nav.component';
 import { TopNavAdminComponent } from '../top-nav/top-nav-admin.component';
+import { TopNavEmptyComponent } from '../top-nav/top-nav-empty.component';
 
 import { FooterNavComponent } from '../footer-nav/footer-nav.component';
-import { ReadmePageComponent } from '../readme-page/readme-page.component';
+import { SaveTheDate } from '../pages/save-the-date';
 
 
 
@@ -34,16 +35,19 @@ import { ReadmePageComponent } from '../readme-page/readme-page.component';
     UserProfileComponent,
     TopNavComponent,
     TopNavAdminComponent,
+    TopNavEmptyComponent,
     FooterNavComponent,
     UserFormComponent,
     NewUserFormComponent,
-    ReadmePageComponent
+    SaveTheDate
   ],
   exports: [
     TopNavComponent,
     TopNavAdminComponent,
+    TopNavEmptyComponent,
     FooterNavComponent,
     UserProfileComponent,
+    SaveTheDate
   ]
 })
 export class UiModule { }
