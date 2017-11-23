@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterNavComponent implements OnInit {
 
+  showLogin: false;
+  
   constructor() { }
 
   ngOnInit() {

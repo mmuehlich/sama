@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavService } from './nav.service';
 
 import { UserLoginComponent } from '../user-login/user-login.component';
+import { UserLoginDialogComponent } from '../user-login/user-login-dialog.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { UserFormComponent } from '../user-form/user-form.component';
 import { NewUserFormComponent } from '../user-form/new-user-form.component';
@@ -32,6 +33,7 @@ import { SaveTheDate } from '../pages/save-the-date';
   ],
   declarations: [
     UserLoginComponent,
+    UserLoginDialogComponent,
     UserProfileComponent,
     TopNavComponent,
     TopNavAdminComponent,
