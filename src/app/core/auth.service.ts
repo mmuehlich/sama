@@ -45,6 +45,12 @@ export class AuthService {
     return this.authenticated ? this.authState : null;
   }
 
+  get isAdmin(): boolean {
+    return this.authenticated && 
+      (this.authState.displayName === 'Matthias Mühlich' ||
+      this.authState.displayName === 'Sarah Müller');
+  }
+
   // Returns
   get currentUserObservable(): any {
     return this.afAuth.authState

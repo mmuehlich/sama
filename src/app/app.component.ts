@@ -19,12 +19,6 @@ export class AppComponent {
     this.guests = this.guestService.getSnapshot();
   }
 
-  isAdmin(login:any): boolean {
-    return login && 
-      (login.displayName === 'Matthias Mühlich' ||
-      login.displayName === 'Sarah Müller');
-  }
-
   getUser(users:Guest[], login:any): Guest {
     debugger;
     if (!users) {
