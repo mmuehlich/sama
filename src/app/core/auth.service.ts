@@ -24,7 +24,7 @@ import { Observable } from 'rxjs/Observable';
 export class AuthService {
 
   authState: any = null;
-  userRef: AngularFireObject<any>;
+  userRef: AngularFireObject<any>; 
 
   constructor(private afAuth: AngularFireAuth,
     private db: AngularFireDatabase,
@@ -43,13 +43,6 @@ export class AuthService {
   // Returns current user data
   get currentUser(): any {
     return this.authenticated ? this.authState : null;
-  }
-
-  get isAdmin(): boolean {
-    var login = this.authenticated ? this.authState : null;
-    return login &&
-      (login.displayName === 'Matthias Mühlich' ||
-        login.displayName === 'Sarah Müller');
   }
 
   // Returns
@@ -95,7 +88,7 @@ export class AuthService {
     const provider = new firebase.auth.FacebookAuthProvider()
     return this.socialSignIn(provider);
   }
-
+  
 
   private socialSignIn(provider) {
     return this.afAuth.auth.signInWithPopup(provider)

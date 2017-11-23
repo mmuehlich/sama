@@ -2,14 +2,13 @@
 
 <div *ngIf="isAdmin(auth.currentUser) else noAdmin">
   <top-nav-admin></top-nav-admin>
-  
+
   <div class="content columns">
     <main style="width:100%;">
       <router-outlet></router-outlet>
     </main>
   </div>
 </div>
-
 
 <ng-template #noAdmin>
   <div *ngIf="auth.currentUser else notLoggedIn">
@@ -25,6 +24,8 @@
 </ng-template>
 
 
-<ng-template #notLoggedIn>
-  ... TODO - login
+<ng-template #noUser>
+  <top-nav-empty></top-nav-empty>
+  <save-the-date></save-the-date>
+  <footer-nav></footer-nav>
 </ng-template>
