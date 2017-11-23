@@ -1,14 +1,15 @@
 export class Guest {
   greeting: string;
   name: string;
-  adults: string[];
-  children: string[];
+  adults: any[];
+  children: any[];
   civil: boolean;
   state: string;
   loginToken: string;
   address?: string;
   email?: string;
   phone?: string;
-  remarks?: number;
+  remarks?: string;
+  hiddenRemarks?: string;
   id?: string;
 }
