@@ -1,4 +1,18 @@
+<<<<<<< 793c72c12166127f0f34b6d49d58e84972ff1c63
 <div id="wrapper" *ngIf="false && auth.currentUser; else noUser">
+=======
+<!-- TODO -->
+
+<div *ngIf="isAdmin(auth.currentUser) else noAdmin">
+  <top-nav-admin></top-nav-admin>
+  
+  <div class="content columns">
+    <main style="width:100%;">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
+>>>>>>> nodal for notes
 
   <div *ngIf="isAdmin(auth.currentUser) else noAdmin">
     <top-nav-admin></top-nav-admin>

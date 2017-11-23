@@ -1,29 +1,39 @@
 <h1>Notizen</h1>
 
-<div>
-  <div style="display:inline-block;">
-    <input [(ngModel)]="topic" placeholder="Thema" class="input" style="float:left; width: 200px">
-    <select [(ngModel)]="state" class="input" style="float:left; width: 100px;margin-left: 20px;">
-        <option *ngFor="let state of states" [ngValue]="state">{{state}}</option>
-    </select>
-    <select [(ngModel)]="priority" class="input" style="float:left; width: 100px;margin-left: 20px;">
-      <option *ngFor="let priority of priorities" [ngValue]="priority">{{priority}}</option>
-    </select>
-  </div>
+<div style="float:right;margin-top:-50px">
+  <button class="btn" title="neue Notiz..." (click)="showNewNote=!showNewNote;" style="padding-right: 20px">
+    <i class="fa fa-plus"></i>
+  </button>
 
+<<<<<<< 793c72c12166127f0f34b6d49d58e84972ff1c63
   <div class="list" style="width: 80%">
     <div style="padding-left: 20px" *ngFor="let c of content">
       <input style="width: 180px;" [(ngModel)]="c[0]" placeholder="Titel" class="input" (change)="addContent()">
       <textarea [(ngModel)]="c[1]" placeholder="Text" class="input" style="height: 80px; margin-left: 20px"> </textarea>
     </div>
   </div>
+=======
+  <button class="btn" title="Liste herunterladen" (click)="showNewNote=!showNewNote;" disabled="disabled">
+    <i class="fa fa-download"></i>
+  </button>
+>>>>>>> nodal for notes
 </div>
 
-<button class="button is-success" (click)="createNote()">
-  hinzufügen
-</button>
-<hr>
+<div class="modal {{showNewNote? 'is-active' : ''}}">
+  <div class="modal-background"></div>
+  <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
+    <div>
+      <div style="display:inline-block;">
+        <input [(ngModel)]="topic" placeholder="Thema" class="input" style="float:left; width: 200px">
+        <select [(ngModel)]="state" class="input" style="float:left; width: 100px;margin-left: 20px;">
+          <option *ngFor="let state of states" [ngValue]="state">{{state}}</option>
+        </select>
+        <select [(ngModel)]="priority" class="input" style="float:left; width: 100px;margin-left: 20px;">
+          <option *ngFor="let priority of priorities" [ngValue]="priority">{{priority}}</option>
+        </select>
+      </div>
 
+<<<<<<< 793c72c12166127f0f34b6d49d58e84972ff1c63
 <div *ngIf="usedTopics">
   <div *ngFor="let t of usedTopics">
     <div onclick="this.nextElementSibling.style.display == 'block'? this.nextElementSibling.style.display = 'none' : this.nextElementSibling.style.display = 'block'">
@@ -35,4 +45,25 @@
       </div>
     </div>
   </div>
+=======
+      <div class="list" style="width: 80%">
+        <div style="padding-left: 20px" *ngFor="let c of content">
+          <input [(ngModel)]="c[0]" placeholder="Titel" class="input" (change)="addContent()">
+          <textarea [(ngModel)]="c[1]" placeholder="Text" class="input" style="height: 80px; margin-left: 20px"> </textarea>
+        </div>
+      </div>
+    </div>
+
+    <button class="button is-success" (click)="createNote(); showNewNote=false;">
+      hinzufügen
+    </button>
+
+  </div>
+  <button class="modal-close is-large" aria-label="close" (click)="showNewNote=false;"></button>
+</div>
+
+<div *ngFor="let note of notes | async | orderBy:['topic']">
+  <span>{{note.topic}}</span>
+  <note-detail [note]="note"></note-detail>
+>>>>>>> nodal for notes
 </div>
