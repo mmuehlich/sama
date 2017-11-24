@@ -1,81 +1,34 @@
-<div *ngIf="!auth.currentUser; else logout">
-
-  <div class="navbar-item has-dropdown is-hoverable">
-    <a class="navbar-link" style="margin-right:120px;">
-      Login
+<div>
+  <h1 style="font-size: x-large;">Login</h1>
+  <div class="navbar-item" style="display: inline-block;">
+    <span style="float:left;line-height: 40px;">1-Klick-Login</span>
+    <a style="float:left" title="Google+" (click)="signInWithGoogle()">
+      <i class="fa fa-google-plus btn-google btn" style="padding-left:10px;"></i>
     </a>
-
-    <div class="navbar-dropdown">
-      <a class="navbar-item" (click)="showLogin=!showLogin; showRegister = false;">
-        anmelden (User/Passwort)
-      </a>
-      <div class="navbar-item">
-        direkter Login mit
-        <a title="Google+" (click)="signInWithGoogle()">
-          <i class="fa fa-google-plus btn-google" style="padding-left:10px;"></i>
-        </a>
-        <a title="facebook" (click)="signInWithFacebook()">
-          <i class="fa fa-facebook btn-facebook" style="padding-left:10px;"></i>
-        </a>
-      </div>
-      <hr class="navbar-divider">
-      <a class="navbar-item" (click)="showRegister=!showRegister; showLogin = false;">
-        registrieren
-      </a>
-    </div>
+    <a style="float:left" title="facebook" (click)="signInWithFacebook()">
+      <i class="fa fa-facebook btn-facebook btn" style="padding-left:10px;"></i>
+    </a>
   </div>
 
+  <br/>
 
-  <div class="modal {{showLogin? 'is-active' : ''}}">
-    <div class="modal-background"></div>
-    <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
+  <div class="navbar-item">
+    <a (click)="showLogin=!showLogin; showRegister = false;" style="color:#4a4a4a">
+      anmelden (User/Passwort)
+    </a>
+    <div *ngIf="showLogin" style="padding-left: 30px">
       <user-form></user-form>
     </div>
-    <button class="modal-close is-large" aria-label="close" (click)="showLogin=false; showRegister = false;"></button>
   </div>
 
-  <div class="modal {{showRegister? 'is-active' : ''}}">
-    <div class="modal-background"></div>
-    <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
+  <hr>
+
+  <div class="navbar-item">
+    <a (click)="showRegister=!showRegister; showLogin = false;" style="color:#4a4a4a">
+      registrieren
+    </a>
+    <div *ngIf="showRegister" style="padding-left: 30px">
       <new-user-form> </new-user-form>
     </div>
-    <button class="modal-close is-large" aria-label="close" (click)="showLogin=false; showRegister = false;"></button>
   </div>
-
 </div>
-
-
-
-
-<ng-template #logout>
-
-  <a class="navbar-item" routerLink="/guests">
-    Gäste
-  </a>
-  <a class="navbar-item" routerLink="/items">
-    Notizen
-  </a>
-  <a class="navbar-item" routerLink="/items">
-    Planung
-  </a>
-  <a class="navbar-item" routerLink="/items">
-    Geschenke
-  </a>
-  <a class="navbar-item" routerLink="/items">
-    €
-  </a>
-  <a class="navbar-item" routerLink="/items">
-    Nachrichten
-  </a>
-
-  <div class="navbar-item has-dropdown is-hoverable">
-    <a class="navbar-link">
-      {{ auth.currentUserDisplayName }}
-    </a>
-    <div class="navbar-dropdown">
-      <a class="navbar-item" (click)="doLogout()" href="javascript://">abmelden</a>
-    </div>
-  </div>
-
-
-</ng-template>

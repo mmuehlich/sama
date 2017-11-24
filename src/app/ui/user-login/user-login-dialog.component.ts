@@ -34,8 +34,4 @@ export class UserLoginDialogComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  doLogout(): void {
-    this.auth.signOut();
-  }
-
 }
