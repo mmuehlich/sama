@@ -11,12 +11,16 @@ export class NewUserFormComponent implements OnInit {
 
   userForm: FormGroup;
   formErrors = {
+    'name': '',
     'email': '',
     'password': ''
   };
   validationMessages = {
+    'name': {
+      'required': 'bitte einen Namen angeben',
+    },
     'email': {
-      'required': 'eMail darf nicht leer sein.',
+      'required': 'bitte eine eMail Adresse angeben',
       'email': 'Ungültige eMail'
     },
     'password': {
@@ -31,11 +35,15 @@ export class NewUserFormComponent implements OnInit {
   }
 
   signup(): void {
-    this.auth.emailSignUp(this.userForm.value['email'], this.userForm.value['password'])
+    this.auth.emailSignUp(this.userForm.value['email'], this.userForm.value['password'], this.userForm.value['name'])
   }
 
   buildForm(): void {
     this.userForm = this.fb.group({
+      'name': ['', [
+        Validators.required
+      ]
+      ],
       'email': ['', [
         Validators.required,
         Validators.email
@@ -55,9 +63,11 @@ export class NewUserFormComponent implements OnInit {
   onValueChanged(data?: any) {
     if (!this.userForm) { return; }
     const form = this.userForm;
+
     for (const field in this.formErrors) {
       if (Object.prototype.hasOwnProperty.call(this.formErrors, field)) {
         // clear previous error message (if any)
+        debugger;
         this.formErrors[field] = '';
         const control = form.get(field);
         if (control && control.dirty && !control.valid) {

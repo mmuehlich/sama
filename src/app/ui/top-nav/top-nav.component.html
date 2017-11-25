@@ -1,14 +1,37 @@
 <nav class="navbar is-transparent" role="navigation">
   <div class="navbar-brand">
     <a class="navbar-item logo" routerLink="/">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmzVTgKI5o43hEmD31BSYHwnnv-D00EmhfY3MIYEoBw8mRi94reg" 
-       style="height:38px">  Sarah & Matthias
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmzVTgKI5o43hEmD31BSYHwnnv-D00EmhfY3MIYEoBw8mRi94reg" style="height:38px"> Sarah & Matthias
     </a>
+
+    <button class="button navbar-burger btn" data-target="navMenu" (click)='toggleMobile()'>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
 
-  <div class="navbar-menu">
-    <user-login class="navbar-end"></user-login>
+  <div class="navbar-menu" id="navMenu">
+    <div class="navbar-end">
+      <a class="navbar-item" title="..">
+        Standesamt
+      </a>
+      <a class="navbar-item" title="..">
+        Kirche
+      </a>
+      <a class="navbar-item" title="..">
+        Sonstiges
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          {{ auth.currentUserDisplayName }}
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" (click)="doLogout()" href="javascript://">abmelden</a>
+        </div>
+      </div>
+    </div>
   </div>
 
 </nav>
-

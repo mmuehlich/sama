@@ -1,24 +1,24 @@
+<form [formGroup]="userForm" (ngSubmit)="signup()">
 
-<form [formGroup]="userForm"  (ngSubmit)="signup()">
+  <label for="name">Name (Vorname Nachname)</label>
+  <input id="name" class="input" formControlName="name" required>
 
   <label for="email">Email</label>
-  <input type="email" id="email" class="input"
-         formControlName="email" required >
+  <input type="email" id="email" class="input" formControlName="email" required>
 
+  <label for="password">Password</label>
+  <input type="password" id="password" class="input" formControlName="password" required>
+
+  <div *ngIf="formErrors.name" class="help is-danger">
+    {{ formErrors.name }}
+  </div>
+  <div *ngIf="formErrors.password" class="help is-danger">
+    {{ formErrors.password }}
+  </div>
   <div *ngIf="formErrors.email" class="help is-danger">
     {{ formErrors.email }}
   </div>
 
-  <label for="password">Password</label>
-  <input type="password" id="password" class="input"
-         formControlName="password" required >
-
-  <div *ngIf="formErrors.password" class="help is-danger">
-    {{ formErrors.password }}
-  </div>
-
-  <div *ngIf="userForm.valid" class="help is-success">Form is valid</div>
   <button type="submit" class="button" [disabled]="!userForm.valid">Registrieren</button>
 
 </form>
-
