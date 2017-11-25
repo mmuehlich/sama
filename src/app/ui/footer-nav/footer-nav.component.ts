@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterNavComponent implements OnInit {
 
-  showLogin: false;
+  showLogin = false;
   
   constructor() { }
 
