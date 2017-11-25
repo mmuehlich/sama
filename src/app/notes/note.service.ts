@@ -7,6 +7,7 @@ interface Note {
   topic: string;
   status: string;
   priority: string;
+  title: string;
   content: string;
   id?: any;
   time?: number;
@@ -38,11 +39,12 @@ export class NoteService {
     return this.afs.doc<Note>('notes/' + id);
   }
 
-  create(state: string, topic: string, priority: string, content: string) {
+  create(state: string, topic: string, priority: string, title: string, content: string) {
     const note: Note = {
       topic: topic,
       status: state,
       priority: priority,
+      title: title,
       content: content,
       time: new Date().getTime()
     }

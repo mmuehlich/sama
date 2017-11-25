@@ -7,7 +7,7 @@
 
   <button class="btn" title="Liste herunterladen" (click)="showNewNote=!showNewNote;" disabled="disabled">
     <i class="fa fa-download"></i>
-  </button>1
+  </button> 
 </div>
 
 <div class="modal {{showNewNote? 'is-active' : ''}}">
@@ -25,10 +25,12 @@
         </select>
       </div>
 
+      <input [(ngModel)]="title" placeholder="Titel" class="input">
+      
       <div class="list" style="width: 80%">
           <div style="padding-left: 20px" *ngFor="let c of content">
-            <input style="width: 180px;" [(ngModel)]="c[0]" placeholder="Titel" class="input" (change)="addContent()">
-            <textarea [(ngModel)]="c[1]" placeholder="Text" class="input" style="height: 80px; margin-left: 20px"> </textarea>
+            <input style="width: 180px;" [(ngModel)]="c[0]" placeholder="Label" class="input" (change)="addContent()">
+            <textarea [(ngModel)]="c[1]" placeholder="Text" class="input" style="height: 50px; margin-left: 20px"> </textarea>
           </div>
         </div>
 
@@ -48,6 +50,7 @@
   <div *ngFor="let t of usedTopics">
     <div onclick="this.nextElementSibling.style.display == 'block'? this.nextElementSibling.style.display = 'none' : this.nextElementSibling.style.display = 'block'">
       <h3>
+        <!-- todo - mark important -->
         <i class="fa fa-chevron-down"></i> {{t.topic}} ({{t.values.length}})</h3>
     </div>
     <div style="padding-left: 20px;display:none;">

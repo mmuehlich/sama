@@ -13,9 +13,10 @@ export class NotesListComponent implements OnInit {
 
   showNewNote = false;
   
-  state;
-  topic;
-  priority;
+  state: string;
+  topic: string;
+  priority: string;
+  title: string;
   content: string[][];
 
   notes;
@@ -37,7 +38,7 @@ export class NotesListComponent implements OnInit {
   }
 
   createNote() {
-    this.noteService.create(this.state, this.topic, this.priority, this.content.map(c => c[0] + '::' + c[1]).join(";;"))
+    this.noteService.create(this.state, this.topic, this.priority, this.title, this.content.map(c => c[0] + '::' + c[1]).join(";;"))
     this.content = [["", ""]]
 
     this.sortedNotes = [];
@@ -57,7 +58,7 @@ export class NotesListComponent implements OnInit {
     var me = this;
     this.noteService.getSnapshot().subscribe(x => {
       new Set(x.map(x => x['topic'])).forEach(
-        topic => me.usedTopics.push({topic: topic, values: x.filter(x => x['topic'] == topic) }));
+        topic => me.usedTopics.push({topic: topic, values: x.filter(x => x['topic'] == topic && x['status'] != 'gelöscht') }));
     });
   }
 
