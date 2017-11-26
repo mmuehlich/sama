@@ -1,38 +1,39 @@
 <h1>Notizen</h1>
 
 <div style="float:right;margin-top:-50px">
-  <button class="btn" title="neue Notiz..." (click)="showNewNote=!showNewNote;" style="padding-right: 20px">
+  <button class="btn" title="neue Notiz..." (click)="newNote(); showNewNote=!showNewNote;" style="padding-right: 20px">
     <i class="fa fa-plus"></i>
   </button>
 
-  <button class="btn" title="Liste herunterladen" (click)="showNewNote=!showNewNote;" disabled="disabled">
+  <button class="btn" title="Liste herunterladen" disabled="disabled">
     <i class="fa fa-download"></i>
-  </button> 
+  </button>
 </div>
+
 
 <div class="modal {{showNewNote? 'is-active' : ''}}">
   <div class="modal-background"></div>
   <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
-    <h1>Neue Notiz</h1>
+    <h1>{{getDialogTitle()}}</h1>
     <div>
       <div style="display:inline-block;">
-        <input [(ngModel)]="topic" placeholder="Thema" class="input" style="float:left; width: 200px">
-        <select [(ngModel)]="state" class="input" style="float:left; width: 100px;margin-left: 20px;">
+        <input [(ngModel)]="currSimpleNote.topic" placeholder="Thema" class="input" style="float:left; width: 200px">
+        <select [(ngModel)]="currSimpleNote.state" class="input" style="float:left; width: 100px;margin-left: 20px;">
           <option *ngFor="let state of states" [ngValue]="state">{{state}}</option>
         </select>
-        <select [(ngModel)]="priority" class="input" style="float:left; width: 100px;margin-left: 20px;">
+        <select [(ngModel)]="currSimpleNote.priority" class="input" style="float:left; width: 100px;margin-left: 20px;">
           <option *ngFor="let priority of priorities" [ngValue]="priority">{{priority}}</option>
         </select>
       </div>
 
-      <input [(ngModel)]="title" placeholder="Titel" class="input">
-      
+      <input [(ngModel)]="currSimpleNote.title" placeholder="Titel" class="input">
+
       <div class="list" style="width: 80%">
-          <div style="padding-left: 20px" *ngFor="let c of content">
-            <input style="width: 180px;" [(ngModel)]="c[0]" placeholder="Label" class="input" (change)="addContent()">
-            <textarea [(ngModel)]="c[1]" placeholder="Text" class="input" style="height: 50px; margin-left: 20px"> </textarea>
-          </div>
+        <div style="padding-left: 20px" *ngFor="let c of currSimpleNote.content">
+          <input style="width: 180px;" [(ngModel)]="c[0]" placeholder="Label" class="input" (change)="addContent()">
+          <textarea [(ngModel)]="c[1]" placeholder="Text" class="input" style="height: 50px; margin-left: 20px"> </textarea>
         </div>
+      </div>
 
     </div>
 
@@ -55,7 +56,34 @@
     </div>
     <div style="padding-left: 20px;display:none;">
       <div *ngFor="let n of t.values">
-        <note-detail [note]="n"></note-detail>
+        <div>
+          <div>
+            <i *ngIf="n.status == 'neu'" class="fa fa-star" title="neu"></i>
+            <i *ngIf="n.status == 'ToDo'" class="fa fa-check-circle" title="ToDo"></i>
+            <i *ngIf="n.status == 'done'" class="fa fa-check" title="done"></i>
+
+            <h4 style="float:left">{{n.title}}</h4>
+
+            <i *ngIf="n.priority == 'wichtig'" class="fa fa-exclamation-triangle" title="wichtig" style="color:#a30a0a"></i>
+            <i *ngIf="n.priority == 'info'" class="fa fa-info" title="info" style="color:gray"></i>
+
+            <button class="btn" title="löschen" (click)="deleteNote(n)" style="float:right;">
+              <i class="fa fa-trash" style="color:#a30a0a"></i>
+            </button>
+            <button class="btn" title="bearbeiten" (click)="editNote(n); showNewNote=!showNewNote;" style="float:right;">
+              <i class="fa fa-pencil"></i>
+            </button>
+          </div>
+
+          <br/>
+
+          <div *ngFor="let t of getContent(n)">
+            <span style="width: 15%; display:inline-block;padding-left: 10px;">{{t.key}}</span>
+            <span>{{t.value}}</span>
+          </div>
+
+          <hr>
+        </div>
       </div>
     </div>
   </div>

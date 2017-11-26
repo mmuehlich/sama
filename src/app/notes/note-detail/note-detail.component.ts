@@ -17,10 +17,10 @@ export class NoteDetailComponent implements OnInit {
 
   ngOnInit() {
     this.content = [];
-    this.note.content.split(';;').forEach(n => { 
-      var c = n.split('::'); 
+    this.note.content.split(';;').forEach(n => {
+      var c = n.split('::');
       if (c[0] && c[0].length > 0 && c[1])
-        this.content.push({key: c[0], value: c[1]}); 
+        this.content.push({ key: c[0], value: c[1] });
     });
   }
 
@@ -28,8 +28,11 @@ export class NoteDetailComponent implements OnInit {
     this.noteService.updateNote(this.note.id, { hearts: val + 1 })
   }
 
-  deleteNote(id) {
-    this.noteService.deleteNote(id)
+  deleteNote() {
+    if (confirm('Notiz ' + this.note.title + ' löschen?')) {
+      this.noteService.deleteNote(this.note.id);
+      window.location.reload();
+    }
   }
 
 }

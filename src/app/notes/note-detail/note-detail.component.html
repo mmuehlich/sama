@@ -9,7 +9,7 @@
     <i *ngIf="note.priority == 'wichtig'" class="fa fa-exclamation-triangle" title="wichtig" style="color:#a30a0a"></i>
     <i *ngIf="note.priority == 'info'" class="fa fa-info" title="info" style="color:gray"></i>
 
-    <button class="btn" title="löschen" (click)="showNewNote=!showNewNote;" style="float:right;">
+    <button class="btn" title="löschen" (click)="deleteNote()" style="float:right;">
       <i class="fa fa-trash" style="color:#a30a0a"></i>
     </button>
     <button class="btn" title="bearbeiten" (click)="showNewNote=!showNewNote;" style="float:right;">
