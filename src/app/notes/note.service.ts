@@ -7,19 +7,18 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class NoteService {
 
-  notesCollection: AngularFirestoreCollection<Note>;
-  noteDocument:   AngularFirestoreDocument<Node>
+  notes: AngularFirestoreCollection<Note>;
 
   constructor(private afs: AngularFirestore) {
-    this.notesCollection = this.afs.collection('notes');
+    this.notes = this.afs.collection('notes');
   }
 
   getData(): Observable<Note[]> {
-    return this.notesCollection.valueChanges();
+    return this.notes.valueChanges();
   }
 
   getSnapshot() {
-    return this.notesCollection.snapshotChanges().map(actions => {
+    return this.notes.snapshotChanges().map(actions => {
       return actions.map(a => {
         return { id: a.payload.doc.id, ...a.payload.doc.data() }
       })
@@ -31,7 +30,7 @@ export class NoteService {
   }
 
   create(note: Note) {
-    return this.notesCollection.add(note);
+    return this.notes.add(note);
   }
 
   updateNote(id, data) {

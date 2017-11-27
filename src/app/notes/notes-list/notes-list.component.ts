@@ -7,53 +7,55 @@ import { NoteService } from '../note.service';
   templateUrl: './notes-list.component.html',
   styleUrls: ['./notes-list.component.scss']
 })
+
 export class NotesListComponent implements OnInit {
 
   priorities = ["wichtig", "normal", "info"];
   states = ["neu", "ToDo", "done"]; //, "gelöscht"];
 
   showNewNote = false;
+  showEditNote = false;
 
-  currNote: Note;
   currSimpleNote: SimpleNote;
-  usedTopics: Note[];
+  notes;
 
   constructor(private noteService: NoteService) { 
-    this.currSimpleNote = {
-      state: this.states[0],
-      priority: this.priorities[1],
-      title: '',
-      content: [{key: '', value: ''}]
-    };
-    this.currNote = {
-      topic: '',
-      priority: this.priorities[1],
-      notes: [ this.currSimpleNote  ]
-    };
-    this.usedTopics = [];
+    this.currSimpleNote = this.getEmptyNote();
+    this.notes = this.noteService.getSnapshot();
   }
 
   ngOnInit() {
   //  this.getUsedTopics();
   }
-/*
-  createNote() {
-    this.noteService.create(this.currNote.state, this.currNote.topic, this.currNote.priority, this.currNote.title, this.currNote.content.map(c => c[0] + '::' + c[1]).join(";;"))
-    this.currNote.title = '';
-    this.currNote.content = [["", ""]]
 
-    this.getUsedTopics();
+  createNote(notes: Note[]) {
+    this.currSimpleNote.id = new Date().toString();
+    for (var n in notes) {
+      if (n['topic'] == this.currSimpleNote.topic) {
+        n['notes'].push(this.currSimpleNote);
+        this.noteService.updateNote(n['id'], n);
+        this.currSimpleNote = this.getEmptyNote();
+        return;
+      }
+    }
+    var newNote = {
+      topic: this.currSimpleNote.topic,
+      notes: [ this.currSimpleNote ]
+    };
+    this.noteService.create(newNote);
+    this.currSimpleNote = this.getEmptyNote();
   }
 
   addContent() {
-    var c = this.currNote.content;
-    if (c[c.length-1][0].length > 0) {
-      c.push(["", ""]);
-    } else if (c.length > 1 && c[c.length-2][0].length == 0) {
+    var c = this.currSimpleNote.content;
+    if (c[c.length-1].key.length > 0) {
+      c.push({key: "", value: ""});
+    } else while (c.length > 1 && c[c.length-2].key.length == 0) {
       c.pop();
     }
   }
 
+  /*
   getUsedTopics() {
     this.usedTopics = [];
     var me = this;
@@ -86,16 +88,21 @@ export class NotesListComponent implements OnInit {
   }
 */
   newNote() {
-    this.currSimpleNote = {
+    this.currSimpleNote = this.getEmptyNote();
+    this.showNewNote = true;
+  }
+
+  private getEmptyNote() {
+    return {
+      topic: '',
       state: this.states[0],
       priority: this.priorities[1],
       title: '',
       content: [{key: '', value: ''}]
     };
   }
-
   getDialogTitle() {
-    return this.currSimpleNote && this.currSimpleNote.title.length > 0 ? 'Notiz \'' + this.currSimpleNote.title + '\' bearbeiten' : 'Neue Notiz';
+    return this.showNewNote ? 'Neue Notiz' : 'Notiz \'' + this.currSimpleNote.title + '\' bearbeiten';
   }
  
 }

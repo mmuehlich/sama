@@ -1,7 +1,7 @@
 <h1>Notizen</h1>
 
 <div style="float:right;margin-top:-50px">
-  <button class="btn" title="neue Notiz..." (click)="newNote(); showNewNote=!showNewNote;" style="padding-right: 20px">
+  <button class="btn" title="neue Notiz..." (click)="newNote();" style="padding-right: 20px">
     <i class="fa fa-plus"></i>
   </button>
 
@@ -30,14 +30,14 @@
 
       <div class="list" style="width: 80%">
         <div style="padding-left: 20px" *ngFor="let c of currSimpleNote.content">
-          <input style="width: 180px;" [(ngModel)]="c[0]" placeholder="Label" class="input" (change)="addContent()">
-          <textarea [(ngModel)]="c[1]" placeholder="Text" class="input" style="height: 50px; margin-left: 20px"> </textarea>
+          <input style="width: 180px;" [(ngModel)]="c.key" placeholder="Label" class="input" (change)="addContent()">
+          <textarea [(ngModel)]="c.value" placeholder="Text" class="input" style="height: 50px; margin-left: 20px"> </textarea>
         </div>
       </div>
 
     </div>
 
-    <button class="button is-success" (click)="createNote(); showNewNote=false;">
+    <button class="button is-success" (click)="createNote(usedTopics); showNewNote=false;">
       hinzufügen
     </button>
 
@@ -47,43 +47,41 @@
 
 
 
-<div *ngIf="usedTopics">
-  <div *ngFor="let t of usedTopics">
-    <div onclick="this.nextElementSibling.style.display == 'block'? this.nextElementSibling.style.display = 'none' : this.nextElementSibling.style.display = 'block'">
-      <h3>
-        <!-- todo - mark important -->
-        <i class="fa fa-chevron-down"></i> {{t.topic}} ({{t.values.length}})</h3>
-    </div>
-    <div style="padding-left: 20px;display:none;">
-      <div *ngFor="let n of t.values">
+<div *ngFor="let t of notes | async">
+  <div onclick="this.nextElementSibling.style.display == 'block'? this.nextElementSibling.style.display = 'none' : this.nextElementSibling.style.display = 'block'">
+    <h3>
+      <!-- todo - mark important -->
+      <i class="fa fa-chevron-down"></i> {{t.topic}} ({{t.notes.length}})</h3>
+  </div>
+  <div style="padding-left: 20px;display:none;">
+    <div *ngFor="let n of t.values">
+      <div>
         <div>
-          <div>
-            <i *ngIf="n.status == 'neu'" class="fa fa-star" title="neu"></i>
-            <i *ngIf="n.status == 'ToDo'" class="fa fa-check-circle" title="ToDo"></i>
-            <i *ngIf="n.status == 'done'" class="fa fa-check" title="done"></i>
+          <i *ngIf="n.status == 'neu'" class="fa fa-star" title="neu"></i>
+          <i *ngIf="n.status == 'ToDo'" class="fa fa-check-circle" title="ToDo"></i>
+          <i *ngIf="n.status == 'done'" class="fa fa-check" title="done"></i>
 
-            <h4 style="float:left">{{n.title}}</h4>
+          <h4 style="float:left">{{n.title}}</h4>
 
-            <i *ngIf="n.priority == 'wichtig'" class="fa fa-exclamation-triangle" title="wichtig" style="color:#a30a0a"></i>
-            <i *ngIf="n.priority == 'info'" class="fa fa-info" title="info" style="color:gray"></i>
+          <i *ngIf="n.priority == 'wichtig'" class="fa fa-exclamation-triangle" title="wichtig" style="color:#a30a0a"></i>
+          <i *ngIf="n.priority == 'info'" class="fa fa-info" title="info" style="color:gray"></i>
 
-            <button class="btn" title="löschen" (click)="deleteNote(n)" style="float:right;">
-              <i class="fa fa-trash" style="color:#a30a0a"></i>
-            </button>
-            <button class="btn" title="bearbeiten" (click)="editNote(n); showNewNote=!showNewNote;" style="float:right;">
-              <i class="fa fa-pencil"></i>
-            </button>
-          </div>
-
-          <br/>
-
-          <div *ngFor="let t of getContent(n)">
-            <span style="width: 15%; display:inline-block;padding-left: 10px;">{{t.key}}</span>
-            <span>{{t.value}}</span>
-          </div>
-
-          <hr>
+          <button class="btn" title="löschen" (click)="deleteNote(n)" style="float:right;">
+            <i class="fa fa-trash" style="color:#a30a0a"></i>
+          </button>
+          <button class="btn" title="bearbeiten" (click)="editNote(n); showNewNote=!showNewNote;" style="float:right;">
+            <i class="fa fa-pencil"></i>
+          </button>
         </div>
+
+        <br/>
+
+        <div *ngFor="let t of getContent(n)">
+          <span style="width: 15%; display:inline-block;padding-left: 10px;">{{t.key}}</span>
+          <span>{{t.value}}</span>
+        </div>
+
+        <hr>
       </div>
     </div>
   </div>
