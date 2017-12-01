@@ -7,7 +7,6 @@ import { NoteService } from './note.service';
 import { MainPipe } from '../main-pipe.module'; 
 
 import { NotesListComponent } from './notes-list/notes-list.component';
-import { NoteDetailComponent } from './note-detail/note-detail.component';
 
 import { environment } from '../../environments/environment';
 
@@ -23,8 +22,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     MainPipe
   ],
   declarations: [
-    NotesListComponent,
-    NoteDetailComponent
+    NotesListComponent
   ],
   providers: [NoteService]
 })
