@@ -11,7 +11,7 @@ import { NoteService } from '../note.service';
 export class NotesListComponent implements OnInit {
 
   priorities = ["wichtig", "normal", "info"];
-  states = ["neu", "ToDo", "done"]; //, "gelöscht"];
+  states = ["neu", "ToDo", "done"]; 
 
   showNewNote = false;
   showEditNote = false;
@@ -19,31 +19,45 @@ export class NotesListComponent implements OnInit {
   currSimpleNote: SimpleNote;
   notes;
 
+  data: Note[];
+  
   constructor(private noteService: NoteService) { 
     this.currSimpleNote = this.getEmptyNote();
     this.notes = this.noteService.getSnapshot();
+
+    var me = this;
+    this.noteService.getSnapshot().subscribe(x => me.data = (x as Note[]));
   }
 
   ngOnInit() {
-  //  this.getUsedTopics();
   }
 
-  createNote(notes: Note[]) {
-    this.currSimpleNote.id = new Date().toString();
-    for (var n in notes) {
-      if (n['topic'] == this.currSimpleNote.topic) {
-        n['notes'].push(this.currSimpleNote);
-        this.noteService.updateNote(n['id'], n);
-        this.currSimpleNote = this.getEmptyNote();
-        return;
-      }
+  createNote() {
+    if (!this.currSimpleNote.id) {
+      this.currSimpleNote.id = new Date().toString(); 
     }
+    var parent:Note = this.data.find(n => n.topic == this.currSimpleNote.topic);
+    if (parent) {
+      parent.notes = parent.notes.filter(n => n.id !== this.currSimpleNote.id);
+
+      parent.notes.push(this.currSimpleNote);
+      this.noteService.updateNote(parent.id, parent);
+
+      this.currSimpleNote = this.getEmptyNote();
+      this.showEditNote = false;
+      this.showNewNote = false;
+      return;
+    }
+
     var newNote = {
       topic: this.currSimpleNote.topic,
       notes: [ this.currSimpleNote ]
     };
     this.noteService.create(newNote);
     this.currSimpleNote = this.getEmptyNote();
+
+    this.showEditNote = false;
+    this.showNewNote = false;
   }
 
   addContent() {
@@ -55,38 +69,27 @@ export class NotesListComponent implements OnInit {
     }
   }
 
-  /*
-  getUsedTopics() {
-    this.usedTopics = [];
-    var me = this;
-    this.noteService.getSnapshot().subscribe(x => {
-      new Set(x.map(x => x['topic'])).forEach(
-        topic => me.usedTopics.push({topic: topic, values: x.filter(x => x['topic'] == topic && x['status'] != 'gelöscht') }));
-    });
-  }
-
-  deleteNote(note: any) {
+  deleteNote(noteCollection: any, note: any) {
     if (confirm('Notiz ' + note.title + ' löschen?')) {
-      this.noteService.deleteNote(note.id);
-      this.getUsedTopics();
-      window.location.reload();
+      var n = [];
+      for (var i=0; i<noteCollection.notes.length; i++) {
+        if (noteCollection.notes[i].id !== note.id)
+          n.push(noteCollection.notes[i]);
+      }
+      noteCollection.notes = n;
+      if (n.length == 0) {
+        this.noteService.deleteNote(noteCollection.id);
+      } else {
+        this.noteService.updateNote(noteCollection.id, noteCollection);
+      }
     }
-  }
-
-  getContent(note: any) {
-    var content = [];
-    note.content.split(';;').forEach(n => {
-      var c = n.split('::');
-      if (c[0] && c[0].length > 0 && c[1])
-        content.push({ key: c[0], value: c[1] });
-    });
-    return content;
   }
   
   editNote(note: any) {
-    this.currNote = note;
+    this.showEditNote = true;
+    this.currSimpleNote = note;
   }
-*/
+
   newNote() {
     this.currSimpleNote = this.getEmptyNote();
     this.showNewNote = true;
@@ -100,9 +103,6 @@ export class NotesListComponent implements OnInit {
       title: '',
       content: [{key: '', value: ''}]
     };
-  }
-  getDialogTitle() {
-    return this.showNewNote ? 'Neue Notiz' : 'Notiz \'' + this.currSimpleNote.title + '\' bearbeiten';
   }
  
 }
