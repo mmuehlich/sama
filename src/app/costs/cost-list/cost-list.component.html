@@ -22,7 +22,7 @@
 
       <div class="list" style="width: 100%">
         <div>
-          <input [(ngModel)]="currEntry.title" placeholder="Text" class="input">
+          <input [(ngModel)]="currEntry.text" placeholder="Text" class="input">
           <input [(ngModel)]="currEntry.amount" placeholder="Betrag" class="input">
         </div>
       </div>
@@ -40,7 +40,7 @@
 <table>
     <tr *ngFor="let t of costs | async">
         <td>{{t.topic}}</td>
-        <td>{{t.title}}</td>
+        <td>{{t.text}}</td>
         <td style="text-align:right">{{t.amount}}</td>
         <td>
           <button class="btn" title="löschen" (click)="delete(t)">
