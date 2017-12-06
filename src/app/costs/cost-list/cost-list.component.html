@@ -1,0 +1,58 @@
+<h1>Finanzen</h1>
+
+<div style="float:right;margin-top:-50px">
+  <button class="btn" title="neuer Eintrag" (click)="newEntry();" style="padding-right: 20px">
+    <i class="fa fa-plus"></i>
+  </button>
+
+  <button class="btn" title="Liste herunterladen" disabled="disabled">
+    <i class="fa fa-download"></i>
+  </button>
+</div>
+
+
+<div class="modal {{showNewEntry? 'is-active' : ''}}">
+  <div class="modal-background"></div>
+  <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
+    <h1>Neuer Eintrag</h1>
+    <div>
+      <div style="display:inline-block;width:100%;">
+        <input [(ngModel)]="currEntry.topic" placeholder="Kategorie" class="input" style="float:left; width: 200px">
+      </div>
+
+      <div class="list" style="width: 100%">
+        <div>
+          <input [(ngModel)]="currEntry.title" placeholder="Text" class="input">
+          <input [(ngModel)]="currEntry.amount" placeholder="Betrag" class="input">
+        </div>
+      </div>
+
+    </div>
+
+    <button class="button is-success" (click)="create();">
+      hinzufügen
+    </button>
+
+  </div>
+  <button class="modal-close is-large" aria-label="close" (click)="showNewEntry=false;"></button>
+</div>
+
+<table>
+    <tr *ngFor="let t of costs | async">
+        <td>{{t.topic}}</td>
+        <td>{{t.title}}</td>
+        <td style="text-align:right">{{t.amount}}</td>
+        <td>
+          <button class="btn" title="löschen" (click)="delete(t)">
+            <i class="fa fa-trash" style="color:#a30a0a"></i>
+          </button>
+        </td>
+    </tr>
+
+    <tr>
+        <th></th>
+        <th>Total</th>
+        <th style="text-align:right">{{costs | async | sum:'amount'}}</th>
+        <th></th>
+    </tr>
+</table>
