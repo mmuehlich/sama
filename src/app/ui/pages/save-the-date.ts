@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../core/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'save-the-date',
@@ -8,6 +10,9 @@ import { Component } from '@angular/core';
 
 export class SaveTheDate {
 
-  constructor() { 
+  constructor(public auth: AuthService, private router: Router) { 
+    if (auth.currentUser) {
+      this.router.navigate(['wedding']) 
+    }
   }
 }

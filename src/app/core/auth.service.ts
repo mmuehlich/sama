@@ -124,7 +124,7 @@ export class AuthService {
         user.updateProfile({
           displayName : name
         })
-        this.updateUserData()
+        this.updateUserData();
       })
       .catch(error => alert(error));
   }
@@ -152,7 +152,7 @@ export class AuthService {
 
   signOut(): void {
     this.afAuth.auth.signOut();
-    this.router.navigate(['/'])
+    this.router.navigate(['/']) 
   }
 
 
@@ -161,7 +161,6 @@ export class AuthService {
   private updateUserData(): void {
     // Writes user name and email to realtime db
     // useful if your app displays information about users or for admin features
-
     const path = `users/${this.currentUserId}`; // Endpoint on firebase
     const userRef: AngularFireObject<any> = this.db.object(path);
 

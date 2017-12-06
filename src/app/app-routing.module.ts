@@ -7,11 +7,13 @@ import { NotesListComponent } from './notes/notes-list/notes-list.component';
 import { CostListComponent } from './costs/cost-list/cost-list.component';
 import { GuestListComponent } from './guests/guest-list/guest-list.component';
 import { SaveTheDate } from './ui/pages/save-the-date';
+import { Wedding } from './ui/pages/wedding';
 
 import { CoreModule } from './core/core.module'
 
 const routes: Routes = [
   { path: '', component: SaveTheDate },
+  { path: 'wedding', component: Wedding, canActivate: [AuthGuard]},
   { path: 'items', component: ItemsListComponent, canActivate: [AuthGuard]},
   { path: 'guests', component: GuestListComponent,  canActivate: [AuthGuard] },
   { path: 'notes', component: NotesListComponent,  canActivate: [AuthGuard] },

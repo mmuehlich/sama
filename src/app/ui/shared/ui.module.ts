@@ -19,6 +19,7 @@ import { TopNavEmptyComponent } from '../top-nav/top-nav-empty.component';
 
 import { FooterNavComponent } from '../footer-nav/footer-nav.component';
 import { SaveTheDate } from '../pages/save-the-date';
+import { Wedding } from '../pages/wedding';
 
 
 
@@ -41,7 +42,8 @@ import { SaveTheDate } from '../pages/save-the-date';
     FooterNavComponent,
     UserFormComponent,
     NewUserFormComponent,
-    SaveTheDate
+    SaveTheDate,
+    Wedding
   ],
   exports: [
     TopNavComponent,
