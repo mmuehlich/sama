@@ -12,4 +12,5 @@ export class Guest {
   remarks?: string;
   hiddenRemarks?: string;
   id?: string;
+  role?: string;
 }

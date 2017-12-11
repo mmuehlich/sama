@@ -1,38 +1,31 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
 
-
-// export function createListValueChanges<T>(query: DatabaseQuery) {
-//   return function valueChanges<T>(events?: ChildEvent[]): Observable<T[]> {
-//     events = validateEventsArray(events);
-//     return listChanges<T>(query, events!)
-//       .map(changes => changes.map(change => { 
-//         console.log(changes)
-//         const data = change.payload.snapshot!.val()
-//         return  { $key: change.key, ...data }
-//       }))
-//   }
-// }
-
+import { GuestService } from '../guests/guest.service';
+import { Guest } from '../guests/guest';
 
 
 @Injectable()
 export class AuthService {
 
   authState: any = null;
-  userRef: AngularFireObject<any>; 
+  users: Guest[] = [];
 
   constructor(private afAuth: AngularFireAuth,
-    private db: AngularFireDatabase,
+    private guestService: GuestService,
     private router: Router) {
 
     this.afAuth.authState.subscribe((auth) => {
       this.authState = auth
     });
+  
+    this.guestService.getSnapshot().subscribe(x => {
+      this.users = (x as Guest[])}
+    );
   }
 
   // Returns true if user is logged in
@@ -46,9 +39,8 @@ export class AuthService {
   }
 
   get isAdmin(): boolean {
-    return this.authenticated && 
-      (this.authState.displayName === 'Matthias Mühlich' ||
-      this.authState.displayName === 'Sarah Müller');
+    if (!this.authenticated) { return false;}
+    return this.users.filter(u => u.id == this.currentUserId && u.role == 'admin').length === 1;
   }
 
   // Returns
@@ -87,20 +79,20 @@ export class AuthService {
 
   googleLogin() {
     const provider = new firebase.auth.GoogleAuthProvider()
-    return this.socialSignIn(provider);
+    return this.socialSignIn(provider, 'google');
   }
 
   facebookLogin() {
     const provider = new firebase.auth.FacebookAuthProvider()
-    return this.socialSignIn(provider);
+    return this.socialSignIn(provider, 'facebook');
   }
   
 
-  private socialSignIn(provider) {
+  private socialSignIn(provider, providerName: string) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
         this.authState = credential.user
-        this.updateUserData()
+        this.updateUserData(providerName)
       })
       .catch(error => console.log(error));
   }
@@ -124,7 +116,7 @@ export class AuthService {
         user.updateProfile({
           displayName : name
         })
-        this.updateUserData();
+        this.updateUserData('email');
       })
       .catch(error => alert(error));
   }
@@ -133,7 +125,7 @@ export class AuthService {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((user) => {
         this.authState = user
-        this.updateUserData()
+        this.updateUserData('email')
       })
       .catch(error => console.log(error));
   }
@@ -158,10 +150,16 @@ export class AuthService {
 
   //// Helpers ////
 
-  private updateUserData(): void {
+  private updateUserData(loginSource: string): void {
+    this.guestService.createIfNotExisting(
+      this.currentUserId,
+      this.authState.displayName,
+      this.authState.email,
+      loginSource
+    );
     // Writes user name and email to realtime db
     // useful if your app displays information about users or for admin features
-    const path = `users/${this.currentUserId}`; // Endpoint on firebase
+   /* const path = `users/${this.currentUserId}`; // Endpoint on firebase
     const userRef: AngularFireObject<any> = this.db.object(path);
 
     const data = {
@@ -171,7 +169,7 @@ export class AuthService {
 
     userRef.update(data)
       .catch(error => console.log(error));
-
+*/
   }
 
 

@@ -9,13 +9,9 @@ import { Guest } from './guest';
 export class GuestService {
 
   guests: AngularFirestoreCollection<Guest>;
-  
-  noteDocument:   AngularFirestoreDocument<Node>
-
 
   constructor(private afs: AngularFirestore) {
-    this.guests = this.afs.collection('guests', ref => ref.orderBy('firstname', 'desc'));
-    // this.noteDocument = this.afs.doc('notes/mtp1Ll6caN4dVrhg8fWD');
+    this.guests = this.afs.collection('guests');
   }
 
   getData(): Observable<Guest[]> {
@@ -36,26 +32,26 @@ export class GuestService {
   }
 
   getByName(name) {
-    return this.guests = this.afs.collection('guests', 
+    return this.guests = this.afs.collection('guests',
       ref => ref.where('name', "==", name)
     );
-  /*  return this.guests
-    .map(user => {
-       debugger;
+    /*  return this.guests
+      .map(user => {
+         debugger;
+  
+         this.guestService.getByName([user.displayName, user.email]);
+        // user.displayName
+        // user.email
+        return !!user;})
+      .do(loggedIn => {
+        if (!loggedIn) {
+          console.log('access denied')
+          this.router.navigate(['/']);
+        }
+    })
+  */
 
-       this.guestService.getByName([user.displayName, user.email]);
-      // user.displayName
-      // user.email
-      return !!user;})
-    .do(loggedIn => {
-      if (!loggedIn) {
-        console.log('access denied')
-        this.router.navigate(['/']);
-      }
-  })
-*/
-
-//    return ""; //this.afs.doc<Guest>('guests/' + id);
+    //    return ""; //this.afs.doc<Guest>('guests/' + id);
   }
 
   create(guest: Guest) {
@@ -69,6 +65,30 @@ export class GuestService {
 
   delete(id) {
     return this.getGuest(id).delete()
+  }
+
+  createIfNotExisting(id, name, email, loginSource) {
+    this.afs.firestore.doc('guests/' + id).get().then(
+      docSnapshot => {
+        if (docSnapshot.exists) { return }
+        else { 
+          this.afs.firestore.doc('guests/' + id).set({
+            greeting: '',
+            name: name,
+            adults: [{name: name}],
+            children: [],
+            civil: false,
+            state: 'new',
+            loginToken: '',
+            address: '',
+            email: email,
+            phone: '',
+            remarks: '',
+            hiddenRemarks: 'login via ' + loginSource,
+          })
+        }
+      }
+    );
   }
 
 }
