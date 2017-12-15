@@ -20,7 +20,6 @@ export class AppComponent {
   }
 
   getUser(users:Guest[], login:any): Guest {
-    debugger;
     if (!users) {
       return undefined;
     }

@@ -67,7 +67,6 @@ export class NewUserFormComponent implements OnInit {
     for (const field in this.formErrors) {
       if (Object.prototype.hasOwnProperty.call(this.formErrors, field)) {
         // clear previous error message (if any)
-        debugger;
         this.formErrors[field] = '';
         const control = form.get(field);
         if (control && control.dirty && !control.valid) {
