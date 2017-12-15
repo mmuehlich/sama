@@ -97,18 +97,23 @@
     <th>Kontakt</th>
     <th>Gäste</th>
     <th>Anmerkungen</th>
+    <th>Status</th>
   </tr>
-  <tr ngInit="alert('test');" *ngFor="let guest of guests | async" (click)="showUser(guest)">
+  <tr *ngFor="let guest of guests | async" (click)="showUser(guest)">
     <td>{{guest.name}}</td>
     <td title="{{guest.email}} &#013;{{guest.phone}} &#013;{{guest.address}}">{{guest.email}}</td>
-    <td>{{guest.adults}} Erwachsene, {{guest.children}} Kinder</td>
+    <td>
+      <span *ngIf="guest.adults.length > 1">{{guest.adults.length - 1}} Erwachsene</span>
+      <span *ngIf="guest.children.length > 1"> {{guest.children.length - 1}} Kinder</span>
+    </td>
     <td title="{{guest.remarks}}">{{guest.remarks | slice:0:10}}</td>
+    <td>{{guest.state}}</td>
   </tr>
 
   <tr style="font-weight: bold">
     <td>Total</td>
     <td></td>
-    <td>{{guests | async | sum:'adults'}} Erwachsene, {{guests | async | sum:'children'}} Kinder</td>
+    <td>{{guests | async | sum:'adults'}} Erwachsene {{guests | async | sum:'children'}} Kinder</td>
     <td></td>
   </tr>
 </table>
@@ -141,7 +146,19 @@
       </div>
       <div>
         <p>Gäste</p>
-        <p>{{guest.adults}} Erwachsene, {{guest.children}} Kinder</p>
+        <p>{{guest.adults.length - 1}} Erwachsene, {{guest.children.length - 1}} Kinder</p>
+      </div>
+      <div *ngIf="guest.adults.length > 1">
+          <p>Erwachsene</p>
+          <p>
+            <span *ngFor="let a of guest.adults" style="display:block">{{a.name}}</span> 
+          </p>
+      </div>
+      <div *ngIf="guest.children.length > 1">
+          <p>Kinder</p>
+          <p>
+            <span *ngFor="let a of guest.children" style="display:block">{{a.name}}</span> 
+          </p>
       </div>
       <div>
         <p>Anmerkungen</p>
