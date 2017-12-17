@@ -2,35 +2,33 @@
   <h1 style="font-size: x-large;">Login</h1>
 
   <p>Wir möchten niemanden vergessen - melde dich deshalb hier bitte an!</p>
-  <p>Am einfachsten geht dies mit Facebook oder Google+, einfach auf den ensprechenden Button klicken:</p>
+  <br/>
+  <p>Am einfachsten geht dies mit Facebook oder Google+:</p>
 
   <div class="navbar-item" style="display: inline-block;">
-    <span style="float:left;line-height: 40px;">1-Klick-Login</span>
-    <a style="float:left" title="Google+" (click)="signInWithGoogle()">
+    <a style="float:left" title="Google+ Login" (click)="signInWithGoogle()">
       <i class="fa fa-google-plus btn-google btn" style="padding-left:10px;"></i>
     </a>
-    <a style="float:left" title="facebook" (click)="signInWithFacebook()">
+    <a style="float:left" title="facebook Login" (click)="signInWithFacebook()">
       <i class="fa fa-facebook btn-facebook btn" style="padding-left:10px;"></i>
     </a>
   </div>
 
-  <br/>
+  <hr style="margin-top:0px">
+
+  <p>Oder ganz klassisch mit eMail und Passwort 
+      <a (click)="showRegister=!showRegister; showLogin = false;" title="registrieren">hier</a> 
+    registrieren und 
+    <a (click)="showLogin=!showLogin; showRegister = false;" title="anmelden (eMail / Passwort)">hier</a> 
+    anmelden</p>
 
   <div class="navbar-item">
-    <a (click)="showLogin=!showLogin; showRegister = false;" style="color:#4a4a4a">
-      anmelden (User/Passwort)
-    </a>
     <div *ngIf="showLogin" style="padding-left: 30px">
       <user-form></user-form>
     </div>
   </div>
 
-  <hr>
-
   <div class="navbar-item">
-    <a (click)="showRegister=!showRegister; showLogin = false;" style="color:#4a4a4a">
-      registrieren
-    </a>
     <div *ngIf="showRegister" style="padding-left: 30px">
       <new-user-form> </new-user-form>
     </div>

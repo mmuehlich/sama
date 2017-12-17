@@ -116,6 +116,7 @@ export class AuthService {
         user.updateProfile({
           displayName : name
         })
+        this.authState.displayName = name;
         this.updateUserData('email');
       })
       .catch(error => alert(error));
@@ -127,7 +128,7 @@ export class AuthService {
         this.authState = user
         this.updateUserData('email')
       })
-      .catch(error => console.log(error));
+      .catch(error => alert(error));
   }
 
   // Sends email allowing user to reset password
@@ -135,8 +136,8 @@ export class AuthService {
     const fbAuth = firebase.auth();
 
     return fbAuth.sendPasswordResetEmail(email)
-      .then(() => console.log('email sent'))
-      .catch((error) => console.log(error))
+      .then(() => alert('eMail verschickt'))
+      .catch((error) =>alert(error))
   }
 
 
