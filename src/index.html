@@ -25,14 +25,25 @@
 <body>
 
 
-  <app-root></app-root>
+  <app-root></app-root> 
 
 
   <div class="loading">
     <img src="/assets/images/loader.gif" style="width:32px"> 
     <p style="color:white; font-size: 3em;" class="niceFont">...bald  ist es soweit...</p>
-  </div>
+  
 
+    <div class="notLoading" style="display:none">
+        <p>Ups - du scheinst auf dieser Seite festzustecken... </p>
+        <p>Vielleicht funktioniert es mit einem anderen Browser!</p>
+        <p>Hilft auch das nicht weiter, erreichst du mich unter <a href="mailto:mmuehlich@gmx.li">mmuehlich@gmx.li</a>.</p>
+    </div>
+
+    <script type="text/javascript">
+      window.setTimeout(function(){document.getElementsByClassName('notLoading')[0].style.display = 'block';}, 3000);
+    </script>
+
+  </div>
 
 </body>
 
