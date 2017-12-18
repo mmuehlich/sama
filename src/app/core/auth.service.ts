@@ -43,6 +43,11 @@ export class AuthService {
     return this.users.filter(u => u.id == this.currentUserId && u.role == 'admin').length === 1;
   }
 
+  get isCivil(): boolean {
+    if (!this.authenticated) { return false;}
+    return this.users.filter(u => u.id == this.currentUserId && u.civil).length === 1;
+  }
+
   // Returns
   get currentUserObservable(): any {
     return this.afAuth.authState

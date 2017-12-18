@@ -14,7 +14,7 @@
 
   <div class="navbar-menu" id="navMenu">
     <div class="navbar-end">
-      <a class="navbar-item" title="..">
+      <a class="navbar-item" title=".." *ngIf="auth.isCivil">
         Standesamt
       </a>
       <a class="navbar-item" title="..">
@@ -24,11 +24,14 @@
         Sonstiges
       </a>
 
-      <div class="navbar-item has-dropdown is-hoverable">
+      <div class="navbar-item has-dropdown is-hoverable" style="background: #fdf498;box-shadow: 0px 0px 20px #b5b1af;">
         <a class="navbar-link">
           {{ auth.currentUserDisplayName }}
         </a>
         <div class="navbar-dropdown">
+          <a class="navbar-item" (click)="doLogout()" href="javascript://">Meine Daten</a>
+          <a class="navbar-item" (click)="doLogout()" href="javascript://">zusagen / absagen</a>
+          <hr class="navbar-divider">
           <a class="navbar-item" (click)="doLogout()" href="javascript://">abmelden</a>
         </div>
       </div>
