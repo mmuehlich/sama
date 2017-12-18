@@ -1,31 +1,70 @@
-
 .save-the-date-bg {
   padding: 20px;
   text-align: center;
 }
 
 .save-the-date {
-  font-size: 4em;
+  font-size: 6em;
 }
 
 .save-the-date-label{
   width: 100%;
   top: 30%;
-  padding-bottom: 2em;
-
   h1 {
     margin-bottom: -0.4em;
   }
 }
 
 .save-the-date-date {
-  font-size: 2em;
-  top: 50%;
+  font-size: 3em;
+  top: 55%;
   left: 50%;
+}
+
+.xlarge {
+  font-size: 8em;
 }
 
 @media (max-width: 590px) {
   .save-the-date {
     font-size: 4em;
   }
+  .xlarge {
+    font-size: 6em;
+  }
+}
+
+.col {
+  padding: 10px;
+  float: left; 
+}
+
+.left {
+  width: 45%;
+}
+
+.right {
+  width: 45%;
+}
+
+.middle {
+  width: 10%;
+}
+
+.middleLarge {
+  width: 20%;
+}
+
+.leftSmall {
+  width: 40%;
+}
+
+.rightSmall {
+  width: 40%;
+}
+
+.left-center-right:after {
+    content: "";
+    display: table;
+    clear: both;
 }

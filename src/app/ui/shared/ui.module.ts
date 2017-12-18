@@ -22,6 +22,7 @@ import { SaveTheDate } from '../pages/save-the-date';
 import { Wedding } from '../pages/wedding';
 import { Bg } from '../pages/bg';
 
+import {CountDown} from "../../../../node_modules/angular2-simple-countdown/countdown";
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { Bg } from '../pages/bg';
     NewUserFormComponent,
     SaveTheDate,
     Wedding,
-    Bg
+    Bg,
+    CountDown
   ],
   exports: [
     TopNavComponent,

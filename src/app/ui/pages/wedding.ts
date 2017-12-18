@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'wedding',
   templateUrl: './wedding.html',
@@ -8,6 +9,6 @@ import { Component } from '@angular/core';
 
 export class Wedding {
 
-  constructor() { 
+  constructor() {
   }
 }
