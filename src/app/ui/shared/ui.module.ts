@@ -10,6 +10,7 @@ import { NavService } from './nav.service';
 
 import { UserLoginComponent } from '../user-login/user-login.component';
 import { UserLoginDialogComponent } from '../user-login/user-login-dialog.component';
+import { UserEditDialogComponent } from '../user-login/user-edit-dialog.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { UserFormComponent } from '../user-form/user-form.component';
 import { NewUserFormComponent } from '../user-form/new-user-form.component';
@@ -37,6 +38,7 @@ import {CountDown} from "../../../../node_modules/angular2-simple-countdown/coun
   declarations: [
     UserLoginComponent,
     UserLoginDialogComponent,
+    UserEditDialogComponent,
     UserProfileComponent,
     TopNavComponent,
     TopNavAdminComponent,

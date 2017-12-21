@@ -1,0 +1,36 @@
+<div>
+  <h1 style="font-size: x-large;">Login</h1>
+
+  <p>Wir möchten niemanden vergessen - melde dich deshalb hier bitte an!</p>
+  <br/>
+  <p>Am einfachsten geht dies mit Facebook oder Google+:</p>
+
+  <div class="navbar-item" style="display: inline-block;">
+    <a style="float:left" title="Google+ Login" (click)="signInWithGoogle()">
+      <i class="fa fa-google-plus btn-google btn" style="padding-left:10px;"></i>
+    </a>
+    <a style="float:left" title="facebook Login" (click)="signInWithFacebook()">
+      <i class="fa fa-facebook btn-facebook btn" style="padding-left:10px;"></i>
+    </a>
+  </div>
+
+  <hr style="margin-top:0px">
+
+  <p>Oder ganz klassisch mit eMail und Passwort 
+      <a (click)="showRegister=!showRegister; showLogin = false;" title="registrieren">hier</a> 
+    registrieren und 
+    <a (click)="showLogin=!showLogin; showRegister = false;" title="anmelden (eMail / Passwort)">hier</a> 
+    anmelden</p>
+
+  <div class="navbar-item">
+    <div *ngIf="showLogin" style="padding-left: 30px">
+      <user-form></user-form>
+    </div>
+  </div>
+
+  <div class="navbar-item">
+    <div *ngIf="showRegister" style="padding-left: 30px">
+      <new-user-form> </new-user-form>
+    </div>
+  </div>
+</div>
