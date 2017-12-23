@@ -1,36 +1,55 @@
 <div>
-  <h1 style="font-size: x-large;">Login</h1>
 
-  <p>Wir möchten niemanden vergessen - melde dich deshalb hier bitte an!</p>
-  <br/>
-  <p>Am einfachsten geht dies mit Facebook oder Google+:</p>
+  <div class="tabs">
+    <ul>
+      <li class="{{active=='user' ? 'is-active' : ''}}">
+        <a (click)="loadUser(); active='user';">Meine Daten</a>
+      </li>
 
-  <div class="navbar-item" style="display: inline-block;">
-    <a style="float:left" title="Google+ Login" (click)="signInWithGoogle()">
-      <i class="fa fa-google-plus btn-google btn" style="padding-left:10px;"></i>
-    </a>
-    <a style="float:left" title="facebook Login" (click)="signInWithFacebook()">
-      <i class="fa fa-facebook btn-facebook btn" style="padding-left:10px;"></i>
-    </a>
+      <li class="{{active=='conf' ? 'is-active' : ''}}">
+        <a (click)="loadUser(); active='conf';">Zu-/Absage</a>
+      </li>
+
+      <li class="{{active=='remarks' ? 'is-active' : ''}}">
+        <a (click)="loadUser(); active='remarks';">Anmerkungen</a>
+      </li>
+    </ul>
   </div>
 
-  <hr style="margin-top:0px">
 
-  <p>Oder ganz klassisch mit eMail und Passwort 
-      <a (click)="showRegister=!showRegister; showLogin = false;" title="registrieren">hier</a> 
-    registrieren und 
-    <a (click)="showLogin=!showLogin; showRegister = false;" title="anmelden (eMail / Passwort)">hier</a> 
-    anmelden</p>
+  <div *ngIf="active=='user'">
 
-  <div class="navbar-item">
-    <div *ngIf="showLogin" style="padding-left: 30px">
-      <user-form></user-form>
+    <div *ngFor="let guest of guests | async">
+      <div *ngIf="guest.id == auth.currentUserId">
+        <h2>Name</h2>
+        <div style="padding-left: 20px">
+          <input [(ngModel)]="guest.name" placeholder="Name" class="input">
+        </div>
+
+        <h2>Kontakt</h2>
+        <div style="padding-left: 20px">
+          <input [(ngModel)]="guest.email" placeholder="eMail" class="input">
+          <input [(ngModel)]="guest.phone" placeholder="Telefon" class="input">
+          <textarea style="height: 100px;" [(ngModel)]="guest.address" placeholder="Adresse" class="input"></textarea>
+        </div>
+
+        <button class="button is-success" (click)="updateUser(guest);" style="float:right">
+            speichern
+        </button>
+
+      </div>
+
     </div>
+
+
   </div>
 
-  <div class="navbar-item">
-    <div *ngIf="showRegister" style="padding-left: 30px">
-      <new-user-form> </new-user-form>
-    </div>
+  <div *ngIf="active=='conf'">
+    <h1 style="font-size: x-large;">zusagen</h1>
   </div>
+
+  <div *ngIf="active=='remarks'">
+    <h1 style="font-size: x-large;">Meine Daten</h1>
+  </div>
+
 </div>

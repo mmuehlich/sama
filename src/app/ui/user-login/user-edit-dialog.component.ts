@@ -4,6 +4,8 @@ import { AuthService } from '../../core/auth.service';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { GuestService } from '../../guests/guest.service';
+import {Guest} from '../../guests/guest';
 
 @Component({
   selector: 'user-edit-dialog',
@@ -12,28 +14,19 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class UserEditDialogComponent implements OnInit {
 
-  showLogin = false;
-  showRegister = false;
+  active:string = 'user';
 
-  constructor(public auth: AuthService,
-    private router: Router) { }
+  guests : any = [];
+
+  constructor(public auth: AuthService, private router: Router, private guestService: GuestService) { }
 
 
   ngOnInit() {
+    this.guests = this.guestService.getSnapshot();
   }
 
-  signInWithGoogle(): void {
-    this.auth.googleLogin()
-      .then(() => this.afterSignIn());
-  }
-
-  signInWithFacebook(): void {
-    this.auth.facebookLogin()
-      .then(() => this.afterSignIn());
-  }
-
-  private afterSignIn(): void {
-    // Do after login stuff here, such router redirects, toast messages, etc.
+  updateUser(user: Guest) {
+    this.guestService.update(user.id, user);
     this.router.navigate(['/']);
   }
 
