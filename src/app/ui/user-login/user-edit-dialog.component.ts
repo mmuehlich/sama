@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
 
@@ -7,12 +7,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { GuestService } from '../../guests/guest.service';
 import {Guest} from '../../guests/guest';
 
+
 @Component({
   selector: 'user-edit-dialog',
   templateUrl: './user-edit-dialog.component.html',
   styleUrls: ['./user-edit-dialog.component.scss']
 })
 export class UserEditDialogComponent implements OnInit {
+
+  @Input()
+  topNav:any;
 
   active:string = 'user';
 
@@ -27,7 +31,12 @@ export class UserEditDialogComponent implements OnInit {
 
   updateUser(user: Guest) {
     this.guestService.update(user.id, user);
-    this.router.navigate(['/']);
+    this.topNav.editUser = false;
+  }
+
+  updateUserAndNext(user: Guest) {
+    this.guestService.update(user.id, user);
+    this.active = 'conf';
   }
 
 }

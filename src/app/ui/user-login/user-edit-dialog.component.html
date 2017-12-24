@@ -33,9 +33,15 @@
           <textarea style="height: 100px;" [(ngModel)]="guest.address" placeholder="Adresse" class="input"></textarea>
         </div>
 
-        <button class="button is-success" (click)="updateUser(guest);" style="float:right">
-            speichern
+      <!--  <button class="button is-success" (click)="updateUserAndNext(guest);" style="float:right">
+          weiter
         </button>
+      -->
+
+        <button class="button is-success" (click)="updateUser(guest);" style="float:right; margin-right: 20px;">
+          speichern
+        </button>
+
 
       </div>
 
@@ -45,7 +51,30 @@
   </div>
 
   <div *ngIf="active=='conf'">
-    <h1 style="font-size: x-large;">zusagen</h1>
+    <span>Sorry - noch zu früh... Dieser Teil kommt im Jannuar...</span>
+  
+   <!-- 
+     <span>Wirst du mit ums am 1.9.2018 feiern?</span> 
+    <button class="button" (click)="updateUser(guest);" style="float:right; margin-right: 20px;">
+        nein - ich würd ja gerne aber...
+    </button>
+    <button class="button" (click)="updateUser(guest);" style="float:right; margin-right: 20px;">
+        hmmm - definitiv Jein...
+    </button>
+    <button class="button" (click)="updateUser(guest);" style="float:right; margin-right: 20px;">
+        Ja ich will! Ich bin dabei!
+    </button>
+
+    <hr/>
+
+    <button class="button is-success" (click)="updateUserAndNext(guest);" style="float:right">
+      weiter
+    </button>
+
+    <button class="button is-success" (click)="updateUser(guest);" style="float:right; margin-right: 20px;">
+      speichern
+    </button>
+  -->
   </div>
 
   <div *ngIf="active=='remarks'">

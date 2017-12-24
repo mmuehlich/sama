@@ -59,7 +59,7 @@ export class GuestService {
   }
 
   update(id, data) {
-    data.id = undefined;
+  //  data.id = undefined;
     return this.getGuest(id).update(data)
   }
 
