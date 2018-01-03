@@ -11,7 +11,8 @@ functions/*
 /out-tsc
 
 # dependencies
-/node_modules
+/node_modules/*
+!/node_modules/angular2-simple-countdown/
 
 # IDEs and editors
 /.idea
