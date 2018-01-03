@@ -3,16 +3,16 @@
   <div class="tabs">
     <ul>
       <li class="{{active=='user' ? 'is-active' : ''}}">
-        <a (click)="loadUser(); active='user';">Meine Daten</a>
+        <a (click)="active='user';">Meine Daten</a>
       </li>
 
       <li class="{{active=='conf' ? 'is-active' : ''}}">
-        <a (click)="loadUser(); active='conf';">Zu-/Absage</a>
+        <a (click)="active='conf';">Zu-/Absage</a>
       </li>
 
-      <li class="{{active=='remarks' ? 'is-active' : ''}}">
-        <a (click)="loadUser(); active='remarks';">Anmerkungen</a>
-      </li>
+   <!--   <li class="{{active=='remarks' ? 'is-active' : ''}}">
+        <a (click)="active='remarks';">Anmerkungen</a>
+      </li> -->
     </ul>
   </div>
 

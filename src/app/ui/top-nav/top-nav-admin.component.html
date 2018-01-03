@@ -1,7 +1,7 @@
 <nav class="navbar is-transparent" role="navigation">
   <div class="navbar-brand">
     <a class="navbar-item logo" routerLink="/">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmzVTgKI5o43hEmD31BSYHwnnv-D00EmhfY3MIYEoBw8mRi94reg" style="height:38px"> Sarah & Matthias
+      <img src="../assets/images/tree_blue.jpg" style="height:38px"> Sarah & Matthias    
     </a>
 
     <button class="button navbar-burger btn" data-target="navMenu" (click)='toggleMobile()'>
@@ -31,10 +31,21 @@
           {{ auth.currentUserDisplayName }}
         </a>
         <div class="navbar-dropdown">
-          <a class="navbar-item" (click)="doLogout()" href="javascript://">abmelden</a>
+            <a class="navbar-item" (click)="editUser = true" href="javascript://">Meine Daten</a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" (click)="doLogout()" href="javascript://">abmelden</a>  
         </div>
       </div>
     </div>
   </div>
 
 </nav>
+
+
+<div class="modal {{editUser? 'is-active' : ''}}">
+    <div class="modal-background"></div>
+    <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
+        <user-edit-dialog [topNav]="this"></user-edit-dialog>
+    </div>
+    <button class="modal-close is-large" aria-label="close" (click)="editUser=false;"></button>
+</div>

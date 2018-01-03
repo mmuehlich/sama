@@ -8,6 +8,8 @@ import { AuthService } from '../../core/auth.service';
 })
 export class TopNavAdminComponent {
 
+  editUser = false;
+  
   constructor(public auth: AuthService) { 
   }
 

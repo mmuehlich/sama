@@ -4,6 +4,7 @@
   margin-bottom: 25px;
   padding: 0 5vw;
   padding-right: 60px;
+  z-index: 10;
   box-shadow: 0px 0px 20px #f34e17;
 
   .navbar-item {
@@ -21,4 +22,8 @@
   width: 100%;
   top: 0px;
   box-shadow: 0px 5px 20px #f34e17;
+}
+
+.marked {
+  box-shadow: 0px 0px 20px #a00303 !important;
 }
