@@ -103,8 +103,8 @@
     <td>{{guest.name}}</td>
     <td title="{{guest.email}} &#013;{{guest.phone}} &#013;{{guest.address}}">{{guest.email}}</td>
     <td>
-      <span *ngIf="guest.adults.length > 1">{{guest.adults.length - 1}} Erwachsene</span>
-      <span *ngIf="guest.children.length > 1"> {{guest.children.length - 1}} Kinder</span>
+      <span >{{[guest] | sumLength:'adults':'name':'Erwachsene'}} </span>
+      <span >{{[guest] | sumLength:'children':'name':'Kinder'}} </span>
     </td>
     <td title="{{guest.remarks}}">{{guest.remarks | slice:0:10}}</td>
     <td>{{guest.state}}</td>
@@ -113,7 +113,7 @@
   <tr style="font-weight: bold">
     <td>Total</td>
     <td></td>
-    <td>{{guests | async | sum:'adults'}} Erwachsene {{guests | async | sum:'children'}} Kinder</td>
+    <td>{{guests | async | sumLength:'adults':'name':'Erwachsene'}} {{guests | async | sumLength:'children':'name':'Kinder'}}</td>
     <td></td>
   </tr>
 </table>

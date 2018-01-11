@@ -23,7 +23,7 @@
       <div class="list" style="width: 100%">
         <div>
           <input [(ngModel)]="currEntry.text" placeholder="Text" class="input">
-          <input [(ngModel)]="currEntry.amount" placeholder="Betrag" class="input">
+          <input [(ngModel)]="currEntry.amount" placeholder="Betrag (12.34)" class="input">
         </div>
       </div>
 
@@ -41,7 +41,7 @@
     <tr *ngFor="let t of costs | async">
         <td>{{t.topic}}</td>
         <td>{{t.text}}</td>
-        <td style="text-align:right">{{t.amount}}</td>
+        <td style="text-align:right">{{t.amount}} €</td>
         <td>
           <button class="btn" title="löschen" (click)="delete(t)">
             <i class="fa fa-trash" style="color:#a30a0a"></i>
@@ -52,7 +52,7 @@
     <tr>
         <th></th>
         <th>Total</th>
-        <th style="text-align:right">{{costs | async | sum:'amount'}}</th>
+        <th style="text-align:right">{{(costs | async | sum:'amount').toFixed(2)}} €</th>
         <th></th>
     </tr>
 </table>
