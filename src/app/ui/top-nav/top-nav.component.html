@@ -1,7 +1,6 @@
 <nav class="navbar is-transparent" role="navigation">
   <div class="navbar-brand">
     <a class="navbar-item logo" routerLink="/">
-   <!--   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmzVTgKI5o43hEmD31BSYHwnnv-D00EmhfY3MIYEoBw8mRi94reg" style="height:38px"> Sarah & Matthias -->
       <img src="../assets/images/tree_blue.jpg" style="height:38px"> Sarah & Matthias    
     </a>
 
@@ -12,7 +11,7 @@
     </button>
   </div>
 
-  <div class="navbar-menu" id="navMenu">
+  <div class="navbar-menu" id="navMenu" *ngIf="auth.currentUser">
     <div class="navbar-end">
      <!-- <a class="navbar-item" title=".." *ngIf="auth.isCivil">
         Standesamt
@@ -34,6 +33,14 @@
           <a class="navbar-item" (click)="doLogout()" href="javascript://">abmelden</a>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="navbar-menu" id="navMenu" *ngIf="!auth.currentUser">
+    <div class="navbar-end">
+      <a class="navbar-link" href="/login" >
+        login
+      </a>
     </div>
   </div>
 

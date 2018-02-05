@@ -28,7 +28,6 @@ export class GuestListComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.notes = this.noteService.getData()
     this.guests = this.guestService.getSnapshot();
   }
 

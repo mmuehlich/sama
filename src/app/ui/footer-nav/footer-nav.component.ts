@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../core/auth.service';
 
 @Component({
   selector: 'footer-nav',
@@ -9,7 +10,7 @@ export class FooterNavComponent implements OnInit {
 
   showLogin = false;
   
-  constructor() { }
+  constructor(public auth: AuthService, ) { }
 
   ngOnInit() {
   }

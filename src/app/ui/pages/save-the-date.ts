@@ -14,5 +14,17 @@ export class SaveTheDate {
     if (auth.currentUser) {
       this.router.navigate(['wedding']) 
     }
+
+    /*
+    setTimeout(function(){
+      $('.save-the-date-label').animate({
+        transform: scale(0.5, 0.5),
+        margin-left: "30%",
+        top: "10%"
+      }, 2000, function() {
+        // Animation complete.
+      });
+    },100);
+    */
   }
 }

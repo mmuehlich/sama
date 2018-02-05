@@ -19,6 +19,7 @@ import { TopNavAdminComponent } from '../top-nav/top-nav-admin.component';
 import { TopNavEmptyComponent } from '../top-nav/top-nav-empty.component';
 
 import { FooterNavComponent } from '../footer-nav/footer-nav.component';
+import { Login } from '../pages/login';
 import { SaveTheDate } from '../pages/save-the-date';
 import { Wedding } from '../pages/wedding';
 import { Bg } from '../pages/bg';
@@ -46,6 +47,7 @@ import {CountDown} from "../../../../node_modules/angular2-simple-countdown/coun
     FooterNavComponent,
     UserFormComponent,
     NewUserFormComponent,
+    Login,
     SaveTheDate,
     Wedding,
     Bg,
@@ -57,7 +59,8 @@ import {CountDown} from "../../../../node_modules/angular2-simple-countdown/coun
     TopNavEmptyComponent,
     FooterNavComponent,
     UserProfileComponent,
-    SaveTheDate
+    SaveTheDate, 
+    Login
   ]
 })
 export class UiModule { }
