@@ -11,7 +11,7 @@ export class GuestService {
   guests: AngularFirestoreCollection<Guest>;
 
   constructor(private afs: AngularFirestore) {
-    this.guests = this.afs.collection('guests');
+    this.guests = this.afs.collection('guests', (ref) => ref.orderBy('name', 'asc'));
   }
 
   getData(): Observable<Guest[]> {

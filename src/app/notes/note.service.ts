@@ -10,7 +10,7 @@ export class NoteService {
   notes: AngularFirestoreCollection<Note>;
 
   constructor(private afs: AngularFirestore) {
-    this.notes = this.afs.collection('notes');
+    this.notes = this.afs.collection('notes', (ref) => ref.orderBy('topic', 'asc'));
   }
 
   getData(): Observable<Note[]> {

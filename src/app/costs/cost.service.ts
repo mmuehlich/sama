@@ -10,7 +10,7 @@ export class CostService {
   costs: AngularFirestoreCollection<Cost>;
 
   constructor(private afs: AngularFirestore) {
-    this.costs = this.afs.collection('costs');
+    this.costs = this.afs.collection('costs', (ref) => ref.orderBy('topic', 'asc'));
   }
 
   getData(): Observable<Cost[]> {
