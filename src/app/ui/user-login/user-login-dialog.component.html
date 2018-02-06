@@ -1,22 +1,35 @@
 <div>
-  <h1 style="font-size: x-large;">Login</h1>
+  <h1 style="font-size: x-large;">Anmelden</h1>
 
-  <p>Wir möchten niemanden vergessen - melde dich deshalb hier bitte an!</p>
+  <p>Bitte melde dich hier an: <br/>
+    <span style="float:right; font-style:italic;" 
+    title="Wir möchten euch hier die Möglichkeit geben zu- oder auch abzusagen, Fotos hochzuladen und anzusehen, Fragen zu stellen und vieles mehr. &#10;Das alles setzt jedoch ein Minimum an Privatsphäre voraus.">Warum muss ich mich anmelden?</span></p>
   <br/>
-  <p>Am einfachsten geht dies mit Facebook oder Google+:</p>
+  <p>Single sign-on mit Facebook oder Google+</p>
 
-  <div class="navbar-item" style="display: inline-block;">
-    <a style="float:left" title="Google+ Login" (click)="signInWithGoogle()">
-      <i class="fa fa-google-plus btn-google btn" style="padding-left:10px;"></i>
+  <div>
+    <a (click)="signInWithFacebook()" class="btn-facebook btn">facebook login
+        <i class="fa fa-facebook" style="padding-left:10px;padding-right:15px;"></i>
     </a>
-    <a style="float:left" title="facebook Login" (click)="signInWithFacebook()">
-      <i class="fa fa-facebook btn-facebook btn" style="padding-left:10px;"></i>
+
+    <a (click)="signInWithGoogle()" class="btn-google btn">Google+ login
+      <i class="fa fa-google-plus" style="padding-left:10px;padding-right:25px;"></i>
     </a>
+
+    <span style="float:right; font-style:italic;" 
+    title="Die Authentifizierung wird durch Google+ oder Facebook in einem externen Fenster gemacht. &#10;Wir bekommen dadurch weder dein Passwort noch Zugriff auf deinen Account oder deine Freunde. Und ganz wollen auch keine Rechte, etwas in deinem Namen zu posten. &#10;Trotzdem misstrauisch? Du kannst dich unten auch einfach mit eMail und einem beliebigen Passwort anmelden.">Hmmm... Google, Facebook...?</span>
+ 
   </div>
+
+  <br/>
 
   <hr style="margin-top:0px">
 
-  <p>Oder ganz klassisch mit eMail und Passwort 
+  <p>Oder mit eMail und Passwort </p>
+
+  <user-form></user-form>
+ 
+ <!-- <p>
       <a (click)="showRegister=!showRegister; showLogin = false;" title="registrieren">hier</a> 
     registrieren und 
     <a (click)="showLogin=!showLogin; showRegister = false;" title="anmelden (eMail / Passwort)">hier</a> 
@@ -33,4 +46,5 @@
       <new-user-form> </new-user-form>
     </div>
   </div>
+-->
 </div>
