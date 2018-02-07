@@ -13,7 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class UserLoginDialogComponent implements OnInit {
 
   showLogin = false;
-  showRegister = false;
+  showRegister = true;
 
   constructor(public auth: AuthService,
     private router: Router) { }

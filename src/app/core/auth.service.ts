@@ -142,7 +142,7 @@ export class AuthService {
 
     return fbAuth.sendPasswordResetEmail(email)
       .then(() => alert('eMail verschickt'))
-      .catch((error) =>alert(error))
+      .catch((error) => alert(error))
   }
 
 
