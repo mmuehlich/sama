@@ -22,6 +22,7 @@ import { FooterNavComponent } from '../footer-nav/footer-nav.component';
 import { Login } from '../pages/login';
 import { SaveTheDate } from '../pages/save-the-date';
 import { Wedding } from '../pages/wedding';
+import { Hotel } from '../pages/hotel';
 import { Bg } from '../pages/bg';
 
 import {CountDown} from "../../../../node_modules/angular2-simple-countdown/countdown";
@@ -50,6 +51,7 @@ import {CountDown} from "../../../../node_modules/angular2-simple-countdown/coun
     Login,
     SaveTheDate,
     Wedding,
+    Hotel,
     Bg,
     CountDown
   ],
