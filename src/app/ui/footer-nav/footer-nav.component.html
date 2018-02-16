@@ -4,11 +4,17 @@
             nächste Schritte: 
 
             <div *ngIf="!auth.currentUser" style="display:inline">
-                    <a style="padding-left:2em; font-weight: bold" href="/login">1. anmelden </a>
-                    <span style="padding-left:2em; color: lightgray">2. zusagen </span>
-                    <span style="padding-left:2em; color: lightgray">3. Musikwunsch </span>
-        
+                <a style="padding-left:2em; font-weight: bold" href="/login">1. anmelden </a>
+                <span style="padding-left:2em; color: lightgray">2. zusagen </span>
+                <span style="padding-left:2em; color: lightgray">3. Musikwunsch </span>
             </div>
+
+            <div *ngIf="auth.currentUser" style="display:inline">
+                <span style="padding-left:2em; color: rgb(4, 71, 4)">1. anmelden <i class="fa fa-check" style="color: #0d800d"></i> </span>
+                <a style="padding-left:2em; font-weight: bold" href="/myAccount" >2. zusagen </a>
+                <span style="padding-left:2em; color: lightgray">3. Musikwunsch </span>
+            </div>
+
 <!--
             <span *ngIf="!auth.currentUser" style="padding-left:2em">anmelden </span>
             <span *ngIf="auth.currentUser" style="padding-left:2em">anmelden <i class="fa fa-check" style="color: #0d800d"></i></span>

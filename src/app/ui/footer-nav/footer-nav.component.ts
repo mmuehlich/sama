@@ -14,5 +14,4 @@ export class FooterNavComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

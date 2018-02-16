@@ -11,6 +11,9 @@ export class TopNavComponent {
   editUser = false;
 
   constructor(public auth: AuthService) { 
+    if (window.location.href.indexOf("myAccount") > 0) {
+      this.editUser = true;
+    }
   }
 
   doLogout(): void {
