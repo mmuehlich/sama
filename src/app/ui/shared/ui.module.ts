@@ -23,6 +23,7 @@ import { Login } from '../pages/login';
 import { SaveTheDate } from '../pages/save-the-date';
 import { Wedding } from '../pages/wedding';
 import { Hotel } from '../pages/hotel';
+import { GettingThere } from '../pages/gettingThere';
 import { FAQ } from '../pages/faq';
 import { Bg } from '../pages/bg';
 
@@ -53,6 +54,7 @@ import {CountDown} from "../../../../node_modules/angular2-simple-countdown/coun
     SaveTheDate,
     Wedding,
     Hotel,
+    GettingThere,
     FAQ,
     Bg,
     CountDown

@@ -1,0 +1,39 @@
+.save-the-date-bg {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .col {
+    padding: 10px;
+    float: left; 
+  }
+  
+  .left {
+    width: 45%;
+  }
+  
+  .right {
+    width: 45%;
+  }
+  
+  .middle {
+    width: 10%;
+  }
+  
+  .middleLarge {
+    width: 20%;
+  }
+  
+  .leftSmall {
+    width: 40%;
+  }
+  
+  .rightSmall {
+    width: 40%;
+  }
+  
+  .left-center-right:after {
+      content: "";
+      display: table;
+      clear: both;
+  }

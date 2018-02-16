@@ -13,10 +13,13 @@ export class CostListComponent implements OnInit {
   showNewEntry = false;
   currEntry: Cost;
   costs;
+  costTopics;
 
   constructor(private costService: CostService) { 
     this.currEntry = this.getEmpty();
     this.costs = this.costService.getSnapshot();
+    this.costTopics = this.costService.getSnapshot()
+      .map(c => new Set(c.map(i => i['topic'])));
   }
 
   ngOnInit() {

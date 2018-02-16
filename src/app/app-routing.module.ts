@@ -10,6 +10,7 @@ import { SaveTheDate } from './ui/pages/save-the-date';
 import { Wedding } from './ui/pages/wedding';
 import { Login } from './ui/pages/login';
 import { Hotel } from './ui/pages/hotel';
+import { GettingThere } from 'app/ui/pages/gettingThere';
 import { FAQ } from './ui/pages/faq';
 
 import { CoreModule } from './core/core.module'
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'wedding', component: Wedding},
   { path: 'login', component: Login},
   { path: 'hotel', component: Hotel},
+  { path: 'gettingThere', component: GettingThere},
   { path: 'faq', component: FAQ},
 
   { path: 'items', component: ItemsListComponent, canActivate: [AuthGuard]},
