@@ -5,7 +5,7 @@ import { AuthService } from '../../core/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { GuestService } from '../../guests/guest.service';
-import {Guest} from '../../guests/guest';
+import { Guest } from '../../guests/guest';
 
 
 @Component({

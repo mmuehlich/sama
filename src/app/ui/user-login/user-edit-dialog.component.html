@@ -5,14 +5,23 @@
       <li class="{{active=='user' ? 'is-active' : ''}}">
         <a (click)="active='user';">Meine Daten</a>
       </li>
-
+<!--
       <li class="{{active=='conf' ? 'is-active' : ''}}">
-        <a (click)="active='conf';">Zu-/Absage</a>
+        <a (click)="active='conf';">Zusage</a>
       </li>
 
-   <!--   <li class="{{active=='remarks' ? 'is-active' : ''}}">
+      <li class="{{active=='guests' ? 'is-active' : ''}}">
+        <a (click)="active='guests';">Gästedaten</a>
+      </li>
+
+      <li class="{{active=='remarks' ? 'is-active' : ''}}">
         <a (click)="active='remarks';">Anmerkungen</a>
-      </li> -->
+      </li>
+
+      <li class="{{active=='music' ? 'is-active' : ''}}">
+        <a (click)="active='music';">Musikwunsch</a>
+      </li>
+    -->
     </ul>
   </div>
 
@@ -33,7 +42,7 @@
           <textarea style="height: 100px;" [(ngModel)]="guest.address" placeholder="Adresse" class="input"></textarea>
         </div>
 
-      <!--  <button class="button is-success" (click)="updateUserAndNext(guest);" style="float:right">
+        <!--  <button class="button is-success" (click)="updateUserAndNext(guest);" style="float:right">
           weiter
         </button>
       -->
@@ -51,30 +60,32 @@
   </div>
 
   <div *ngIf="active=='conf'">
-    <span>Sorry - noch zu früh... Dieser Teil kommt im Februar...</span>
-  
-   <!-- 
-     <span>Wirst du mit ums am 1.9.2018 feiern?</span> 
-    <button class="button" (click)="updateUser(guest);" style="float:right; margin-right: 20px;">
-        nein - ich würd ja gerne aber...
-    </button>
-    <button class="button" (click)="updateUser(guest);" style="float:right; margin-right: 20px;">
-        hmmm - definitiv Jein...
-    </button>
-    <button class="button" (click)="updateUser(guest);" style="float:right; margin-right: 20px;">
-        Ja ich will! Ich bin dabei!
+
+    <span>Feierst du am 1.9.2018 mit uns in Christkindl?</span>
+    <br/>
+
+    <button class="button" (click)="updateUser(guest);" style="float:left; margin: 20px; border: 2px solid green; ">
+      Ja, natürlich!
     </button>
 
+    <!-- // TODO
+    xx erwachsene xx kinder
+    -->
+
+
+    <button class="button" (click)="updateUser(guest);" style="float: left; margin: 20px; ">
+      Nein - leider...
+    </button>
+
+    <br/>
+    <br/>
     <hr/>
 
-    <button class="button is-success" (click)="updateUserAndNext(guest);" style="float:right">
-      weiter
-    </button>
 
     <button class="button is-success" (click)="updateUser(guest);" style="float:right; margin-right: 20px;">
       speichern
     </button>
-  -->
+
   </div>
 
   <div *ngIf="active=='remarks'">

@@ -1,6 +1,7 @@
 <footer class="footer">
 
     <div style="text-align: center;">
+
             nächste Schritte: 
 
             <div *ngIf="!auth.currentUser" style="display:inline">
@@ -9,7 +10,9 @@
                 <span style="padding-left:2em; color: lightgray">3. Musikwunsch </span>
             </div>
 
-            <div *ngIf="auth.currentUser" style="display:inline">
+            <span *ngIf="auth.user">{{auth.user.state}}</span>
+
+            <div *ngIf="auth.user && auth.user.state == 'new'" style="display:inline">
                 <span style="padding-left:2em; color: rgb(4, 71, 4)">1. anmelden <i class="fa fa-check" style="color: #0d800d"></i> </span>
                 <a style="padding-left:2em; font-weight: bold" href="/myAccount" >2. zusagen </a>
                 <span style="padding-left:2em; color: lightgray">3. Musikwunsch </span>

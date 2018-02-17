@@ -72,20 +72,24 @@
 
 .me {
     float: left;   
-    margin: 5px 45px 5px 20px;         
+    margin: 5px 45px 5px 20px;      
+    background-color: #ffee8f;    
 }
 
 .me::before {
+    background-color: #ffee8f;
     box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
     left: -9px;           
 }
 
 .you {
     float: right;    
-    margin: 5px 20px 5px 45px;         
+    margin: 5px 20px 5px 45px;  
+    background-color: #bfc7d1;         
 }
 
 .you::before {
+    background-color: #bfc7d1;   
     box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4 );
     right: -9px;    
 }

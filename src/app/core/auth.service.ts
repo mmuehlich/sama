@@ -48,6 +48,11 @@ export class AuthService {
     return this.users.filter(u => u.id == this.currentUserId && u.civil).length === 1;
   }
 
+  get user(): Guest {
+    if (!this.authenticated) { return undefined;}
+    return this.users.find(u => u.id == this.currentUserId);
+  }
+
   // Returns
   get currentUserObservable(): any {
     return this.afAuth.authState
@@ -150,7 +155,7 @@ export class AuthService {
 
   signOut(): void {
     this.afAuth.auth.signOut();
-    this.router.navigate(['/']) 
+    this.router.navigate(['/']); 
   }
 
 
@@ -163,22 +168,8 @@ export class AuthService {
       this.authState.email,
       loginSource
     );
-    // Writes user name and email to realtime db
-    // useful if your app displays information about users or for admin features
-   /* const path = `users/${this.currentUserId}`; // Endpoint on firebase
-    const userRef: AngularFireObject<any> = this.db.object(path);
-
-    const data = {
-      email: this.authState.email,
-      name: this.authState.displayName
-    }
-
-    userRef.update(data)
-      .catch(error => console.log(error));
-*/
+    this.router.navigate(['/myAccount']); 
   }
-
-
 
 
 }

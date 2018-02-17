@@ -10,7 +10,8 @@ export class FooterNavComponent implements OnInit {
 
   showLogin = false;
   
-  constructor(public auth: AuthService, ) { }
+  constructor(public auth: AuthService, ) { 
+  }
 
   ngOnInit() {
   }
