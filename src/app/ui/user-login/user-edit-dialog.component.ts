@@ -22,6 +22,9 @@ export class UserEditDialogComponent implements OnInit {
 
   guests : any = [];
 
+  showDetailY:boolean = false;
+  showDetailN:boolean = false;
+
   constructor(public auth: AuthService, private router: Router, private guestService: GuestService) { }
 
 
@@ -31,12 +34,45 @@ export class UserEditDialogComponent implements OnInit {
 
   updateUser(user: Guest) {
     this.guestService.update(user.id, user);
-    this.topNav.editUser = false;
   }
 
-  updateUserAndNext(user: Guest) {
+  updateUserAndNext(user: Guest, next: string) {
     this.guestService.update(user.id, user);
-    this.active = 'conf';
+    this.active = next;
+  }
+
+  confirmUser(user: Guest) {
+    if (this.showDetailY) {
+      user.state = 'confirmed';
+
+      while (user.adults.length > user['adultCount']) {
+        user.adults.pop();
+      }
+      while (user.adults.length < user['adultCount']) {
+        user.adults.push({name: ''});
+      }
+
+      while (user.children.length > user['childCount']) {
+        user.children.pop();
+      }
+      while (user.children.length < user['childCount']) {
+        user.children.push({name: ''});
+      }
+
+    } else {
+      user.state = 'notComming';
+      this.close();
+    }
+    this.guestService.update(user.id, user);
+  }
+
+  confirmUserAndNext(user: Guest, next: string) {
+    this.confirmUser(user);
+    this.active = next;
+  }
+
+  close() {
+    this.topNav.editUser = false;
   }
 
 }

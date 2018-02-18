@@ -5,7 +5,7 @@
       <li class="{{active=='user' ? 'is-active' : ''}}">
         <a (click)="active='user';">Meine Daten</a>
       </li>
-<!--
+
       <li class="{{active=='conf' ? 'is-active' : ''}}">
         <a (click)="active='conf';">Zusage</a>
       </li>
@@ -18,18 +18,20 @@
         <a (click)="active='remarks';">Anmerkungen</a>
       </li>
 
-      <li class="{{active=='music' ? 'is-active' : ''}}">
+     <!-- <li class="{{active=='music' ? 'is-active' : ''}}">
         <a (click)="active='music';">Musikwunsch</a>
-      </li>
-    -->
+      </li> -->
+
     </ul>
   </div>
 
 
-  <div *ngIf="active=='user'">
+  <div *ngFor="let guest of guests | async">
+    <div *ngIf="guest.id == auth.currentUserId">
 
-    <div *ngFor="let guest of guests | async">
-      <div *ngIf="guest.id == auth.currentUserId">
+
+      <div *ngIf="active=='user'">
+
         <h2>Name</h2>
         <div style="padding-left: 20px">
           <input [(ngModel)]="guest.name" placeholder="Name" class="input">
@@ -42,14 +44,107 @@
           <textarea style="height: 100px;" [(ngModel)]="guest.address" placeholder="Adresse" class="input"></textarea>
         </div>
 
-        <!--  <button class="button is-success" (click)="updateUserAndNext(guest);" style="float:right">
-          weiter
-        </button>
-      -->
+        <button class="button is-success" (click)="updateUser(guest);close();" style="float:right; margin-right: 20px;">speichern</button>
+        <button class="button is-success" (click)="updateUserAndNext(guest, 'conf');" style="float:right; margin-right: 20px">weiter</button>
+        <button class="button is-secondary" (click)="close();" style="float:right; margin-right: 20px;">abbrechen</button>
 
-        <button class="button is-success" (click)="updateUser(guest);" style="float:right; margin-right: 20px;">
-          speichern
-        </button>
+      </div>
+
+
+
+      <div *ngIf="active=='conf'" style="min-height: 200px">
+        <br/>
+        <span style="font-size:larger;padding-left: 20px;">Seid ihr bei unserer Hochzeit dabei?</span>
+        <br/>
+
+
+        <div class="left-center-right" style="margin-top: 20px">
+
+          <div class="col left">
+            <button class="button" (click)="showDetailY = true; showDetailN = false;" style="margin-left: 100px; border: 2px solid green; ">
+              Ja, natürlich!
+            </button>
+          </div>
+
+          <div class="col right">
+            <div *ngIf="showDetailY || guest.state == 'confirmed'">
+              Wir kommen gerne mit!
+              <br/> Wir sind
+              <input type="number" [(ngModel)]="guest.adultCount" class="input" style="width: 50px; vertical-align: baseline; margin-left: 10px; margin-right: 10px;">Erwachsene und
+              <input type="number" [(ngModel)]="guest.childCount" class="input" style="width: 50px; vertical-align: baseline; margin-left: 10px; margin-right: 10px;">Kinder
+            </div>
+          </div>
+
+        </div>
+        <div class="left-center-right" style="margin-top: 20px">
+
+          <div class="col left">
+            <button class="button" (click)="showDetailY = false; showDetailN = true;" style="margin-left: 100px;">
+              Nein - leider...
+            </button>
+          </div>
+
+          <div class="col right">
+            <div *ngIf="showDetailN || guest.state == 'notComming'">
+              Hier kannst du uns eine Nachricht hinterlassen (natürlich ist eMail oder Telefon auch willkommen):
+              <textarea [(ngModel)]="guest.remarks" style="width: 90%; height: 100px"></textarea>
+            </div>
+          </div>
+        </div>
+
+
+        <button class="button is-success" (click)="confirmUser(guest);close();" style="float:right; margin-right: 20px;">speichern</button>
+        <button class="button is-success" (click)="confirmUserAndNext(guest, 'guests');" style="float:right; margin-right: 20px">weiter</button>
+        <button class="button is-secondary" (click)="close();" style="float:right; margin-right: 20px;">abbrechen</button>
+
+      </div>
+
+
+
+      <div *ngIf="active=='guests'">
+
+        <div *ngIf="guest.state == 'notComming'">
+          (nicht zugesagt, keine Gästedaten notwendig.)
+        </div>
+
+        <div *ngIf="guest.state == 'confirmed'">
+
+          <div style="padding-left: 20px">
+            <span>Erwachsene</span>
+            <div *ngFor="let adult of guest.adults">
+              <input [(ngModel)]="adult.name" placeholder="Name" class="input" style="margin-left: 20px">
+            </div>
+            <span>Kinder</span>
+            <div *ngFor="let child of guest.children">
+              <input [(ngModel)]="child.name" placeholder="Name" class="input" style="margin-left: 20px">
+            </div>
+          </div>
+
+        </div>
+
+        <button class="button is-success" (click)="updateUser(guest);close();" style="float:right; margin-right: 20px;">speichern</button>
+        <button class="button is-success" (click)="updateUserAndNext(guest, 'remarks');" style="float:right; margin-right: 20px">weiter</button>
+        <button class="button is-secondary" (click)="close();" style="float:right; margin-right: 20px;">abbrechen</button>
+
+      </div>
+
+
+
+      <div *ngIf="active=='remarks'">
+
+        <div *ngIf="guest.state == 'notComming'">
+          (nicht zugesagt)
+        </div>
+
+        <div *ngIf="guest.state == 'confirmed'">
+          Sollten wir irgendwelche besonderen Wünche berücksichtigen? Zum Beispiel Allergien, Kindermenu, ....? 
+
+          <textarea [(ngModel)]="guest.remarks" style="width: 90%; height: 100px"></textarea>
+        </div>
+
+
+        <button class="button is-success" (click)="updateUser(guest);close();" style="float:right; margin-right: 20px;">speichern</button>
+        <button class="button is-secondary" (click)="close();" style="float:right; margin-right: 20px;">abbrechen</button>
 
 
       </div>
@@ -58,38 +153,4 @@
 
 
   </div>
-
-  <div *ngIf="active=='conf'">
-
-    <span>Feierst du am 1.9.2018 mit uns in Christkindl?</span>
-    <br/>
-
-    <button class="button" (click)="updateUser(guest);" style="float:left; margin: 20px; border: 2px solid green; ">
-      Ja, natürlich!
-    </button>
-
-    <!-- // TODO
-    xx erwachsene xx kinder
-    -->
-
-
-    <button class="button" (click)="updateUser(guest);" style="float: left; margin: 20px; ">
-      Nein - leider...
-    </button>
-
-    <br/>
-    <br/>
-    <hr/>
-
-
-    <button class="button is-success" (click)="updateUser(guest);" style="float:right; margin-right: 20px;">
-      speichern
-    </button>
-
-  </div>
-
-  <div *ngIf="active=='remarks'">
-    <h1 style="font-size: x-large;">Meine Daten</h1>
-  </div>
-
 </div>

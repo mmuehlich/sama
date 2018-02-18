@@ -17,12 +17,37 @@
     text-align: center;
   }
 
-.btn-facebook {
-    color: #314a7d;
-    border: 1px solid #314a7d;
+
+.button.is-success {
+  background-color: #bfc7d1;
+  color: black;
 }
-   
-.btn-google {
-    color: #9a382c;
-    border: 1px solid #9a382c;
+
+.button.is-success:hover {
+  background-color: #738dad;
+}
+
+.button.is-secondary {
+  border: none;
+}
+
+
+
+.col {
+  padding: 10px;
+  float: left; 
+}
+
+.left {
+  width: 30%; 
+}
+
+.right {
+  width: 70%;
+}
+
+.left-center-right:after {
+    content: "";
+    display: table;
+    clear: both;
 }
