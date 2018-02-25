@@ -51,49 +51,23 @@
 
   <div *ngIf="active=='conf'" style="min-height: 200px">
     <br/>
-    <span style="font-size:larger;padding-left: 20px;">Seid ihr bei unserer Hochzeit dabei?</span>
+    <span style="font-size:larger;padding-left: 20px;">Natürlich kommen wir zur Hochzeit!</span>
     <br/>
-
-
+  
+  
     <div class="left-center-right" style="margin-top: 20px">
-
-      <div class="col left">
-        <button class="button" (click)="showDetailY = true; showDetailN = false;" style="margin-left: 100px; border: 2px solid green; ">
-          Ja, natürlich!
-        </button>
-      </div>
-
-      <div class="col right">
-        <div *ngIf="showDetailY || guest.state == 'confirmed'">
-          Wir kommen gerne mit!
-          <br/> Wir sind
-          <input type="number" [(ngModel)]="guest.adultCount" class="input" style="width: 50px; vertical-align: baseline; margin-left: 10px; margin-right: 10px;">Erwachsene und
-          <input type="number" [(ngModel)]="guest.childCount" class="input" style="width: 50px; vertical-align: baseline; margin-left: 10px; margin-right: 10px;">Kinder
-        </div>
-      </div>
-
+  
+      Wir sind
+      <input type="number" [(ngModel)]="guest.adultCount" class="input" style="width: 50px; vertical-align: baseline; margin-left: 10px; margin-right: 10px;">Erwachsene und
+      <input type="number" [(ngModel)]="guest.childCount" class="input" style="width: 50px; vertical-align: baseline; margin-left: 10px; margin-right: 10px;">Kinder
+  
     </div>
-    <div class="left-center-right" style="margin-top: 20px">
-
-      <div class="col left">
-        <button class="button" (click)="showDetailY = false; showDetailN = true;" style="margin-left: 100px;">
-          Nein - leider...
-        </button>
-      </div>
-
-      <div class="col right">
-        <div *ngIf="showDetailN || guest.state == 'notComming'">
-          Hier kannst du uns eine Nachricht hinterlassen (natürlich ist eMail oder Telefon auch willkommen):
-          <textarea [(ngModel)]="guest.remarks" style="width: 90%; height: 100px"></textarea>
-        </div>
-      </div>
-    </div>
-
-
+  
+  
     <button class="button is-success" (click)="confirmUser(guest);close();" style="float:right; margin-right: 20px;">speichern</button>
     <button class="button is-success" (click)="confirmUserAndNext(guest, 'guests');" style="float:right; margin-right: 20px">weiter</button>
     <button class="button is-secondary" (click)="close();" style="float:right; margin-right: 20px;">abbrechen</button>
-
+  
   </div>
 
 
