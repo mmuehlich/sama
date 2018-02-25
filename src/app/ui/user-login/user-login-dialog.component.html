@@ -1,17 +1,11 @@
 <div>
   <h1 style="font-size: x-large;">Anmelden</h1>
-  <span style="margin-top: -3em; float:right; font-style:italic; font-size:small;" 
-    title="Wir möchten euch hier die Möglichkeit geben zu- oder auch abzusagen, Fotos hochzuladen und anzusehen, Fragen zu stellen und vieles mehr. &#10;Das alles setzt jedoch ein Minimum an Privatsphäre voraus.&#10;&#10;Die Anmeldung ist einmalig und wird im Browser gespeichert.">Warum muss ich mich anmelden?</span>
-  
 
   <div class="left-center-right">
-    <div class="col left">
+    <div>
       <h4>Single Sign On</h4>
 
       <br/>
-      <span style="float:right; font-style:italic; font-size:small;" 
-      title="Die Authentifizierung wird durch Google+ oder Facebook in einem externen Fenster gemacht. &#10;Wir bekommen dadurch weder dein Passwort noch Zugriff auf deinen Account oder deine Freunde. Und wollen auch keine Rechte, etwas in deinem Namen zu posten. &#10;Trotzdem misstrauisch? Du kannst dich auch einfach mit eMail und Passwort anmelden.">Hinweise</span>
-   
 
       <div style="text-align: center; display: inline-grid; width: 100%; padding: 20px;">
         <a (click)="signInWithFacebook()" class="btn-facebook btn">facebook login
@@ -27,82 +21,7 @@
       </div>
 
     </div>
-    <div class="col middle spacer-vertical"><div class="mask"></div><div class="mask-text">oder</div></div>
-    <div class="col right">
-      <h4>eMail / Passwort</h4>
 
-      <div *ngIf="showRegister" style="padding-left: 30px">
-        <span style="float:right; font-style:italic; font-size:small;" 
-        title="Wie funktioniert das?
-        Die Authentifizierung erfolgt via Google Firebase Authentication (don't reinvent security!) - melde dich einmal an und die Anmeldung bleibt gespeichert.
-        &#10;Welches Passwort?
-        Such dir ein beliebiges Passwort aus.
-        &#10;Warum muss ich mein Passwort nicht bestätigen?
-        Weil ich daran glaube, dass die User tippen - oder das Passwort zurücksetzen können.
-        &#10;Hmmm - hatte ich mich nicht schon registriert?
-        Probiers aus oder versuche dein Passwort zurückzusetzen. Dann wirst du gleich sehen, ob du berets registriert bist.
-        &#10;Passwort vergessen?
-        eMail bei 'Anmelden' eingeben, dann erscheint die Option das Passwort zurückzusetzen.">Hinweise</span>
-        <br/>
-        <br/>
-
-        <new-user-form> </new-user-form>
-
-        <br/>
-        <span style="font-size:small;">Bereits registriert? Dann geht's <a (click)="showRegister=false; showLogin=true;">hier</a> zur Anmeldung</span>
-      </div>
-
-     
-      <div *ngIf="showLogin" style="padding-left: 30px">
-        <user-form></user-form>
-      </div>
-
-    </div>
   </div>
 
-
-  <!--
-  <br/>
-  <p>Single sign-on mit Facebook oder Google+</p>
-
-  <div>
-    <a (click)="signInWithFacebook()" class="btn-facebook btn">facebook login
-        <i class="fa fa-facebook" style="padding-left:10px;padding-right:15px;"></i>
-    </a>
-
-    <a (click)="signInWithGoogle()" class="btn-google btn">Google+ login
-      <i class="fa fa-google-plus" style="padding-left:10px;padding-right:25px;"></i>
-    </a>
-
-    <span style="float:right; font-style:italic;" 
-    title="Die Authentifizierung wird durch Google+ oder Facebook in einem externen Fenster gemacht. &#10;Wir bekommen dadurch weder dein Passwort noch Zugriff auf deinen Account oder deine Freunde. Und ganz wollen auch keine Rechte, etwas in deinem Namen zu posten. &#10;Trotzdem misstrauisch? Du kannst dich unten auch einfach mit eMail und einem beliebigen Passwort anmelden.">Hmmm... Google, Facebook...?</span>
- 
-  </div>
-
-  <br/>
-
-  <hr style="margin-top:0px">
-
-  <p>Oder mit eMail und Passwort </p>
-
-  <user-form></user-form>
--->
- <!-- <p>
-      <a (click)="showRegister=!showRegister; showLogin = false;" title="registrieren">hier</a> 
-    registrieren und 
-    <a (click)="showLogin=!showLogin; showRegister = false;" title="anmelden (eMail / Passwort)">hier</a> 
-    anmelden</p>
-
-  <div class="navbar-item">
-    <div *ngIf="showLogin" style="padding-left: 30px">
-      <user-form></user-form>
-    </div>
-  </div>
-
-  <div class="navbar-item">
-    <div *ngIf="showRegister" style="padding-left: 30px">
-      <new-user-form> </new-user-form>
-    </div>
-  </div>
--->
 </div>

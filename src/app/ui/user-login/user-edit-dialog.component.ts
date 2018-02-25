@@ -21,6 +21,7 @@ export class UserEditDialogComponent implements OnInit {
   active:string = 'user';
 
   guests : any = [];
+  guest : Guest = new Guest();
 
   showDetailY:boolean = false;
   showDetailN:boolean = false;
@@ -32,12 +33,11 @@ export class UserEditDialogComponent implements OnInit {
     this.guests = this.guestService.getSnapshot();
   }
 
-  updateUser(user: Guest) {
-    this.guestService.update(user.id, user);
-  }
-
   updateUserAndNext(user: Guest, next: string) {
-    this.guestService.update(user.id, user);
+    if (!user.name || !user.email) {
+      alert('bitte Name + eMail angeben');
+      return;
+    }
     this.active = next;
   }
 

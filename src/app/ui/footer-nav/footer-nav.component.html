@@ -1,46 +1,26 @@
 <footer class="footer">
 
-    <div style="text-align: center;" *ngIf="!auth.currentUser || (auth.user && auth.user.state == 'new')">
+    <div style="text-align: center;">
 
-            nächste Schritte: 
+        schon zugesagt? 
 
-            <div *ngIf="!auth.currentUser" style="display:inline">
-                <a style="padding-left:2em; font-weight: bold" href="/login">1. anmelden </a>
-                <span style="padding-left:2em; color: lightgray">2. zusagen </span>
-                <!-- <span style="padding-left:2em; color: lightgray">3. Musikwunsch </span> -->
-            </div>
+        <a style="padding-left:2em; font-weight: bold" (click)="editUser=true" href="javascript://">hier zusagen </a>
 
-            <div *ngIf="auth.user && auth.user.state == 'new'" style="display:inline">
-                <span style="padding-left:2em; color: rgb(4, 71, 4)">1. anmelden <i class="fa fa-check" style="color: #0d800d"></i> </span>
-                <a style="padding-left:2em; font-weight: bold" href="/myAccount" >2. zusagen </a>
-                 <!-- <span style="padding-left:2em; color: lightgray">3. Musikwunsch </span> -->
-            </div>
-
-<!--
-            <span *ngIf="!auth.currentUser" style="padding-left:2em">anmelden </span>
-            <span *ngIf="auth.currentUser" style="padding-left:2em">anmelden <i class="fa fa-check" style="color: #0d800d"></i></span>
-            
-            <span style="padding-left:2em">zusagen <i class="fa fa-check" style="color: #0d800d"></i></span>
-            <span style="padding-left:2em">Musikwunsch <i class="fa fa-check" style="color: #0d800d"></i></span>
--->
-   </div>
-
-<!--
-    <div style="float:left;padding-left:20%;">
-        
-
-
-        <span style="line-height: 1em;padding: 0;font-size: 1em;" class="navbar-item">Bitte nimm dir kurz Zeit und melde dich hier an:</span>
-        <span style="line-height:0.8em;font-size: 0.8em;">Alle weiteren Infos findest du auf den nächsten Seiten.</span>
     </div>
-    <button class="btn btn-login" (click)="showLogin=true;">anmelden</button>
 
-    <div class="modal {{showLogin? 'is-active' : ''}}">
-        <div class="modal-background"></div>
-        <div class="modal-content" style="background:white;padding:20px;border-radius:3px;">
-            <user-login-dialog></user-login-dialog>
-        </div>
-        <button class="modal-close is-large" aria-label="close" (click)="showLogin=false;"></button>
+    <div style="text-align: right;
+        line-height: 0px;
+        font-size: smaller;
+        margin-right: 0px;" *ngIf="!auth.currentUser">
+        <a style="color: white" title="login" href="/login">anmelden </a>
     </div>
--->
+
 </footer>
+
+<div class="modal {{editUser? 'is-active' : ''}}">
+    <div class="modal-background"></div>
+    <div class="modal-content" style="background:white;padding:20px;border-radius:3px;width: 80%">
+        <user-edit-dialog [topNav]="this"></user-edit-dialog>
+    </div>
+    <button class="modal-close is-large" aria-label="close" (click)="editUser=false;"></button>
+</div>

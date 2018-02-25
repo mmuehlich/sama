@@ -8,7 +8,7 @@ import { AuthService } from '../../core/auth.service';
 })
 export class FooterNavComponent implements OnInit {
 
-  showLogin = false;
+  editUser = false;
   
   constructor(public auth: AuthService, ) { 
   }
