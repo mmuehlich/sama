@@ -13,4 +13,8 @@ export class Guest {
   hiddenRemarks?: string;
   id?: string;
   role?: string;
+
+  adultCount?: number;
+  childCount?: number;
+  music?: string;
 }

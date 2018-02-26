@@ -6,10 +6,6 @@
         <a>Meine Daten</a>
       </li>
 
-      <li class="{{active=='conf' ? 'is-active' : ''}}">
-        <a>Zusage</a>
-      </li>
-
       <li class="{{active=='guests' ? 'is-active' : ''}}">
         <a>Gästedaten</a>
       </li>
@@ -18,9 +14,9 @@
         <a>Anmerkungen</a>
       </li>
 
-      <!-- <li class="{{active=='music' ? 'is-active' : ''}}">
+      <li class="{{active=='music' ? 'is-active' : ''}}">
         <a (click)="active='music';">Musikwunsch</a>
-      </li> -->
+      </li> 
 
     </ul>
   </div>
@@ -29,6 +25,11 @@
 
 
   <div *ngIf="active=='user'">
+
+    <!-- <div style="padding-bottom: 1.5em;font-size: small;">
+      <span style="float:right"><a href="#">Hier </a> kannst du überprüfen, ob du bereits zugesagt hast.</span>
+    </div>
+  -->
 
     <h2>Name</h2>
     <div style="padding-left: 20px">
@@ -42,58 +43,34 @@
       <textarea style="height: 100px;" [(ngModel)]="guest.address" placeholder="Adresse" class="input"></textarea>
     </div>
 
-    <button class="button is-success" (click)="updateUserAndNext(guest, 'conf');" style="float:right; margin-right: 20px">weiter</button>
+    <button class="button is-success" (click)="updateUserAndNext(guest, 'guests');" style="float:right; margin-right: 20px">weiter</button>
     <button class="button is-secondary" (click)="close();" style="float:right; margin-right: 20px;">abbrechen</button>
 
-  </div>
-
-
-
-  <div *ngIf="active=='conf'" style="min-height: 200px">
-    <br/>
-    <span style="font-size:larger;padding-left: 20px;">Natürlich kommen wir zur Hochzeit!</span>
-    <br/>
-  
-  
-    <div class="left-center-right" style="margin-top: 20px">
-  
-      Wir sind
-      <input type="number" [(ngModel)]="guest.adultCount" class="input" style="width: 50px; vertical-align: baseline; margin-left: 10px; margin-right: 10px;">Erwachsene und
-      <input type="number" [(ngModel)]="guest.childCount" class="input" style="width: 50px; vertical-align: baseline; margin-left: 10px; margin-right: 10px;">Kinder
-  
-    </div>
-  
-  
-    <button class="button is-success" (click)="confirmUser(guest);close();" style="float:right; margin-right: 20px;">speichern</button>
-    <button class="button is-success" (click)="confirmUserAndNext(guest, 'guests');" style="float:right; margin-right: 20px">weiter</button>
-    <button class="button is-secondary" (click)="close();" style="float:right; margin-right: 20px;">abbrechen</button>
-  
   </div>
 
 
 
   <div *ngIf="active=='guests'">
 
-    <div *ngIf="guest.state == '  '">
-      (nicht zugesagt, keine Gästedaten notwendig.)
+    <div class="left-center-right" style="margin-top: 20px">
+  
+      Wir sind
+      <input type="number" [(ngModel)]="guest.adultCount" class="input" style="width: 50px; vertical-align: baseline; margin-left: 10px; margin-right: 10px;" (change)="updateCount()">Erwachsene und
+      <input type="number" [(ngModel)]="guest.childCount" class="input" style="width: 50px; vertical-align: baseline; margin-left: 10px; margin-right: 10px;" (change)="updateCount()">Kinder
+  
     </div>
 
-    <div *ngIf="guest.state == 'confirmed'">
-
-      <div style="padding-left: 20px">
-        <span>Erwachsene</span>
-        <div *ngFor="let adult of guest.adults">
-          <input [(ngModel)]="adult.name" placeholder="Name" class="input" style="margin-left: 20px">
-        </div>
-        <span>Kinder</span>
-        <div *ngFor="let child of guest.children">
-          <input [(ngModel)]="child.name" placeholder="Name" class="input" style="margin-left: 20px">
-        </div>
+    <div style="padding-top: 10px">
+      <span>Erwachsene</span>
+      <div *ngFor="let adult of guest.adults">
+        <input [(ngModel)]="adult.name" placeholder="Name" class="input" style="margin-left: 5%; width: 95%">
       </div>
-
+      <span>Kinder</span>
+      <div *ngFor="let child of guest.children">
+        <input [(ngModel)]="child.name" placeholder="Name" class="input" style="margin-left: 5%; width: 95%">
+      </div>
     </div>
 
-    <button class="button is-success" (click)="updateUser(guest);close();" style="float:right; margin-right: 20px;">speichern</button>
     <button class="button is-success" (click)="updateUserAndNext(guest, 'remarks');" style="float:right; margin-right: 20px">weiter</button>
     <button class="button is-secondary" (click)="close();" style="float:right; margin-right: 20px;">abbrechen</button>
 
@@ -102,21 +79,28 @@
 
 
   <div *ngIf="active=='remarks'">
-
-    <div *ngIf="guest.state == 'notComming'">
-      (nicht zugesagt)
+    <div style="padding-bottom: 1.5em;">
+      Sollten wir irgendwelche besonderen Wünche berücksichtigen? <br/> (Abholen beim Bahnhof, vegetarisches Essen, Allergien, Kindermenu, ... ?)
     </div>
 
-    <div *ngIf="guest.state == 'confirmed'">
-      Sollten wir irgendwelche besonderen Wünche berücksichtigen? Zum Beispiel vegetarisches Essen, Allergien, Kindermenu, ....?
-
-      <textarea [(ngModel)]="guest.remarks" style="width: 90%; height: 100px;margin-left: 20px"></textarea>
-    </div>
+    <textarea [(ngModel)]="guest.remarks" style="width: 90%; height: 100px;margin-left: 20px; margin-bottom: 5%"></textarea>
 
 
-    <button class="button is-success" (click)="updateUser(guest);close();" style="float:right; margin-right: 20px;">speichern</button>
+    <button class="button is-success" (click)="updateUserAndNext(guest, 'music');" style="float:right; margin-right: 20px;">weiter</button>
     <button class="button is-secondary" (click)="close();" style="float:right; margin-right: 20px;">abbrechen</button>
 
+  </div>
+
+  <div *ngIf="active=='music'">
+    <div style="padding-bottom: 1.5em;">
+      Hilf uns für die Feier am Abend mit einem Musikwunsch! (Dürfen natürlich auch mehrere sein)
+    </div>
+
+    <textarea [(ngModel)]="guest.music" style="width: 90%; height: 100px;margin-left: 20px; margin-bottom: 5%"></textarea>
+
+
+    <button class="button is-success" (click)="saveUser(); close(); " style="float:right; margin-right: 20px;">speichern</button>
+    <button class="button is-secondary" (click)="close();" style="float:right; margin-right: 20px;">abbrechen</button>
 
   </div>
 

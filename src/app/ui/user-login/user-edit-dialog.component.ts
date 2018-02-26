@@ -23,10 +23,13 @@ export class UserEditDialogComponent implements OnInit {
   guests : any = [];
   guest : Guest = new Guest();
 
-  showDetailY:boolean = false;
-  showDetailN:boolean = false;
-
-  constructor(public auth: AuthService, private router: Router, private guestService: GuestService) { }
+  constructor(public auth: AuthService, private router: Router, private guestService: GuestService) { 
+    this.guest.adultCount = 1;
+    this.guest.adults = [];
+    this.guest.adults.push({name: ''});
+    this.guest.childCount = 0;
+    this.guest.children = [];
+  }
 
 
   ngOnInit() {
@@ -35,40 +38,58 @@ export class UserEditDialogComponent implements OnInit {
 
   updateUserAndNext(user: Guest, next: string) {
     if (!user.name || !user.email) {
-      alert('bitte Name + eMail angeben');
+      alert('bitte Name und eMail angeben');
       return;
     }
     this.active = next;
   }
 
-  confirmUser(user: Guest) {
-    if (this.showDetailY) {
-      user.state = 'confirmed';
-
-      while (user.adults.length > user['adultCount']) {
-        user.adults.pop();
-      }
-      while (user.adults.length < user['adultCount']) {
-        user.adults.push({name: ''});
-      }
-
-      while (user.children.length > user['childCount']) {
-        user.children.pop();
-      }
-      while (user.children.length < user['childCount']) {
-        user.children.push({name: ''});
-      }
-
-    } else {
-      user.state = 'notComming';
-      this.close();
+  updateCount() {
+    if (this.guest.adultCount < 1) {
+      this.guest.adultCount = 1;
     }
-    this.guestService.update(user.id, user);
+    if (this.guest.childCount < 0) {
+      this.guest.childCount = 0;
+    }
+    while (this.guest.adults.length > this.guest.adultCount) {
+      this.guest.adults.pop();
+    }
+    while (this.guest.adults.length < this.guest.adultCount) {
+      this.guest.adults.push({name: ''});
+    }
+
+    while (this.guest.children.length > this.guest.childCount) {
+      this.guest.children.pop();
+    }
+    while (this.guest.children.length < this.guest.childCount) {
+      this.guest.children.push({name: ''});
+    }
   }
 
-  confirmUserAndNext(user: Guest, next: string) {
-    this.confirmUser(user);
-    this.active = next;
+  saveUser() {
+    if (this.guest.id) {
+      this.guestService.update(this.guest.id, this.guest);
+    } else {
+      this.guestService.create({
+        greeting: '',
+        name: this.guest.name,
+        adults: this.guest.adults,
+        adultCount: this.guest.adultCount,
+        children: this.guest.children,
+        childCount: this.guest.childCount,
+        civil: false,
+        state: 'confirmed',
+        loginToken: '',
+        address: this.guest.address ? this.guest.address : '',
+        email: this.guest.email,
+        phone: this.guest.phone ? this.guest.phone : '',
+        remarks: this.guest.remarks ? this.guest.remarks : '',
+        music: this.guest.music ? this.guest.music : '',
+        hiddenRemarks: 'created  - ' + new Date().toString(),
+      });
+
+      alert('Deine Zusage wurde gespeichert - vielen Dank!');
+    }
   }
 
   close() {
