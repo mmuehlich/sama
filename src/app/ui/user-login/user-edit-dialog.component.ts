@@ -20,7 +20,7 @@ export class UserEditDialogComponent implements OnInit {
 
   active:string = 'user';
 
-  guests : any = [];
+  guests: Guest[] = [];
   guest : Guest = new Guest();
 
   userText: string = '';
@@ -31,11 +31,16 @@ export class UserEditDialogComponent implements OnInit {
     this.guest.adults.push({name: ''});
     this.guest.childCount = 0;
     this.guest.children = [];
+
+    
+    guestService.getSnapshot().subscribe(x => {
+      this.guests = (x as Guest[])}
+    );
   }
 
 
   ngOnInit() {
-    this.guests = this.guestService.getSnapshot();
+    
   }
 
   updateUserAndNext(user: Guest, next: string) {
@@ -97,12 +102,25 @@ export class UserEditDialogComponent implements OnInit {
 
   close() {
     this.topNav.editUser = false;
+    this.active = 'user';
   }
 
   checkUser(users: any) {
     var text = '';
-    debugger;
-    this.userText = 'test ' + this.guest.email;
+
+    var match = this.guests.filter(g => g.email == this.guest.email.trim());
+    if (match.length == 1 && match[0].state === 'confirmed') {
+      var u = match[0];
+
+      text += 'Zusage für ' + u.name + ' (' + u.email + ') wurde bestätigt.\n';
+      text +=  '(' + u.adultCount + ' Erwachsene, ' + u.childCount + ' Kinder)';
+
+      this.userText = text;
+      return;
+
+    }
+    this.userText = 'Kein Eintrag für ' + this.guest.email + ' gefunden.';
+    return;
   }
 
 }
