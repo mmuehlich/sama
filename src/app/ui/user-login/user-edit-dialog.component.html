@@ -26,10 +26,10 @@
 
   <div *ngIf="active=='user'">
 
-    <!-- <div style="padding-bottom: 1.5em;font-size: small;">
-      <span style="float:right"><a href="#">Hier </a> kannst du überprüfen, ob du bereits zugesagt hast.</span>
+     <div style="padding-bottom: 1.5em;font-size: small;">
+      <span style="float:right"><a (click)="active='verifyUser'" href="javascript://">Hier </a> kannst du überprüfen, ob du bereits zugesagt hast.</span>
     </div>
-  -->
+  
 
     <h2>Name</h2>
     <div style="padding-left: 20px">
@@ -100,6 +100,30 @@
 
 
     <button class="button is-success" (click)="saveUser(); close(); " style="float:right; margin-right: 20px;">speichern</button>
+    <button class="button is-secondary" (click)="close();" style="float:right; margin-right: 20px;">abbrechen</button>
+
+  </div>
+
+
+
+
+  <div *ngIf="active=='verifyUser'">
+    <div style="padding-bottom: 1.5em;">
+      Bereits zugesagt? Gib hier deine eMail ein um deine Zusage zu überprüfen:
+    </div>
+
+    <div style="padding-left: 20px">
+      <input [(ngModel)]="guest.email" placeholder="eMail" class="input">
+    </div>
+
+    <button class="button" (click)="checkUser();" style="float:right; margin-right: 20px;">überprüfen</button>
+
+    <div style="padding-left: 20px; height: 6em;">
+      <span>{{userText}}</span>
+    </div>
+
+
+    <button class="button is-success" (click)="active=='user'" style="float:right; margin-right: 20px;">zusagen</button>
     <button class="button is-secondary" (click)="close();" style="float:right; margin-right: 20px;">abbrechen</button>
 
   </div>

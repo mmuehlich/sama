@@ -23,6 +23,8 @@ export class UserEditDialogComponent implements OnInit {
   guests : any = [];
   guest : Guest = new Guest();
 
+  userText: string = '';
+
   constructor(public auth: AuthService, private router: Router, private guestService: GuestService) { 
     this.guest.adultCount = 1;
     this.guest.adults = [];
@@ -42,6 +44,7 @@ export class UserEditDialogComponent implements OnInit {
       return;
     }
     this.active = next;
+    this.userText = '';
   }
 
   updateCount() {
@@ -94,6 +97,12 @@ export class UserEditDialogComponent implements OnInit {
 
   close() {
     this.topNav.editUser = false;
+  }
+
+  checkUser(users: any) {
+    var text = '';
+    debugger;
+    this.userText = 'test ' + this.guest.email;
   }
 
 }
