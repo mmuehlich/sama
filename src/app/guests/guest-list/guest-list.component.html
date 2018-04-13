@@ -91,29 +91,34 @@
   <button class="modal-close is-large" aria-label="close" (click)="showNewGuest=false;"></button>
 </div>
 
+
+
 <table>
   <tr>
     <th>Name</th>
     <th>Kontakt</th>
     <th>Gäste</th>
     <th>Anmerkungen</th>
-    <th>Status</th>
+    <th>Musikwunsch</th>
   </tr>
-  <tr *ngFor="let guest of guests | async" (click)="showUser(guest)">
+  <tr *ngFor="let guest of guests | async | filterBy:'state':'value':'confirmed'" (click)="showUser(guest)">
     <td>{{guest.name}}</td>
     <td title="{{guest.email}} &#013;{{guest.phone}} &#013;{{guest.address}}">{{guest.email}}</td>
     <td>
       <span >{{[guest] | sumLength:'adults':'name':'Erwachsene'}} </span>
       <span >{{[guest] | sumLength:'children':'name':'Kinder'}} </span>
     </td>
-    <td title="{{guest.remarks}}">{{guest.remarks | slice:0:10}}</td>
-    <td>{{guest.state}}</td>
+    <td title="{{guest.remarks}}">{{guest.remarks | slice:0:30}}</td>
+    <td title="{{guest.music}}">{{guest.music | slice:0:30}}</td>
   </tr>
 
   <tr style="font-weight: bold">
     <td>Total</td>
     <td></td>
-    <td>{{guests | async | sumLength:'adults':'name':'Erwachsene'}} {{guests | async | sumLength:'children':'name':'Kinder'}}</td>
+    <td> 
+      {{countAdults(guests | async)  + '   ' + countChildren(guests | async)}}
+    </td>
+    <td></td>
     <td></td>
   </tr>
 </table>
@@ -127,14 +132,6 @@
 
     <div class="list">
       <div>
-        <p>id</p>
-        <p>{{guest.id}}</p>
-      </div>
-      <div>
-        <p>Anrede</p>
-        <p>{{guest.greeting}}</p>
-      </div>
-      <div>
         <p>Name</p>
         <p>{{guest.name}}</p>
       </div>
@@ -146,7 +143,7 @@
       </div>
       <div>
         <p>Gäste</p>
-        <p>{{guest.adults.length - 1}} Erwachsene, {{guest.children.length - 1}} Kinder</p>
+        <p>{{guest.adultCount}} Erwachsene, {{guest.childCount}} Kinder</p>
       </div>
       <div *ngIf="guest.adults.length > 1">
           <p>Erwachsene</p>
@@ -164,14 +161,19 @@
         <p>Anmerkungen</p>
         <p>{{guest.remarks}}</p>
       </div>
+
+      <div>
+          <p>Musikwunsch</p>
+          <p>{{guest.music}}</p>
+        </div>
     </div>
 
-    <button class="button is-warning" (click)="deleteGuest(guest)">
+   <!-- <button class="button is-warning" (click)="deleteGuest(guest)">
       entfernen
     </button>
     <button class="button is-success" (click)="editGuest(guest); showNewGuest=true;">
       bearbeiten
-    </button>
+    </button> -->
   </div>
 
   <button class="modal-close is-large" aria-label="close" (click)="showGuestDetails=false;"></button>

@@ -73,4 +73,18 @@ export class GuestListComponent implements OnInit {
   addChild() {
     this.guest.children.push({name: ""});
   }
+
+  countAdults (guests: Guest[]) {
+    return guests ? guests
+      .filter(g => g.state === 'confirmed')
+      .map(g => g.adultCount)
+      .reduce((a,b) => a+b, 0) + ' Erwachsene' : '';
+  }
+
+  countChildren (guests: Guest[]) {
+    return guests ? guests
+      .filter(g => g.state === 'confirmed')
+      .map(g => g.childCount)
+      .reduce((a,b) => a+b, 0) + ' Kinder' : '';
+  }
 }

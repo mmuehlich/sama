@@ -25,3 +25,19 @@ export class SumLengthPipe implements PipeTransform {
         return c === 0 ? '' : c + ' ' + label;
     }
 }
+
+@Pipe({name: 'filterBy'})
+export class FilterByPipe implements PipeTransform {
+    transform(items: any[], attr: string, property: string, value: string): any {
+        debugger;
+        if (!items)
+            return [];
+        var res = [];
+        for (var i in items) {
+            if (items[i][attr] === value) {
+               res.push(items[i]);
+            }
+        }
+        return res;
+    }
+}
