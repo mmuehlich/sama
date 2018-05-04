@@ -68,3 +68,13 @@
     display: table;
     clear: both;
 }
+
+.timetable table td {
+  border: none;
+}
+
+.timetable table {
+  width: auto;
+  left: 30%;
+  position: relative;
+}
