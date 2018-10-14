@@ -78,3 +78,22 @@
   left: 30%;
   position: relative;
 }
+
+
+li.photos {
+  display: block;
+  text-align: left;
+  padding-left: 40%;
+}
+
+li.photos a {
+  color: #16344e;
+}
+
+li.photos a i {
+  padding-right: 5px;
+}
+
+li.photos a:hover i {
+  text-shadow: 0 0 6px #f7d202;
+}
